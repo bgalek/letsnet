@@ -20,14 +20,13 @@ const app =
     <Router>
         <MuiThemeProvider>
             <div className="App">
-                <TopBar />
+                <TopBar/>
                 <div>
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/contacts" component={Contacts}/>
-                    <Route path="/schedule" render={(props)=> <Schedule {...props} userName="Dan"/>}/>
-                    <Route path="/scanner" render={(props)=> <Scanner {...props} onScaned={console.log}/>}/>
-                    <Route path="/schedule" render={(props) => <Schedule {...props} userName="Dan"/>}/>
+                    <Route path="/schedule" component={Schedule}/>
+                    <Route path="/scanner" render={(props) => <Scanner {...props} onScaned={console.log}/>}/>
                     <Route path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>}/>
                     <Route path="/profile" component={Profile}/>
                 </div>

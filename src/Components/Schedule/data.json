@@ -1,131 +1,123 @@
 {
-  "scheduleData":[
+  "schedule": [
     {
-      "title": "Registration Starts",
-      "subtitle": "Arrive at the venue and get checked in.",
-      "hours": "6:00 PM",
-      "day": "Friday"
+      "day": "Friday",
+      "sessions": [
+        {
+          "title": "Registration Starts",
+          "subtitle": "Arrive at the venue and get checked in.",
+          "hours": "6:00 PM"
+        },
+        {
+          "title": "Dinner & Networking",
+          "subtitle": "Friday pizzas. Meet people, get familiar with each other.",
+          "hours": "6:20 PM"
+        },
+        {
+          "title": "Welcome & Rules",
+          "subtitle": "Warm welcome and review agenda for the weekend.",
+          "hours": "7:00 PM"
+        },
+        {
+          "title": "Pitchfire",
+          "subtitle": "60 seconds to present your idea - a mic, your voice and your passion.",
+          "hours": "7:20 PM"
+        },
+        {
+          "title": "Voting",
+          "subtitle": "Attendees vote for the top pitches.",
+          "hours": "8:00 PM"
+        },
+        {
+          "title": "Forming Teams & Begin Work",
+          "subtitle": "",
+          "hours": "8:30 PM"
+        },
+        {
+          "title": "Wrap-Up",
+          "subtitle": "Finished for the day",
+          "hours": "11:00 PM"
+        }
+      ]
     },
     {
-      "title": "Dinner & Networking",
-      "subtitle": "Friday pizzas. Meet people, get familiar with each other.",
-      "hours":"6:20 PM",
-      "day": "Friday"
+      "day": "Saturday",
+      "sessions": [
+        {
+          "title": "Doors Open",
+          "subtitle": "Arrive at the venue and get checked in.",
+          "hours": "9:00 AM"
+        },
+        {
+          "title": "Breakfast",
+          "subtitle": "",
+          "hours": "10:00 AM"
+        },
+        {
+          "title": "Mentors arrive",
+          "subtitle": "Mentors help teams one-on-one. They are here to help!",
+          "hours": "12:00 AM"
+        },
+        {
+          "title": "Lunch",
+          "subtitle": "",
+          "hours": "2:00 PM"
+        },
+        {
+          "title": "Mentors still here",
+          "subtitle": "Mentors are still here to help. Ask questions, show them what you have done.",
+          "hours": "2:30 PM"
+        },
+        {
+          "title": "Supper",
+          "subtitle": "",
+          "hours": "6:00 PM"
+        },
+        {
+          "title": "Wrap-Up",
+          "subtitle": "",
+          "hours": "11:00 PM"
+        }
+      ]
     },
     {
-      "title": "Welcome & Rules",
-      "subtitle": "Warm welcome and review agenda for the weekend.",
-      "hours":"7:00 PM",
-      "day": "Friday"
-    },
-    {
-      "title": "Pitchfire",
-      "subtitle": "60 seconds to present your idea - a mic, your voice and your passion.",
-      "hours":"7:20 PM",
-      "day": "Friday"
-    },
-    {
-      "title": "Voting",
-      "subtitle": "Attendees vote for the top pitches.",
-      "hours":"8:00 PM",
-      "day": "Friday"
-    },
-    {
-      "title": "Forming Teams & Begin Work",
-      "subtitle": "",
-      "hours":"8:30 PM",
-      "day": "Friday"
-    },
-    {
-      "title": "Wrap-Up",
-      "subtitle": "Finished for the day",
-      "hours":"11:00 PM",
-      "day": "Friday"
-    },
-    {
-      "title": "Doors Open",
-      "subtitle": "Arrive at the venue and get checked in.",
-      "hours": "9:00 AM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Breakfast",
-      "subtitle": "",
-      "hours": "10:00 AM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Mentors arrive",
-      "subtitle": "Mentors help teams one-on-one. They are here to help!",
-      "hours": "12:00 AM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Lunch",
-      "subtitle": "",
-      "hours": "2:00 PM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Mentors still here",
-      "subtitle": "Mentors are still here to help. Ask questions, show them what you have done.",
-      "hours": "2:30 PM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Supper",
-      "subtitle": "",
-      "hours": "6:00 PM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Wrap-Up",
-      "subtitle": "",
-      "hours": "11:00 PM",
-      "day": "Saturday"
-    },
-    {
-      "title": "Doors Open",
-      "subtitle": "",
-      "hours": "9:00 AM",
-      "day": "Sunday"
-    },
-    {
-      "title": "Breakfast",
-      "subtitle": "",
-      "hours": "10:00 AM",
-      "day": "Sunday"
-    },
-    {
-      "title": "Lunch",
-      "subtitle": "",
-      "hours": "2:45 PM",
-      "day": "Sunday"
-    },
-    {
-      "title": "Tech check",
-      "subtitle": "Obligatory tech check for final presentations.",
-      "hours": "4:00 PM",
-      "day": "Sunday"
-    },
-    {
-      "title": "FINAL PRESENTATIONS",
-      "subtitle": "3 min presentation and 3 min Q&A per team.",
-      "hours": "5:00 PM",
-      "day": "Sunday"
-    },
-    {
-      "title": "Judging & Awards",
-      "subtitle": "",
-      "hours": "7:00 PM",
-      "day": "Sunday"
-    },
-    {
-      "title": "Wrap-Up",
-      "subtitle": "Go Home or go drink!",
-      "hours": "7:30 PM",
-      "day": "Sunday"
-    }
-  ]
+      "day": "Sunday",
+      "sessions": [
+        {
+          "title": "Doors Open",
+          "subtitle": "",
+          "hours": "9:00 AM"
+        },
+        {
+          "title": "Breakfast",
+          "subtitle": "",
+          "hours": "10:00 AM"
+        },
+        {
+          "title": "Lunch",
+          "subtitle": "",
+          "hours": "2:45 PM"
+        },
+        {
+          "title": "Tech check",
+          "subtitle": "Obligatory tech check for final presentations.",
+          "hours": "4:00 PM"
+        },
+        {
+          "title": "FINAL PRESENTATIONS",
+          "subtitle": "3 min presentation and 3 min Q&A per team.",
+          "hours": "5:00 PM"
+        },
+        {
+          "title": "Judging & Awards",
+          "subtitle": "",
+          "hours": "7:00 PM"
+        },
+        {
+          "title": "Wrap-Up",
+          "subtitle": "Go Home or go drink!",
+          "hours": "7:30 PM"
+        }
+      ]
+    }]
 }
-
