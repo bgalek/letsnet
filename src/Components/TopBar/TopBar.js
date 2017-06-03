@@ -23,6 +23,9 @@ class About extends Component {
                         <Link to="/about">About</Link>
                     </MenuItem>
                     <MenuItem>
+                        <Link to="/scanner">Scanner</Link>
+                    </MenuItem>
+                    <MenuItem>
                         <Link to="/contacts">Contacts</Link>
                     </MenuItem>
                     <MenuItem>
