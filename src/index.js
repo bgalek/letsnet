@@ -24,7 +24,7 @@ const app =
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/contacts" component={Contacts}/>
-                    <Route path="/schedule" component={Schedule}/>}/>
+                    <Route path="/schedule" component={Schedule}/>
                     <Route path="/scanner" render={(props) => <Scanner {...props} onScaned={console.log}/>}/>
                     <Route path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>}/>
                 </div>
