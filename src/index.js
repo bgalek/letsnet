@@ -28,8 +28,8 @@ const app =
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/contacts" component={Contacts}/>
-                    <Route path="/ticket" component={Ticket}/>
-                    <Route path="/schedule"  render={(props)=> <Schedule {...props} userName="Dan"/>}/>
+                    <Route path="/schedule" render={(props) => <Schedule {...props} userName="Dan"/>}/>
+                    <Route path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>}/>
                 </div>
             </div>
         </MuiThemeProvider>

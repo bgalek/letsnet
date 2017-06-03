@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react';
 import './TopBar.css';
 import AppBar from 'material-ui/AppBar';
