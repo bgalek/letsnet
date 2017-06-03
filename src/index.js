@@ -11,6 +11,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from "./Components/TopBar/TopBar";
 import Ticket from "./Components/Ticket/Ticket";
+import Schedule from "./Components/Schedule/Schedule";
 
 injectTapEventPlugin();
 
@@ -28,6 +29,7 @@ const app =
                     <Route path="/about" component={About}/>
                     <Route path="/contacts" component={Contacts}/>
                     <Route path="/ticket" component={Ticket}/>
+                    <Route path="/schedule"  render={(props)=> <Schedule {...props} userName="Dan"/>}/>
                 </div>
             </div>
         </MuiThemeProvider>
