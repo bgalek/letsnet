@@ -18,9 +18,16 @@ class TopBar extends Component {
         open: false
     };
 
+    handleClose = () => this.setState({open: false});
+
     render() {
         const menuItems = this.props.menuItems.filter(it => !it.props.exact)
-            .map((route, index) => <MenuItem key={index}><Link to={route.props.path}>{route.props.label}</Link></MenuItem>);
+            .map((route, index) => (
+                <MenuItem onTouchTap={this.handleClose} key={index}>
+                    <Link to={route.props.path}>{route.props.label}</Link>
+                </MenuItem>
+            ));
+
         return (
             <div>
                 <AppBar title={config.appName} iconClassNameRight="muidocs-icon-navigation-expand-more" onTouchTap={this.openDrawer}/>

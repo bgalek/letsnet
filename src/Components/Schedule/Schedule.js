@@ -5,28 +5,21 @@ import {Tab, Tabs} from "material-ui/Tabs";
 const scheduleList = require('./data.json');
 
 export default class Schedule extends Component {
-    render() {
-        return <div>
-            <CustomList/>
-        </div>
-    }
-}
 
-class CustomList extends Component {
-    render() {
-        const schedules = scheduleList.schedule.map((scheduleItem) =>
-            <Tab label={scheduleItem.day}>
-                <List>
-                    {scheduleItem.sessions.map(session => <ListItem primaryText={session.title}
-                                                                    secondaryText={<p>{session.subtitle}</p>}/>)}
-
-                </List>
-            </Tab>
+    renderTalks(scheduleItem) {
+        return scheduleItem.sessions.map((session, index) =>
+            <ListItem key={`${index}-${session.title}`} primaryText={session.title} secondaryText={session.subtitle}/>
         );
-        return <div>
+    }
+
+    render() {
+        return (
             <Tabs>
-                {schedules}
+                {scheduleList.schedule.map((scheduleItem) =>
+                    <Tab label={scheduleItem.day} key={scheduleItem.day}>
+                        <List>{this.renderTalks(scheduleItem)}</List>
+                    </Tab>)}
             </Tabs>
-        </div>
+        );
     }
 }

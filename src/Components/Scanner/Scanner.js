@@ -9,20 +9,17 @@ class Scanner extends Component {
     }
 
     handleError(err) {
-        console.error(err)
+        console.error(err);
+        throw err;
     }
 
     render() {
-        const previewStyle = {
-            width: '100%'
-        };
-
         return (
             <div className="Reader-container">
                 <p>Scan business card here:</p>
                 <QrReader
                     delay={200}
-                    style={previewStyle}
+                    style={{width: '100%'}}
                     onError={() => this.handleError}
                     onScan={(data) => this.handleScan(data)}
                     facingMode={'rear'}
