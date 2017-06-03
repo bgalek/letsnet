@@ -1,0 +1,14 @@
+.container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.profile-container {
+    padding: 20px;
+}
+
+.buttons-container {
+    position: relative;
+    bottom: 0;
+}
