@@ -15,95 +15,22 @@ export default class Schedule extends Component {
             <p>{this.props.userName}</p>
             <CustomList/>
         </div>
-
     }
 }
 
 class CustomList extends Component {
-
     render() {
-        const iconButtonElement = (
-            <IconButton
-                touch={true}
-                tooltip="more"
-                tooltipPosition="bottom-left"
-            >
-                <MoreVertIcon color={grey400}/>
-            </IconButton>
+        const scheduleList = require('./data.json');
+        const schedules = scheduleList.scheduleData.map((scheduleItem, i) =>
+            <div key={scheduleItem.title+i}>
+                <ListItem primaryText={scheduleItem.title} secondaryText={ <p>{scheduleItem.subtitle}</p> }/>
+                <Divider inset={true}/>
+            </div>
         );
-
-        const rightIconMenu = (
-            <IconMenu iconButtonElement={iconButtonElement}>
-                <MenuItem>Reply</MenuItem>
-                <MenuItem>Forward</MenuItem>
-                <MenuItem>Delete</MenuItem>
-            </IconMenu>
-        );
-
+        console.log(schedules);
         return <div>
             <List>
-                <Subheader>Today</Subheader>
-                <ListItem
-                    leftAvatar={<Avatar src="http://www.material-ui.com/images/ok-128.jpg"/>}
-                    primaryText="Brunch this weekend?"
-                    secondaryText={
-                        <p>
-                            <span style={{color: darkBlack}}>Brendan Lim</span> --
-                            I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
-                        </p>
-                    }
-                    secondaryTextLines={2}
-                />
-                <Divider inset={true}/>
-                <ListItem
-                    leftAvatar={<Avatar src="http://www.material-ui.com/images/kolage-128.jpg"/>}
-                    primaryText={
-                        <p>Summer BBQ&nbsp;&nbsp;<span style={{color: lightBlack}}>4</span></p>
-                    }
-                    secondaryText={
-                        <p>
-                            <span style={{color: darkBlack}}>to me, Scott, Jennifer</span> --
-                            Wish I could come, but I&apos;m out of town this weekend.
-                        </p>
-                    }
-                    secondaryTextLines={2}
-                />
-                <Divider inset={true}/>
-                <ListItem
-                    leftAvatar={<Avatar src="http://www.material-ui.com/images/uxceo-128.jpg"/>}
-                    primaryText="Oui oui"
-                    secondaryText={
-                        <p>
-                            <span style={{color: darkBlack}}>Grace Ng</span> --
-                            Do you have Paris recommendations? Have you ever been?
-                        </p>
-                    }
-                    secondaryTextLines={2}
-                />
-                <Divider inset={true}/>
-                <ListItem
-                    leftAvatar={<Avatar src="http://www.material-ui.com/images/kerem-128.jpg"/>}
-                    primaryText="Birdthday gift"
-                    secondaryText={
-                        <p>
-                            <span style={{color: darkBlack}}>Kerem Suer</span> --
-                            Do you have any ideas what we can get Heidi for her birthday? How about a pony?
-                        </p>
-                    }
-                    secondaryTextLines={2}
-                />
-                <Divider inset={true}/>
-                <ListItem
-                    leftAvatar={<Avatar src="http://www.material-ui.com/images/raquelromanp-128.jpg"/>}
-                    primaryText="Recipe to try"
-                    secondaryText={
-                        <p>
-                            <span style={{color: darkBlack}}>Raquel Parrado</span> --
-                            We should eat this: grated squash. Corn and tomatillo tacos.
-                        </p>
-                    }
-                    secondaryTextLines={2}
-                />
+                {schedules}
             </List>
         </div>
     }
