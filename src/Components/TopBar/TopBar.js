@@ -35,6 +35,9 @@ class About extends Component {
                     <MenuItem>
                         <Link to="/schedule">Schedule</Link>
                     </MenuItem>
+                    <MenuItem>
+                        <Link to="/profile">Profile</Link>
+                    </MenuItem>
                 </Drawer>
             </div>
         );

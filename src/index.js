@@ -12,6 +12,7 @@ import TopBar from "./Components/TopBar/TopBar";
 import Ticket from "./Components/Ticket/Ticket";
 import Schedule from "./Components/Schedule/Schedule";
 import Scanner from "./Components/Scanner/Scanner";
+import Profile from "./Components/Profile/Profile";
 
 injectTapEventPlugin();
 
@@ -28,6 +29,7 @@ const app =
                     <Route path="/scanner" render={(props)=> <Scanner {...props} onScaned={console.log}/>}/>
                     <Route path="/schedule" render={(props) => <Schedule {...props} userName="Dan"/>}/>
                     <Route path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>}/>
+                    <Route path="/profile" component={Profile}/>
                 </div>
             </div>
         </MuiThemeProvider>
