@@ -1,43 +1,31 @@
-// @flow
 import React, {Component} from 'react';
 import './TopBar.css';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import config from '../../config';
 
-class About extends Component {
+// @flow
+class TopBar extends Component {
+
+    static propTypes = {
+        menuItems: PropTypes.array.isRequired
+    };
 
     state = {
         open: false
     };
 
     render() {
+        const menuItems = this.props.menuItems.filter(it => !it.props.exact)
+            .map((route, index) => <MenuItem key={index}><Link to={route.props.path}>{route.props.label}</Link></MenuItem>);
         return (
             <div>
-                <AppBar title="Let's net" iconClassNameRight="muidocs-icon-navigation-expand-more" onTouchTap={this.openDrawer}/>
+                <AppBar title={config.appName} iconClassNameRight="muidocs-icon-navigation-expand-more" onTouchTap={this.openDrawer}/>
                 <Drawer docked={false} width={200} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem>
-                        <Link to="/">Home</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/about">About</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/scanner">Scanner</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/contacts">Contacts</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/ticket">Ticket</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/schedule">Schedule</Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <Link to="/profile">Profile</Link>
-                    </MenuItem>
+                    {menuItems}
                 </Drawer>
             </div>
         );
@@ -48,4 +36,4 @@ class About extends Component {
     }
 }
 
-export default About;
+export default TopBar;
