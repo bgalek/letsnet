@@ -11,7 +11,7 @@ class Ticket extends Component {
                 <Paper className="QR-container" zDepth={1}>
                     <img src={qr} alt="QR code" />
                 </Paper>
-                <p>Great! Here is your ticket for SWWAW</p>
+                <p>Great! Here is your ticket {this.props.name} for SWWAW</p>
             </div>
         );
     }
