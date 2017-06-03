@@ -7,6 +7,7 @@ import Contacts from "./Components/Contacts/Contacts";
 import Schedule from "./Components/Schedule/Schedule";
 import Ticket from "./Components/Ticket/Ticket";
 import Scanner from "./Components/Scanner/Scanner";
+import BusinessNetwork from "./Components/BusinessNetwork/BusinessNetwork";
 
 export default {
     appName: "Let's net!",
@@ -15,7 +16,7 @@ export default {
         <Route key="2" path="/about" component={About} label="About"/>,
         <Route key="3" path="/contacts" component={Contacts} label="Contacts"/>,
         <Route key="4" path="/schedule" render={(props) => <Schedule {...props} userName="Dan"/>} label="Schedule"/>,
-        <Route key="5" path="/scanner" render={(props) => <Scanner {...props} onScaned={console.log}/>} label="Scanner"/>,
-        <Route key="7" path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>} label="Ticket"/>,
+        <Route key="5" path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>} label="Ticket"/>,
+        <Route key="6" path="/network" component={BusinessNetwork} label="Business Network"/>,
     ]
 }
