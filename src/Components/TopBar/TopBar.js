@@ -25,6 +25,9 @@ class About extends Component {
                     <MenuItem>
                         <Link to="/contacts">Contacts</Link>
                     </MenuItem>
+                    <MenuItem>
+                        <Link to="/ticket">Ticket</Link>
+                    </MenuItem>
                 </Drawer>
             </div>
         );

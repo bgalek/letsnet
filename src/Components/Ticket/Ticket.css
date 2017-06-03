@@ -1,0 +1,7 @@
+.QR-container {
+    height: 126px;
+    width: 126px;
+    margin: 50px;
+    textAlign: 'center';
+    display: inline-block;
+}

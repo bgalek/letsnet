@@ -10,6 +10,7 @@ import Contacts from "./Components/Contacts/Contacts";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from "./Components/TopBar/TopBar";
+import Ticket from "./Components/Ticket/Ticket";
 
 injectTapEventPlugin();
 
@@ -26,6 +27,7 @@ const app =
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/contacts" component={Contacts}/>
+                    <Route path="/ticket" component={Ticket}/>
                 </div>
             </div>
         </MuiThemeProvider>
