@@ -13,8 +13,8 @@ injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({palette: config.palette});
 
-if (screen && screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock();
+if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
+    window.screen.orientation.lock();
 }
 
 const app =
