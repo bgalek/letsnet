@@ -13,6 +13,10 @@ injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({palette: config.palette});
 
+if (screen && screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock();
+}
+
 const app =
     <MuiThemeProvider muiTheme={muiTheme}>
         <Router>
