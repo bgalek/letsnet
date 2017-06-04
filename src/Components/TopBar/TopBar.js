@@ -21,12 +21,11 @@ class TopBar extends Component {
     handleClose = () => this.setState({open: false});
 
     render() {
-        const menuItems = this.props.menuItems.filter(it => !it.props.exact)
-            .map((route, index) => (
-                <MenuItem onTouchTap={this.handleClose} key={index}>
-                    <Link to={route.props.path}>{route.props.label}</Link>
-                </MenuItem>
-            ));
+        const menuItems = this.props.menuItems.map((route, index) => (
+            <MenuItem onTouchTap={this.handleClose} key={index}>
+                <Link to={route.props.path}>{route.props.label}</Link>
+            </MenuItem>
+        ));
 
         return (
             <div>

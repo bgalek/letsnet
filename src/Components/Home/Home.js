@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import './Home.css';
 import TicketCard from "../Cards/TicketCard";
 import {Col, Grid, Row} from "react-flexbox-grid";
-import {Divider, Tab, Tabs} from "material-ui";
+import {Tab, Tabs} from "material-ui";
 import scheduleMock from './schedule.png';
+import speakersMock from './speakers.png';
+import homeMore from './home.png';
+import peopleMock from './people.png';
 
 class Home extends Component {
     render() {
@@ -18,8 +21,7 @@ class Home extends Component {
                         </Row>
                         <Row>
                             <Col xs={12}>
-                                <p>Next Speakers</p>
-                                <Divider />
+                                <img style={{width: '100%', marginTop: 20}} src={homeMore} alt="speakers"/>
                             </Col>
                         </Row>
                     </Grid>
@@ -38,6 +40,18 @@ class Home extends Component {
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
+                                <img style={{width: '100%', marginTop: 20}} src={speakersMock} alt="speakers"/>
+                                <img style={{width: '100%', marginTop: 20}} src={speakersMock} alt="speakers"/>
+                            </Col>
+                        </Row>
+                    </Grid>
+                </Tab>
+                <Tab label="People">
+                    <Grid fluid>
+                        <Row>
+                            <Col xs={12}>
+                                <img style={{width: '100%', marginTop: 20}} src={peopleMock} alt="speakers"/>
+
                             </Col>
                         </Row>
                     </Grid>
