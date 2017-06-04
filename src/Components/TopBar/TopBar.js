@@ -28,7 +28,7 @@ class TopBar extends Component {
         const menuItems = this.props.menuItems
             .filter(menuItem => menuItem.props.label)
             .map((route, index) => (
-                    <MenuItem className="menu-item" leftIcon={route.props.icon} onTouchTap={this.handleClose} key={index}>
+                    <MenuItem className="menu-item" leftIcon={route.props.icon} onClick={this.handleClose} key={index}>
                         <Link to={route.props.path}>{route.props.label}</Link>
                     </MenuItem>
                 )
