@@ -7,10 +7,14 @@ import scheduleMock from './schedule.png';
 import speakersMock from './speakers.png';
 import homeMore from './home.png';
 import peopleMock from './people.png';
+import {Dialog, RaisedButton} from 'material-ui';
+import config from './../../config'
 
 class Home extends Component {
+    handleClose = () => {
+    };
+
     render() {
-        console.log(this.props);
         return (
             <Tabs>
                 <Tab label="Overview">
@@ -26,6 +30,34 @@ class Home extends Component {
                             </Col>
                         </Row>
                     </Grid>
+                    <Dialog className="dialog"
+                            title='Welcome to Lets Net!'
+                            titleStyle={{color: config.palette.alternateTextColor}}
+                            modal={false}
+                            open={this.props.showWelcomeScreen}
+                            onRequestClose={this.handleClose}>
+                        <h2>{this.props.match.params.name + " " + this.props.match.params.surname} </h2>
+                        <p>
+                            We're happy to see you at&nbsp;
+                            <strong>
+                                Warsaw Startup Weekend #9!
+                            </strong>
+                        </p>
+                        <p>
+                            Let's net will help you to connect with other attendees and stay in touch after.
+                        </p>
+                        <Grid fluid>
+                            <Row center="xs">
+                                <Col xs={4}>
+                                    <RaisedButton style={{marginTop: 20} }
+                                                  backgroundColor={config.palette.primary3Color}
+                                                  labelStyle={{color: config.palette.alternateTextColor}}
+                                                  label="Explore" onTouchTap={this.handleClose}/>
+                                </Col>
+                            </Row>
+
+                        </Grid>
+                    </Dialog>
                 </Tab>
                 <Tab label="Schedule">
                     <Grid fluid>

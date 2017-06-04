@@ -40,6 +40,6 @@ export default {
         <Route key="1" exact path="/" component={Home} label="Ongoing event" icon={<EventIcon/>}/>,
         <Route key="2" path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>} label="Ticket" icon={<TicketIcon/>}/>,
         <Route key="3" path="/network" component={BusinessNetwork} label="Business Network" icon={<NetworkIcon/>}/>,
-        <Route key="4" path="/welcome/:name" render={(props) => <Home {...props} showWelcomeScreen name={props.name}/>} />
+        <Route key="4" path="/welcome/:name/:surname" render={(props) => <Home {...props} showWelcomeScreen firstName={props.name} surname={props.surname}/>}/>
     ]
 }
