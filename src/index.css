@@ -9,7 +9,7 @@ body {
     height: 100%;
 }
 
-hr {
+hr.thin {
     border-bottom: 1px solid #ddd;
     border-right: none;
     border-top: none;
