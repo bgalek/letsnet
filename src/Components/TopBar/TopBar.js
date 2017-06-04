@@ -8,14 +8,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import config from '../../config';
 import {Paper} from "material-ui";
-import logo from './logo.svg';
-import {grey700} from "material-ui/styles/colors"
-
-const style = {
-    height: 150,
-    width: 200,
-    margin: 0,
-};
+import logo from './letsnet-logo.svg';
 
 
 // @flow
@@ -33,11 +26,14 @@ class TopBar extends Component {
 
     render() {
         const menuItems = this.props.menuItems
-            .map((route, index) => (
-                <MenuItem className="menu-item" onTouchTap={this.handleClose} key={index}>
-                    <Link to={route.props.path}>{route.props.label}</Link>
-                </MenuItem>
-            ));
+            .map((route, index) => {
+                console.log(route);
+                return (
+                    <MenuItem className="menu-item" leftIcon={route.props.icon} onTouchTap={this.handleClose} key={index}>
+                        <Link to={route.props.path}>{route.props.label}</Link>
+                    </MenuItem>
+                )
+            });
 
         return (
             <div>
@@ -46,7 +42,7 @@ class TopBar extends Component {
                     <Grid>
                         <Row>
                             <Col>
-                                <Paper className="profile-container" style={{backgroundColor: grey700}} zDepth={2}>
+                                <Paper className="profile-container" style={{backgroundColor: config.palette.primary1Color}} zDepth={2}>
                                     <img className="logo" src={logo} alt="Logo" />
                                 </Paper>
                             </Col>
