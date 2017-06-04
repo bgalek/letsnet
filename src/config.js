@@ -5,9 +5,11 @@ import Home from "./Components/Home/Home";
 import Ticket from "./Components/Ticket/Ticket";
 import BusinessNetwork from "./Components/BusinessNetwork/BusinessNetwork";
 import {fade} from "material-ui/utils/colorManipulator";
-import EventIcon from 'material-ui/svg-icons/content/move-to-inbox'
-import TicketIcon from 'material-ui/svg-icons/action/receipt'
-import NetworkIcon from 'material-ui/svg-icons/social/people'
+import EventIcon from 'material-ui/svg-icons/content/move-to-inbox';
+import TicketIcon from 'material-ui/svg-icons/action/receipt';
+import NetworkIcon from 'material-ui/svg-icons/social/people';
+import DiscoverIcon from 'material-ui/svg-icons/maps/local-offer';
+import Discover from './Components/Discover/Discover';
 
 import {
     cyan500,
@@ -38,8 +40,9 @@ export default {
     },
     menu: [
         <Route key="1" exact path="/" component={Home} label="Ongoing event" icon={<EventIcon/>}/>,
-        <Route key="2" path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>} label="Ticket" icon={<TicketIcon/>}/>,
         <Route key="3" path="/network" component={BusinessNetwork} label="Business Network" icon={<NetworkIcon/>}/>,
-        <Route key="4" path="/welcome/:name/:surname" render={(props) => <Home {...props} showWelcomeScreen firstName={props.name} surname={props.surname}/>}/>
+        <Route key="2" path="/ticket" render={(props) => <Ticket {...props}/>} label="Tickets" icon={<TicketIcon/>}/>,
+        <Route key="4" path="/discover" render={(props) => <Discover {...props}/>} label="Discover" icon={<DiscoverIcon/>}/>,
+        <Route key="666" path="/welcome/:name/:surname" render={(props) => <Home {...props} showWelcomeScreen firstName={props.name} surname={props.surname}/>}/>
     ]
 }
