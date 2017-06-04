@@ -26,14 +26,13 @@ class TopBar extends Component {
 
     render() {
         const menuItems = this.props.menuItems
-            .map((route, index) => {
-                console.log(route);
-                return (
+            .filter(menuItem => menuItem.props.label)
+            .map((route, index) => (
                     <MenuItem className="menu-item" leftIcon={route.props.icon} onTouchTap={this.handleClose} key={index}>
                         <Link to={route.props.path}>{route.props.label}</Link>
                     </MenuItem>
                 )
-            });
+            );
 
         return (
             <div>
@@ -43,7 +42,7 @@ class TopBar extends Component {
                         <Row>
                             <Col>
                                 <Paper className="profile-container" style={{backgroundColor: config.palette.primary1Color}} zDepth={2}>
-                                    <img className="logo" src={logo} alt="Logo" />
+                                    <img className="logo" src={logo} alt="Logo"/>
                                 </Paper>
                             </Col>
                         </Row>
