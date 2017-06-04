@@ -6,8 +6,11 @@ import {Avatar, Dialog, FlatButton} from "material-ui";
 import Person from "../../Models/Person";
 import config from '../../config';
 
+
+
 class Scanner extends Component {
     constructor(props) {
+        console.log('If iOS: ' + iOS);
         super(props);
         this.state = {
             person: new Person(),
@@ -49,45 +52,51 @@ class Scanner extends Component {
                 onTouchTap={this.handleClose}/>,
         ];
 
-        return (
-            <Grid fluid>
-                <Row>
-                    <Col xs={12}>
-                        <div className="viewfinder">
-                        </div>
-                        <QrReader
-                            delay={200}
-                            style={{width: '100%'}}
-                            onError={() => this.handleError}
-                            onScan={(data) => this.handleScan(data)}
-                            facingMode={'rear'}
-                        />
-                        <Dialog className="dialog"
-                                title={'Say hello to ' + this.state.person.firstName + '!'}
-                                titleStyle={{color: config.palette.alternateTextColor}}
-                                actions={actions}
-                                modal={false}
-                                open={this.state.open}
-                                onRequestClose={this.handleClose}>
-                            <Avatar className="avatar"
-                                    src={this.state.person.image}
-                                    size={50}
-                            />
-                            <section className="user-info">
-                                <h4>{this.state.person.firstName + ' ' + this.state.person.lastName}</h4>
-                                <p>{this.state.person.position}</p>
+        const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-                                <ul className="user-list">
-                                    <li>{this.state.person.company}</li>
-                                    <li>{this.state.person.phoneNumber}</li>
-                                    <li>{this.state.person.email}</li>
-                                </ul>
-                            </section>
-                        </Dialog>
-                    </Col>
-                </Row>
-            </Grid>
-        )
+        if (iOS) {
+            return (<h3 className="iOS-message">iOS not yet supported</h3>)
+        } else {
+            return (
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12}>
+                            <div className="viewfinder">
+                            </div>
+                            <QrReader
+                                delay={200}
+                                style={{width: '100%'}}
+                                onError={() => this.handleError}
+                                onScan={(data) => this.handleScan(data)}
+                                facingMode='rear'
+                            />
+                            <Dialog className="dialog"
+                                    title={'Say hello to ' + this.state.person.firstName + '!'}
+                                    titleStyle={{color: config.palette.alternateTextColor}}
+                                    actions={actions}
+                                    modal={false}
+                                    open={this.state.open}
+                                    onRequestClose={this.handleClose}>
+                                <Avatar className="avatar"
+                                        src={this.state.person.image}
+                                        size={50}
+                                />
+                                <section className="user-info">
+                                    <h4>{this.state.person.firstName + ' ' + this.state.person.lastName}</h4>
+                                    <p>{this.state.person.position}</p>
+
+                                    <ul className="user-list">
+                                        <li>{this.state.person.company}</li>
+                                        <li>{this.state.person.phoneNumber}</li>
+                                        <li>{this.state.person.email}</li>
+                                    </ul>
+                                </section>
+                            </Dialog>
+                        </Col>
+                    </Row>
+                </Grid>
+            )
+        }
     }
 }
 

@@ -49,3 +49,7 @@ section.user-info {
     float: right;
     margin-top: 7px;
 }
+
+.iOS-message {
+    text-align: center;
+}
