@@ -36,9 +36,6 @@ class Scanner extends Component {
     }
 
     render() {
-
-        const title = 'Say hello to ' + this.state.person.firstName + '!';
-
         const actions = [
             <FlatButton
                 label="Ignore"

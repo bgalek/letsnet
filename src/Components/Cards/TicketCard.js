@@ -7,7 +7,8 @@ import './TicketCard.css';
 
 class TicketCard extends Component {
     static styles = {
-        background: amber500
+        background: amber500,
+        marginTop: '2rem'
     };
 
     render() {

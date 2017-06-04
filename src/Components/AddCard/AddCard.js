@@ -22,7 +22,7 @@ class AddCard extends Component {
                         <TextField placeholder="Company name" style={style}/>
                         <TextField placeholder="E-mail" style={style}/>
                         <TextField placeholder="Phone number" style={style}/>
-                        <hr />
+                        <hr className="thin" />
                         <FlatButton label="Save" icon={<DoneIcon />}/>
                         <FlatButton label="Clear" icon={<ClearIcon />}/>
                     </Col>

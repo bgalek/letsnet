@@ -8,7 +8,7 @@ export default class Schedule extends Component {
 
     renderTalks(scheduleItem) {
         return scheduleItem.sessions.map((session, index) =>
-            <ListItem key={`${index}-${session.title}`} primaryText={session.title} secondaryText={session.subtitle}/>
+            <ListItem key={`${index}-${session.title}`} primaryText={session.hours +" - "+ session.title} secondaryText={session.subtitle}/>
         );
     }
 
