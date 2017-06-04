@@ -1,17 +1,12 @@
 import React from 'react';
 import {Route} from "react-router-dom";
 
-import About from "./Components/About/About";
 import Home from "./Components/Home/Home";
-import Contacts from "./Components/Contacts/Contacts";
-import Agenda from "./Components/Agenda/Agenda";
 import Ticket from "./Components/Ticket/Ticket";
-import Scanner from "./Components/Scanner/Scanner";
 import BusinessNetwork from "./Components/BusinessNetwork/BusinessNetwork";
 import {fade} from "material-ui/utils/colorManipulator";
 import EventIcon from 'material-ui/svg-icons/content/move-to-inbox'
 import TicketIcon from 'material-ui/svg-icons/action/receipt'
-import DiscoverIcon from 'material-ui/svg-icons/maps/local-offer'
 import NetworkIcon from 'material-ui/svg-icons/social/people'
 
 import {
@@ -44,6 +39,7 @@ export default {
     menu: [
         <Route key="1" exact path="/" component={Home} label="Ongoing event" icon={<EventIcon/>}/>,
         <Route key="2" path="/ticket" render={(props) => <Ticket {...props} name="Bartosz"/>} label="Ticket" icon={<TicketIcon/>}/>,
-        <Route key="4" path="/network" component={BusinessNetwork} label="Business Network" icon={<NetworkIcon/>}/>
+        <Route key="3" path="/network" component={BusinessNetwork} label="Business Network" icon={<NetworkIcon/>}/>,
+        <Route key="4" path="/welcome/:name/:surname" render={(props) => <Home {...props} showWelcomeScreen firstName={props.name} surname={props.surname}/>}/>
     ]
 }
