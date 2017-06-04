@@ -10,7 +10,6 @@ import config from '../../config';
 
 class Scanner extends Component {
     constructor(props) {
-        console.log('If iOS: ' + iOS);
         super(props);
         this.state = {
             person: new Person(),
