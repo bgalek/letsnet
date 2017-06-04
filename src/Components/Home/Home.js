@@ -7,6 +7,8 @@ import scheduleMock from './schedule.png';
 import speakersMock from './speakers.png';
 import homeMore from './home.png';
 import peopleMock from './people.png';
+import peopleMock2 from './people2.png';
+import peopleMock3 from './people3.png';
 import {Dialog, RaisedButton} from 'material-ui';
 import config from './../../config'
 
@@ -14,6 +16,7 @@ class Home extends Component {
 
     state = {
         open: true,
+        people: 1
     };
 
     handleClose = () => {
@@ -51,6 +54,17 @@ class Home extends Component {
 
                 </Grid>
             </Dialog>;
+        }
+
+        let screen = <img style={{width: '100%', marginTop: 20}} onTouchTap={() => this.setState({people: 2})} src={peopleMock}
+                          alt="people"/>;
+
+        if (this.state.people === 2) {
+            screen =
+                <img style={{width: '100%', marginTop: 20}} onTouchTap={() => this.setState({people: 3})} src={peopleMock2} alt="people"/>
+        } else if (this.state.people === 3) {
+            screen =
+                <img style={{width: '100%', marginTop: 20}} onTouchTap={() => this.setState({people: 4})} src={peopleMock3} alt="people"/>
         }
 
         return (
@@ -94,8 +108,7 @@ class Home extends Component {
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
-                                <img style={{width: '100%', marginTop: 20}} src={peopleMock} alt="speakers"/>
-
+                                {screen}
                             </Col>
                         </Row>
                     </Grid>
