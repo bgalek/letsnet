@@ -11,6 +11,7 @@ import {Dialog, RaisedButton} from 'material-ui';
 import config from './../../config'
 
 class Home extends Component {
+
     state = {
         open: true,
     };
@@ -21,7 +22,7 @@ class Home extends Component {
 
     render() {
         let dialog;
-        if(this.props.showWelcomeScreen) {
+        if (this.props.showWelcomeScreen) {
             dialog = <Dialog className="dialog"
                              title='Welcome to Lets Net!'
                              titleStyle={{color: config.palette.alternateTextColor}}
