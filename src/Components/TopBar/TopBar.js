@@ -47,7 +47,7 @@ class TopBar extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
+                            <Col style={{marginLeft: 20}}>
                                 {menuItems}
                             </Col>
                         </Row>

@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import {Paper} from "material-ui";
 import './Ticket.css';
-import qr from './qr_example.svg';
+import ticketsMock from './tickets.png';
+import {Col, Grid, Row} from "react-flexbox-grid";
 
 class Ticket extends Component {
 
     render() {
         return (
-            <div>
-                <Paper className="QR-container" zDepth={1}>
-                    <img src={qr} alt="QR code" />
-                </Paper>
-                <p>Great! Here is your ticket {this.props.name} for SWWAW</p>
-            </div>
+            <Grid fluid>
+                <Row>
+                    <Col xs={12}>
+                        <img style={{width: '100%', marginTop: 20}} src={ticketsMock} alt="tickets"/>
+                    </Col>
+                </Row>
+
+            </Grid>
         );
     }
 }
