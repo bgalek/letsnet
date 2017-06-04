@@ -4,6 +4,7 @@ import {Col, Row, Grid} from "react-flexbox-grid";
 import './Scanner.css';
 import {Avatar, Dialog, FlatButton} from "material-ui";
 import Person from "../../Models/Person";
+import config from '../../config';
 
 class Scanner extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class Scanner extends Component {
     }
 
     handleOpen = (data) => {
-        const person = new Person(data.name, data.surname, data.email);
+        const person = new Person(data.firstName, data.lastName, data.email, data.phoneNumber, data.image, data.company, data.position);
         this.setState({open: true, person: person});
     };
 
@@ -48,8 +49,6 @@ class Scanner extends Component {
                 onTouchTap={this.handleClose}/>,
         ];
 
-        console.log(this.state.person);
-
         return (
             <Grid fluid>
                 <Row>
@@ -65,21 +64,23 @@ class Scanner extends Component {
                         />
                         <Dialog className="dialog"
                                 title={'Say hello to ' + this.state.person.firstName + '!'}
+                                titleStyle={{color: config.palette.alternateTextColor}}
                                 actions={actions}
                                 modal={false}
                                 open={this.state.open}
                                 onRequestClose={this.handleClose}>
                             <Avatar className="avatar"
+                                    src={this.state.person.image}
                                     size={50}
                             />
                             <section className="user-info">
-                                <h4>Krzysztof Szporer</h4>
-                                <p>Software Developer</p>
+                                <h4>{this.state.person.firstName + ' ' + this.state.person.lastName}</h4>
+                                <p>{this.state.person.position}</p>
 
                                 <ul className="user-list">
-                                    <li>Bosch</li>
-                                    <li>+48999000111</li>
-                                    <li>email@email.com</li>
+                                    <li>{this.state.person.company}</li>
+                                    <li>{this.state.person.phoneNumber}</li>
+                                    <li>{this.state.person.email}</li>
                                 </ul>
                             </section>
                         </Dialog>
