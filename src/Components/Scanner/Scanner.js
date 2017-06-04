@@ -61,7 +61,6 @@ class Scanner extends Component {
                             onError={() => this.handleError}
                             onScan={(data) => this.handleScan(data)}
                             facingMode={'rear'}
-                            legacyMode={true}
                         />
                         <Dialog className="dialog"
                                 title={'Say hello to ' + this.state.person.firstName + '!'}
