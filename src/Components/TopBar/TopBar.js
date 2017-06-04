@@ -36,7 +36,7 @@ class TopBar extends Component {
 
         return (
             <div>
-                <AppBar title={config.appName} iconClassNameRight="muidocs-icon-navigation-expand-more" onTouchTap={this.openDrawer}/>
+                <AppBar title="SWWAW Conference" iconClassNameRight="muidocs-icon-navigation-expand-more" onTouchTap={this.openDrawer}/>
                 <Drawer docked={false} width={250} open={this.state.open} onRequestChange={(open) => this.setState({open})}>
                     <Grid>
                         <Row>

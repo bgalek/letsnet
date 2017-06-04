@@ -10,6 +10,7 @@ import peopleMock from './people.png';
 
 class Home extends Component {
     render() {
+        console.log(this.props);
         return (
             <Tabs>
                 <Tab label="Overview">
