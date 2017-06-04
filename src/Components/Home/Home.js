@@ -1,13 +1,29 @@
 import React, {Component} from 'react';
 import './Home.css';
-import {Paper} from "material-ui";
+import TicketCard from "../Cards/TicketCard";
+import {Col, Grid, Row} from "react-flexbox-grid";
+import {Divider, Tab, Tabs} from "material-ui";
 
 class Home extends Component {
     render() {
         return (
-            <div class="feed">
-                <Paper zDepth={1} />
-            </div>
+            <Tabs>
+                <Tab label="Overview">
+                    <Grid className="feed">
+                        <Row>
+                            <Col xs={12}>
+                                <TicketCard />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <p>Next Speakers</p>
+                                <Divider />
+                            </Col>
+                        </Row>
+                    </Grid>
+                </Tab>
+            </Tabs>
         );
     }
 }
