@@ -11,14 +11,14 @@ import config from "./config";
 injectTapEventPlugin();
 
 const app =
-    <Router>
-        <MuiThemeProvider>
+    <MuiThemeProvider>
+        <Router>
             <div className="App">
                 <TopBar menuItems={config.menu}/>
                 {config.menu}
             </div>
-        </MuiThemeProvider>
-    </Router>;
+        </Router>
+    </MuiThemeProvider>;
 
 ReactDOM.render(app, document.getElementById('root'));
 
