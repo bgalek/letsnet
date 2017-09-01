@@ -45,7 +45,7 @@ class ScheduleItem extends Component {
         const {item, history, hideDescription} = this.props;
 
         return <Card className="schedule-card" style={{margin: '0 0 30px 0', cursor: 'pointer'}}
-                     onTouchTap={() => history.push(`/atm/talk/${item.id}`)}>
+                     onTouchTap={() => history.push(`/talk/${item.id}`)}>
             <CardTitle title={item.title}/>
             {hideDescription || item.type === 'lightning' ? null : <CardText>{item.content}</CardText>}
 

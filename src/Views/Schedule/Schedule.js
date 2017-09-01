@@ -12,6 +12,7 @@ export default class Schedule extends Component {
     };
     
     render() {
+        console.log(this.props.match.params.conferenceId);
         const scheduleDays = this.props.schedule.days();
 
         const tabs = scheduleDays.map(day =>

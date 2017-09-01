@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import 'moment/locale/pl';
 import theme from '../Config/theme';
-import {MuiThemeProvider} from "material-ui";
+import {MuiThemeProvider, Paper} from "material-ui";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Messages from "../Messages";
 import {Profile as ProfileModel, Schedule as ScheduleModel} from '../Models';
@@ -14,7 +14,8 @@ import {Info, Loading, Login, Profile, Schedule, Speakers, Stream, Talk} from '.
 export default class App extends Component {
 
     state = {
-        title: 'Let\'s net',
+        title: Messages.appName,
+        conferences: [],
         isLoading: true,
         isLoggedIn: false,
         profile: {},
@@ -38,12 +39,13 @@ export default class App extends Component {
             votes: dbSnapshot.votes
         }));
 
-        auth.on('conferenceLoaded', (conference) => this.setState({
-            theme: conference.theme,
-            title: conference.title,
-            logo: conference.logo,
-            schedule: new ScheduleModel(conference.schedule)
-        }));
+        auth.on('conferencesLoaded', (conferences) => this.setState({conferences}));
+
+        // theme: conference.theme,
+        // title: conference.title,
+        // logo: conference.logo,
+        // schedule: new ScheduleModel(conference.schedule)
+        // }));
     }
 
     render() {
@@ -53,6 +55,22 @@ export default class App extends Component {
         if (!isLoggedIn) return this.renderLoginForm();
 
         return this.renderApp();
+    }
+
+    renderLandingPage() {
+        return <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+            <div>
+                <AnonymousBar title={this.state.title}/>
+                <Paper zDepth={1} style={{padding: 50, textAlign: 'center'}}>
+                    <h1>Witaj w Let's Net!</h1>
+                    <p>Wybierz interesującą Cię konferencję</p>
+                    <p>--</p>
+                    {this.state.conferences.map(conf => <li style={{textAlign: 'center', margin: 0, padding: 0, listStyle: 'none'}} key={conf.title}>
+                        <a href={`/conference/${conf.id}`}><img style={{maxWidth: 500}} src={conf.leadPhoto}/></a>
+                    </li>)}
+                </Paper>
+            </div>
+        </MuiThemeProvider>;
     }
 
     renderLoader() {
@@ -68,10 +86,9 @@ export default class App extends Component {
         const {actions} = this.props.auth;
 
         return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-            <div>
-                <AnonymousBar title={this.state.title} logo={this.state.logo}/>
-                <Login handleLogin={actions.login}/>
-            </div>
+            <BrowserRouter>
+                <Route render={(props) => <Login title={this.state.title} logo={this.state.logo} handleLogin={actions.login} location={props.location}/>} />
+            </BrowserRouter>
         </MuiThemeProvider>;
     }
 
@@ -79,15 +96,16 @@ export default class App extends Component {
         const {profile, title, schedule, speakers, votes} = this.state;
         const {actions} = this.props.auth;
 
-        const routesDefinitions = [{
-            path: '/home', exact: true,
-            appTitle: () => <div>{this.state.title}</div>,
-            main: () => <Schedule schedule={schedule}/>
-        },
+        const routesDefinitions = [
+            {
+                path: '/conference/:conferenceId',
+                appTitle: () => <div>{this.state.title}</div>,
+                main: () => <Schedule schedule={schedule}/>
+            },
             {
                 path: '/schedule',
                 appTitle: () => <div>{this.state.title} - {Messages.schedule}</div>,
-                main: () => <Schedule schedule={schedule}/>
+                main: () => <Stream/>
             },
             {
                 path: '/talk/:id',
@@ -132,7 +150,6 @@ export default class App extends Component {
                 <BrowserRouter history={createHistory({forceRefresh: true})}>
                     <div>
                         <AuthenticatedBar title={titleComponent} profile={profile}/>
-                        <Route exact path="/" render={() => <Redirect to="/home"/>}/>
                         {mainRoutesComponents}
                         <BottomMenu/>
                         <ScrollToTop/>
