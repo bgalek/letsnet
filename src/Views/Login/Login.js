@@ -38,21 +38,6 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const email = this.props.location.search.split("=")[1];
-        return (<div style={{padding: 30}}>
-            <h1>Zapraszamy na <br/>{this.props.title}!</h1>
-            <p style={{fontSize: '1.6rem', wordSpacing: '0.2rem'}}>Jeszcze tylko jeden krok dzieli Cię od rozpoczęcia
-                networking z LetsNet:</p>
-            <TextField onChange={() => this.setState({showOkButton: true})} floatingLabelText="Ustaw hasło" fullWidth={true}/>
-            <p>
-                {this.state.showOkButton ? <RaisedButton label="Zapisz" primary={true}/> : null}
-            </p>
-            <p style={{position: 'fixed', bottom: 16, wordSpacing: '0.2rem'}}>Twoje konto zostanie przypisane<br/>
-                do adresu <strong>{email}</strong></p>
-        </div>)
-    }
-
-    render2() {
         return (
             <Paper style={{padding: 30, margin: 30, textAlign: 'center', display: 'flex', flexDirection: 'column'}}
                    zDepth={1}>

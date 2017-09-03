@@ -3,5 +3,7 @@ export default {
     password: 'hasło',
     login: 'login',
     schedule: 'Plan',
-    loading: 'Ładowanie'
+    loading: 'Ładowanie',
+    save: 'Zapisz',
+    passwordTooShort: 'hasło jest za krótkie!'
 }

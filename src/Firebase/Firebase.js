@@ -45,6 +45,13 @@ export default class Firebase extends EventEmitter {
 
             /**
              *
+             * @param email
+             * @param password
+             */
+            register: (email, password) => auth.createUserWithEmailAndPassword(email, password),
+
+            /**
+             *
              * @param {String} talkId
              * @param {Number} score
              */

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 import {PropTypes} from 'prop-types';
 import {Avatar, Card, CardHeader, CardText, CardTitle} from "material-ui";
-import { SocialPerson, PlacesFreeBreakfast, MapsRestaurantMenu, SocialLocationCity,
+import { PlacesFreeBreakfast, MapsRestaurantMenu, SocialLocationCity,
     ActionVerifiedUser, ActionSpeakerNotes, ActionFlightTakeoff, ActionFlightLand } from 'material-ui/svg-icons';
 
 import './ScheduleItem.css';
