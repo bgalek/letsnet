@@ -23,7 +23,14 @@ export default class Profile extends Component {
 
     handleSaveClick() {
         this.setState({ isEditable: false });
-        // perform save profile details to Firebase...
+
+        // TODO: perform save profile details to Firebase...
+        this.props.profile.displayName = this.refs.textFieldName.getValue();
+        this.props.profile.email = this.refs.textFieldEmail.getValue();
+        this.props.profile.position = this.refs.textFieldPosition.getValue();
+        this.props.profile.companyName = this.refs.textFieldCompanName.getValue();
+        this.props.profile.phoneNumber = this.refs.textFieldPhoneNumber.getValue();
+        console.log('Saved profile: ' + JSON.stringify(this.props.profile, 0, 4));
     }
 
     render() {
@@ -33,22 +40,62 @@ export default class Profile extends Component {
         let editButton = null;
         if (isEditable) {
             // assign editable profile view
-            editButton = <FlatButton label='Save' style={{ position: 'absolute', right: 0 }} onClick={this.handleSaveClick} />;
+            editButton = <FlatButton label='Zapisz' style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleSaveClick} />;
         } else {
             // assign static profile view
-            editButton = <FlatButton label='Edit' style={{ position: 'absolute', right: 0 }} onClick={this.handleEditClick} />
+            editButton = <FlatButton label='Edytuj' style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleEditClick} />
         }
 
         return (
             <div>
                 {editButton}
-                <div style={{ padding: 30, margin: 30, textAlign: 'center' }}>
-                    <Avatar src={profile.photoURL} size={150} />
-                    <TextField disabled={!isEditable} defaultValue={profile.displayName} hintText='Name Surname' underlineShow={isEditable} inputStyle={{ textAlign: 'center', color: 'black', fontSize: 35 }} />
-                    <TextField disabled={!isEditable} defaultValue={profile.email} hintText="E-mail" underlineShow={isEditable} inputStyle={{ textAlign: 'center', color: 'black' }} />
-                    <TextField disabled={!isEditable} defaultValue={profile.position} hintText="Position" underlineShow={isEditable} inputStyle={{ textAlign: 'center', color: 'black' }} />
-                    <TextField disabled={!isEditable} defaultValue={profile.companyName} hintText="Company name" underlineShow={isEditable} inputStyle={{ textAlign: 'center', color: 'black' }} />
-                    <TextField disabled={!isEditable} defaultValue={profile.phoneNumber} hintText="Phone number" underlineShow={isEditable} inputStyle={{ textAlign: 'center', color: 'black' }} />
+                <div style={{ paddingTop: 51, textAlign: 'center' }}>
+                    <Avatar src={profile.photoURL} size={160} /><br />
+                    <TextField
+                        ref='textFieldName'
+                        disabled={!isEditable}
+                        defaultValue={profile.displayName}
+                        hintText='Imię Nazwisko'
+                        underlineShow={isEditable}
+                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 20 }}
+                    /><br />
+                    <TextField
+                        ref='textFieldEmail'
+                        disabled={!isEditable}
+                        defaultValue={profile.email}
+                        hintText='E-mail'
+                        underlineShow={isEditable}
+                        style={{ bottom: 15 }}
+                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+
+                    /><br />
+                    <TextField
+                        ref='textFieldPosition'
+                        disabled={!isEditable}
+                        defaultValue={profile.position}
+                        hintText='Stanowisko'
+                        underlineShow={isEditable}
+                        style={{ paddingTop: 15 }}
+                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                    /><br />
+                    <TextField
+                        ref='textFieldCompanName'
+                        disabled={!isEditable}
+                        defaultValue={profile.companyName}
+                        hintText='Nazwa firmy'
+                        underlineShow={isEditable}
+                        style={{ bottom: 15 }}
+                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                    /><br />
+                    <TextField
+                        ref='textFieldPhoneNumber'
+                        disabled={!isEditable}
+                        defaultValue={profile.phoneNumber}
+                        hintText='Numer telefonu'
+                        underlineShow={isEditable}
+                        style={{ bottom: 30 }}
+                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                    />
                 </div>
             </div>
         );

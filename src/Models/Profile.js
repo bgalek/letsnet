@@ -34,4 +34,28 @@ export default class Profile {
     get phoneNumber() {
         return this._phoneNumber;
     }
+
+    set displayName(displayName) {
+        this._displayName = displayName;
+    }
+
+    set photoURL(photoURL) {
+        this._photoURL = photoURL;
+    }
+
+    set email(email) {
+        this._email = email;
+    }
+
+    set position(position) {
+        this._position = position;
+    }
+
+    set companyName(companyName) {
+        this._companyName = companyName;
+    }
+
+    set phoneNumber(phoneNumber) {
+        this._phoneNumber = phoneNumber;
+    }
 }
