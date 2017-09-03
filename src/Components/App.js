@@ -10,6 +10,7 @@ import Messages from "../Messages";
 import {Profile as ProfileModel} from '../Models';
 import {ScrollToTop, AnonymousBar, AuthenticatedBar, BottomMenu, AnimatedRoute} from '../Components';
 import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login} from '../Views';
+import Home from "../Views/Home/Home";
 
 export default class App extends Component {
 
@@ -31,7 +32,6 @@ export default class App extends Component {
         }));
 
         auth.on('userLoggedIn', (user, dbSnapshot) => this.setState({
-            isLoading: false,
             isLoggedIn: true,
             profile: new ProfileModel(user),
             speakers: dbSnapshot.speakers,
@@ -49,27 +49,8 @@ export default class App extends Component {
 
     render() {
         const {isLoggedIn, isLoading} = this.state;
-
         if (isLoading) return this.renderLoader();
-        if (!isLoggedIn) {
-            const {actions} = this.props.auth;
-            return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/conference/:conferenceId/register" exact render={(props) =>
-                            <Register
-                                title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
-                                logo={this.state.logo}
-                                handleRegister={actions.register}
-                                location={props.location}/>}/>
-                        <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
-                                                         handleLogin={actions.login} location={props.location}/>}/>
-                    </Switch>
-
-                </BrowserRouter>
-            </MuiThemeProvider>;
-        }
-
+        if (!isLoggedIn) return this.renderLoginForm();
         return this.renderApp();
     }
 
@@ -102,20 +83,17 @@ export default class App extends Component {
 
         return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
             <BrowserRouter>
-                <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
-                                                 handleLogin={actions.login} location={props.location}/>}/>
-            </BrowserRouter>
-        </MuiThemeProvider>;
-    }
-
-    renderRegisterForm() {
-        const {actions} = this.props.auth;
-
-        return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-            <BrowserRouter>
-                <Route render={(props) => <Register title={this.state.title} logo={this.state.logo}
-                                                    handleRegister={actions.register}
-                                                    location={props.location}/>}/>
+                <Switch>
+                    <Route path="/conference/:conferenceId/register" exact render={(props) =>
+                        <Register
+                            title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
+                            logo={this.state.logo}
+                            handleRegister={actions.register}
+                            handleAlreadyRegistered={actions.userAlreadyRegistered}
+                            location={props.location}/>}/>
+                    <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
+                                                     handleLogin={actions.login} location={props.location}/>}/>
+                </Switch>
             </BrowserRouter>
         </MuiThemeProvider>;
     }
@@ -126,9 +104,15 @@ export default class App extends Component {
 
         const routesDefinitions = [
             {
+                path: '/',
+                exact: true,
+                appTitle: () => <div>{this.state.title} - Ekran pierwszy</div>,
+                main: () => <Home/>
+            },
+            {
                 path: '/conference/:conferenceId',
                 appTitle: () => <div>{this.state.title}</div>,
-                main: () => <Schedule schedule={schedule}/>
+                main: () => <Stream/>
             },
             {
                 path: '/schedule',

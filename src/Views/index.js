@@ -7,8 +7,10 @@ import Speakers from './Speakers/Speakers';
 import Stream from './Stream/Stream';
 import Talk from './Talk/Talk';
 import Register from './Register/Register';
+import Home from './Home/Home';
 
 export {
+    Home,
     Info,
     Loading,
     Login,

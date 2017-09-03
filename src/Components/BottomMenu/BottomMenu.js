@@ -20,7 +20,7 @@ class BottomMenuComponent extends Component {
 
     render() {
         const menuOptions = [
-            { label: 'Główna', icon: <ActionHome/>, link: '/home' },
+            { label: 'Główna', icon: <ActionHome/>, link: '/' },
             { label: Messages.schedule, icon: <ActionSchedule/>, link: '/schedule' },
             { label: 'Stream', icon: <AvVideocam/>, link: '/stream' },
             { label: 'Mapa', icon: <CommunicationLocationOn/>, link: '/info' },

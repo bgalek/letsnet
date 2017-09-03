@@ -45,8 +45,8 @@ export default class Login extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         type="text"
-                        hintText="bartosz.galek"
-                        floatingLabelText="login"
+                        hintText="imie.nazwisko@mail.com"
+                        floatingLabelText="email"
                         ref={(input) => this.loginField = input}
                         onChange={() => this.resetErrors()}
                         fullWidth={true}

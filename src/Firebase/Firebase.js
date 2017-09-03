@@ -52,6 +52,12 @@ export default class Firebase extends EventEmitter {
 
             /**
              *
+             * @param {Promise}
+             */
+            userAlreadyRegistered: (email) => auth.fetchProvidersForEmail(email),
+
+            /**
+             *
              * @param {String} talkId
              * @param {Number} score
              */

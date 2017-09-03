@@ -2,37 +2,55 @@ import * as React from "react";
 import {RaisedButton, TextField} from "material-ui";
 import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
+import {Redirect} from 'react-router-dom';
 
 export default class Register extends React.Component {
 
     static propTypes = {
-        handleRegister: PropTypes.func.isRequired
+        handleRegister: PropTypes.func.isRequired,
+        handleAlreadyRegistered: PropTypes.func.isRequired
     };
 
     constructor() {
         super();
         this.state = {
+            loading: true,
+            redirect: false,
             error: null
         };
     }
 
+    componentWillMount() {
+        this.props.handleAlreadyRegistered(this.getEmailFromQuery()).then(providers => {
+            if (providers.length === 0) {
+                this.setState({loading: false});
+            } else {
+                this.setState({redirect: true});
+            }
+        });
+    }
+
     handleSubmit(event) {
         if (!this.state.error) {
-            console.log('creating account', this.getEmailFromQuery(), this.state.password);
-            this.props.handleRegister(this.getEmailFromQuery(), this.state.password).catch(function(error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+            this.props.handleRegister(this.getEmailFromQuery(), this.state.password)
+                .catch((error) => this.setState({error: error.message}));
         }
         event.preventDefault();
     }
 
     render() {
+        if(this.state.redirect){
+            return <Redirect to={`/?email=${this.getEmailFromQuery()}`} />
+        }
+
+        if (this.state.loading) {
+            return <p/>;
+        }
+
         return (<div style={{padding: 30}}>
             <h1>Zapraszamy na <br/>{this.props.title}!</h1>
             <p style={{fontSize: '1.6rem', wordSpacing: '0.2rem'}}>Jeszcze tylko jeden krok dzieli Cię od rozpoczęcia
-                networking z LetsNet:</p>
+                networkingu z LetsNet:</p>
             <form onSubmit={(event) => this.handleSubmit(event)}>
                 <TextField type="password"
                            errorText={this.state.error}
