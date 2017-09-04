@@ -1,8 +1,9 @@
 // @flow
 import firebase from 'firebase';
 import EventEmitter from 'events';
+import Conference from "../Models/Conference";
 
-export default class FirebaseAuth extends EventEmitter {
+export default class Firebase extends EventEmitter {
     constructor(firebaseConfig) {
         super();
 
@@ -10,8 +11,10 @@ export default class FirebaseAuth extends EventEmitter {
         const auth = app.auth();
         const database = app.database().ref();
 
-        app.database().ref('/conferences/ggc-birthday').on('value', snapshot => {
-            this.emit('conferenceLoaded', snapshot.val());
+        app.database().ref('/conferences/').on('value', snapshot => {
+            const conferencesSnapshot = snapshot.val();
+            const conferences = Object.keys(conferencesSnapshot).map(it => new Conference(conferencesSnapshot[it], it));
+            this.emit('conferencesLoaded', conferences);
         });
 
         auth.onAuthStateChanged(user => {
@@ -39,6 +42,19 @@ export default class FirebaseAuth extends EventEmitter {
              * @returns {Promise}
              */
             login: (email, password) => auth.signInWithEmailAndPassword(email, password),
+
+            /**
+             *
+             * @param email
+             * @param password
+             */
+            register: (email, password) => auth.createUserWithEmailAndPassword(email, password),
+
+            /**
+             *
+             * @param {Promise}
+             */
+            userAlreadyRegistered: (email) => auth.fetchProvidersForEmail(email),
 
             /**
              *

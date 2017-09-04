@@ -18,12 +18,12 @@ export default class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        const { handleLogin } = this.props;
+        const {handleLogin} = this.props;
 
         const login = this.loginField.getValue();
         const password = this.passwordField.getValue();
 
-        this.setState({ loading: true });
+        this.setState({loading: true});
 
         handleLogin(login, password).catch(error => this.setState({
             loading: false,
@@ -34,18 +34,19 @@ export default class Login extends React.Component {
     }
 
     resetErrors() {
-        this.setState({ error: null });
+        this.setState({error: null});
     }
 
     render() {
         return (
-            <Paper style={{padding: 30, margin: 30, textAlign: 'center', display: 'flex', flexDirection: 'column'}} zDepth={1}>
+            <Paper style={{padding: 30, margin: 30, textAlign: 'center', display: 'flex', flexDirection: 'column'}}
+                   zDepth={1}>
                 {this.state.loading ? <LinearProgress mode="indeterminate"/> : null}
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         type="text"
-                        hintText="bartosz.galek"
-                        floatingLabelText="login"
+                        hintText="imie.nazwisko@mail.com"
+                        floatingLabelText="email"
                         ref={(input) => this.loginField = input}
                         onChange={() => this.resetErrors()}
                         fullWidth={true}

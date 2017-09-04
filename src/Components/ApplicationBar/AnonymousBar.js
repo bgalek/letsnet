@@ -1,7 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import {AppBar, IconButton} from 'material-ui';
-import SocialPerson from 'material-ui/svg-icons/social/person';
+import {AppBar} from 'material-ui';
 
 export default class AnonymousAppBar extends Component {
     render() {
