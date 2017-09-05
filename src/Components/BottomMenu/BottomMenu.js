@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { PropTypes } from 'prop-types';
 import { BottomNavigation, BottomNavigationItem, Paper } from 'material-ui';
-import { ActionHome, ActionSchedule, CommunicationLocationOn, AvVideocam } from 'material-ui/svg-icons';
+import { ActionEvent, SocialPeople, MapsPersonPin, EditorModeComment } from 'material-ui/svg-icons';
 import Messages from "../../Messages";
 
 class BottomMenuComponent extends Component {
@@ -20,10 +20,10 @@ class BottomMenuComponent extends Component {
 
     render() {
         const menuOptions = [
-            { label: 'Główna', icon: <ActionHome/>, link: '/' },
-            { label: Messages.schedule, icon: <ActionSchedule/>, link: '/schedule' },
-            { label: 'Stream', icon: <AvVideocam/>, link: '/stream' },
-            { label: 'Mapa', icon: <CommunicationLocationOn/>, link: '/info' },
+            { label: Messages.event, icon: <ActionEvent/>, link: '/' },
+            { label: Messages.networking, icon: <EditorModeComment/>, link: '/networking' },
+            { label: Messages.contacts, icon: <SocialPeople/>, link: '/contacts' },
+            { label: Messages.profile, icon: <MapsPersonPin/>, link: '/profile' },
         ];
 
         const activeOptionIndex = menuOptions.findIndex(option => this.props.location.pathname.startsWith(option.link));

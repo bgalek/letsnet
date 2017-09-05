@@ -9,7 +9,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Messages from "../Messages";
 import {Profile as ProfileModel} from '../Models';
 import {ScrollToTop, AnonymousBar, AuthenticatedBar, BottomMenu, AnimatedRoute} from '../Components';
-import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login} from '../Views';
+import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login, Networking} from '../Views';
 import Home from "../Views/Home/Home";
 
 export default class App extends Component {
@@ -114,6 +114,11 @@ export default class App extends Component {
                 path: '/conference/:conferenceId',
                 appTitle: () => <div>{this.state.title}</div>,
                 main: () => <Stream/>
+            },
+            {
+                path: '/networking',
+                appTitle: () => <div>{this.state.title} - {Messages.networking}</div>,
+                main: () => <Networking />
             },
             {
                 path: '/schedule',

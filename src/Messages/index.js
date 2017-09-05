@@ -9,5 +9,12 @@ export default {
     passwordTooShort: 'hasło jest za krótkie!',
     profileHintPosition: 'Stanowisko',
     profileHintCompanyName: 'Nazwa firmy',
-    profileHintPhoneNumber: 'Numer telefonu'
+    profileHintPhoneNumber: 'Numer telefonu',
+    event: 'Event',
+    networking: 'Networking',
+    contacts: 'Kontakty',
+    profile: 'Profil',
+    browse: 'Przeglądaj',
+    scan: 'Skanuj',
+    invitations: 'Zaproszenia'
 }

@@ -1,0 +1,55 @@
+.reader {
+    width: 100%;
+    position: relative;
+}
+
+.viewfinder {
+    width: 150px;
+    height: 150px;
+    border: 3px solid #fff;
+    position: absolute;
+    z-index: 100;
+    margin: 0 auto;
+    display: block;
+    left: calc(50% - 75px);
+    top: calc(50% - 75px);
+}
+
+.dialog h3 {
+    background: #febf2f;
+}
+
+.avatar {
+    margin-top: 20px;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.dialog h4 {
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+
+.user-info p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.user-list li {
+    padding: 3px 0;
+}
+
+section.user-info {
+    display: inline-block;
+    width: calc(100% - 70px);
+    float: right;
+    margin-top: 7px;
+}
+
+.iOS-message {
+    text-align: center;
+}
