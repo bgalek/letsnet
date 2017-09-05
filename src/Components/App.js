@@ -142,7 +142,7 @@ export default class App extends Component {
             {
                 path: '/profile',
                 appTitle: () => <div>Witaj {profile.displayName}!</div>,
-                main: () => <Profile profile={profile} handleLogout={actions.logout}/>
+                main: () => <Profile profile={profile} handleLogout={actions.logout} />
             }
         ];
 

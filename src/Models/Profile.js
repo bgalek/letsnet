@@ -3,12 +3,13 @@ import md5 from 'blueimp-md5';
 export default class Profile {
 
     constructor(currentUser) {
-        this._displayName = 'John Snow';                                                         //currentUser.displayName;
-        this._email = 'john.snow@gmail.com'                                                      //currentUser.email;
-        this._photoURL = 'https://pbs.twimg.com/profile_images/610317350529662976/f3lLBQeH.jpg'; //currentUser.photoURL || 'https://www.gravatar.com/avatar/' + md5(this._email.toLowerCase().trim());
-        this._position = 'King in the North';                                                    //currentUser.position;
-        this._companyName = 'Game of Thrones'                                                    //currentUser.companyName;
-        this._phoneNumber = 'Only ravens...'                                                     //currentUser.phoneNumber;
+        this._currentUser = currentUser;
+        this._displayName = currentUser.displayName;
+        this._email = currentUser.email;
+        this._photoURL = currentUser.photoURL || 'https://www.gravatar.com/avatar/' + md5(this._email.toLowerCase().trim());
+        this._position = currentUser.position;
+        this._companyName = currentUser.companyName;
+        this._phoneNumber = currentUser.phoneNumber;
     }
 
     get displayName() {
@@ -36,26 +37,45 @@ export default class Profile {
     }
 
     set displayName(displayName) {
-        this._displayName = displayName;
+        this._currentUser.updateProfile({
+            displayName: displayName,
+        }).then(() => {
+            this._displayName = this._currentUser.displayName;
+        }).catch((error) => {
+            console.error(error.message);
+        });
     }
 
     set photoURL(photoURL) {
-        this._photoURL = photoURL;
+        this._currentUser.updateProfile({
+            photoURL: photoURL,
+        }).then(() => {
+            this.photoURL = this._currentUser.photoURL;
+        }).catch((error) => {
+            console.error(error.message);
+        });
     }
 
     set email(email) {
-        this._email = email;
+        this._currentUser.updateEmail(email).then(() => {
+            this._email = this._currentUser.email;
+        }).catch((error) => {
+            console.error(error.message);
+        });
+    }
+
+    set phoneNumber(phoneNumber) {
+        // TODO: Save to Firebase - no option to save it with updateProfile method...
+        this._phoneNumber = phoneNumber;
     }
 
     set position(position) {
+        // TODO: Save to Firebase - no option to save it with updateProfile method...
         this._position = position;
     }
 
     set companyName(companyName) {
+        // TODO: Save to Firebase - no option to save it with updateProfile method...
         this._companyName = companyName;
-    }
-
-    set phoneNumber(phoneNumber) {
-        this._phoneNumber = phoneNumber;
     }
 }

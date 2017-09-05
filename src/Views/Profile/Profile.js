@@ -23,14 +23,11 @@ export default class Profile extends Component {
 
     handleSaveClick() {
         this.setState({ isEditable: false });
-
-        // TODO: perform save profile details to Firebase...
         this.props.profile.displayName = this.refs.textFieldName.getValue();
         this.props.profile.email = this.refs.textFieldEmail.getValue();
         this.props.profile.position = this.refs.textFieldPosition.getValue();
-        this.props.profile.companyName = this.refs.textFieldCompanName.getValue();
+        this.props.profile.companyName = this.refs.textFieldCompanyName.getValue();
         this.props.profile.phoneNumber = this.refs.textFieldPhoneNumber.getValue();
-        console.log('Saved profile: ' + JSON.stringify(this.props.profile, 0, 4));
     }
 
     render() {
@@ -79,7 +76,7 @@ export default class Profile extends Component {
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
                     /><br />
                     <TextField
-                        ref='textFieldCompanName'
+                        ref='textFieldCompanyName'
                         disabled={!isEditable}
                         defaultValue={profile.companyName}
                         hintText='Nazwa firmy'
