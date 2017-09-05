@@ -2,14 +2,13 @@ import md5 from 'blueimp-md5';
 
 export default class Profile {
 
-    constructor(currentUser) {
-        this._currentUser = currentUser;
+    constructor(currentUser, userDetails) {
         this._displayName = currentUser.displayName;
         this._email = currentUser.email;
         this._photoURL = currentUser.photoURL || 'https://www.gravatar.com/avatar/' + md5(this._email.toLowerCase().trim());
-        this._position = currentUser.position;
-        this._companyName = currentUser.companyName;
-        this._phoneNumber = currentUser.phoneNumber;
+        this._position = (userDetails) ? userDetails.position : '';
+        this._companyName = (userDetails) ? userDetails.companyName : '';
+        this._phoneNumber = (userDetails) ? userDetails.phoneNumber : '';
     }
 
     get displayName() {
@@ -34,48 +33,5 @@ export default class Profile {
 
     get phoneNumber() {
         return this._phoneNumber;
-    }
-
-    set displayName(displayName) {
-        this._currentUser.updateProfile({
-            displayName: displayName,
-        }).then(() => {
-            this._displayName = this._currentUser.displayName;
-        }).catch((error) => {
-            console.error(error.message);
-        });
-    }
-
-    set photoURL(photoURL) {
-        this._currentUser.updateProfile({
-            photoURL: photoURL,
-        }).then(() => {
-            this.photoURL = this._currentUser.photoURL;
-        }).catch((error) => {
-            console.error(error.message);
-        });
-    }
-
-    set email(email) {
-        this._currentUser.updateEmail(email).then(() => {
-            this._email = this._currentUser.email;
-        }).catch((error) => {
-            console.error(error.message);
-        });
-    }
-
-    set phoneNumber(phoneNumber) {
-        // TODO: Save to Firebase - no option to save it with updateProfile method...
-        this._phoneNumber = phoneNumber;
-    }
-
-    set position(position) {
-        // TODO: Save to Firebase - no option to save it with updateProfile method...
-        this._position = position;
-    }
-
-    set companyName(companyName) {
-        // TODO: Save to Firebase - no option to save it with updateProfile method...
-        this._companyName = companyName;
     }
 }

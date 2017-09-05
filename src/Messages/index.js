@@ -4,6 +4,10 @@ export default {
     login: 'login',
     schedule: 'Plan',
     loading: 'Ładowanie',
+    edit: 'Edytuj',
     save: 'Zapisz',
-    passwordTooShort: 'hasło jest za krótkie!'
+    passwordTooShort: 'hasło jest za krótkie!',
+    profileHintPosition: 'Stanowisko',
+    profileHintCompanyName: 'Nazwa firmy',
+    profileHintPhoneNumber: 'Numer telefonu'
 }

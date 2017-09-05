@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Paper, RaisedButton, Avatar, FlatButton, TextField } from "material-ui";
 import { PropTypes } from 'prop-types';
+import Messages from "../../Messages";
 
 export default class Profile extends Component {
 
@@ -14,7 +15,8 @@ export default class Profile extends Component {
 
     static propTypes = {
         handleLogout: PropTypes.func.isRequired,
-        profile: PropTypes.object.isRequired
+        handleUpdateProfile: PropTypes.func.isRequired,
+        profile: PropTypes.object.isRequired,
     };
 
     handleEditClick() {
@@ -23,11 +25,11 @@ export default class Profile extends Component {
 
     handleSaveClick() {
         this.setState({ isEditable: false });
-        this.props.profile.displayName = this.refs.textFieldName.getValue();
-        this.props.profile.email = this.refs.textFieldEmail.getValue();
-        this.props.profile.position = this.refs.textFieldPosition.getValue();
-        this.props.profile.companyName = this.refs.textFieldCompanyName.getValue();
-        this.props.profile.phoneNumber = this.refs.textFieldPhoneNumber.getValue();
+        this.props.handleUpdateProfile(
+            this.refs.textFieldPosition.getValue(),
+            this.refs.textFieldCompanyName.getValue(),
+            this.refs.textFieldPhoneNumber.getValue()
+        );
     }
 
     render() {
@@ -37,10 +39,10 @@ export default class Profile extends Component {
         let editButton = null;
         if (isEditable) {
             // assign editable profile view
-            editButton = <FlatButton label='Zapisz' style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleSaveClick} />;
+            editButton = <FlatButton label={Messages.save} style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleSaveClick} />;
         } else {
             // assign static profile view
-            editButton = <FlatButton label='Edytuj' style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleEditClick} />
+            editButton = <FlatButton label={Messages.edit} style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleEditClick} />
         }
 
         return (
@@ -50,18 +52,14 @@ export default class Profile extends Component {
                     <Avatar src={profile.photoURL} size={160} /><br />
                     <TextField
                         ref='textFieldName'
-                        disabled={!isEditable}
                         defaultValue={profile.displayName}
-                        hintText='Imię Nazwisko'
-                        underlineShow={isEditable}
+                        underlineShow={false}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 20 }}
                     /><br />
                     <TextField
                         ref='textFieldEmail'
-                        disabled={!isEditable}
                         defaultValue={profile.email}
-                        hintText='E-mail'
-                        underlineShow={isEditable}
+                        underlineShow={false}
                         style={{ bottom: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
 
@@ -70,7 +68,7 @@ export default class Profile extends Component {
                         ref='textFieldPosition'
                         disabled={!isEditable}
                         defaultValue={profile.position}
-                        hintText='Stanowisko'
+                        hintText={Messages.profileHintPosition}
                         underlineShow={isEditable}
                         style={{ paddingTop: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
@@ -79,7 +77,7 @@ export default class Profile extends Component {
                         ref='textFieldCompanyName'
                         disabled={!isEditable}
                         defaultValue={profile.companyName}
-                        hintText='Nazwa firmy'
+                        hintText={Messages.profileHintCompanyName}
                         underlineShow={isEditable}
                         style={{ bottom: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
@@ -88,7 +86,7 @@ export default class Profile extends Component {
                         ref='textFieldPhoneNumber'
                         disabled={!isEditable}
                         defaultValue={profile.phoneNumber}
-                        hintText='Numer telefonu'
+                        hintText={Messages.profileHintPhoneNumber}
                         underlineShow={isEditable}
                         style={{ bottom: 30 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}

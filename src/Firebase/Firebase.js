@@ -66,7 +66,15 @@ export default class Firebase extends EventEmitter {
                     score: score,
                     time: new Date()
                 });
-            }
+            },
+
+            updateProfile: (position, companyName, phoneNumber) => {
+                app.database().ref('users/' + auth.currentUser.uid).set({
+                    position: position,
+                    companyName: companyName,
+                    phoneNumber: phoneNumber
+                });
+            },
         }
     }
 }
