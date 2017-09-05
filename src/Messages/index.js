@@ -5,5 +5,12 @@ export default {
     schedule: 'Plan',
     loading: 'Ładowanie',
     save: 'Zapisz',
-    passwordTooShort: 'hasło jest za krótkie!'
+    passwordTooShort: 'hasło jest za krótkie!',
+    event: 'Event',
+    networking: 'Networking',
+    contacts: 'Kontakty',
+    profile: 'Profil',
+    browse: 'Przeglądaj',
+    scan: 'Skanuj',
+    invitations: 'Zaproszenia'
 }
