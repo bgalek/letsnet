@@ -31,11 +31,11 @@ export default class App extends Component {
             isLoggedIn: false
         }));
 
-        auth.on('userLoggedIn', (user, dbSnapshot) => this.setState({
+        auth.on('userLoggedIn', (user, userInfo) => this.setState({
                 isLoggedIn: true,
-                profile: new ProfileModel(user, dbSnapshot.users[user.uid]),
-                speakers: dbSnapshot.speakers,
-                votes: dbSnapshot.votes
+                profile: new ProfileModel(user, userInfo),
+                // speakers: dbSnapshot.speakers,
+                // votes: dbSnapshot.votes
             }
         ));
 

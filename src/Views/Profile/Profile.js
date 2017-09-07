@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Paper, RaisedButton, Avatar, FlatButton, TextField } from "material-ui";
+import { Avatar, FlatButton, TextField } from "material-ui";
 import { PropTypes } from 'prop-types';
 import Messages from "../../Messages";
 
@@ -8,9 +8,16 @@ export default class Profile extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isEditable: false,
+            position: props.profile.position,
+            companyName: props.profile.companyName,
+            phoneNumber: props.profile.phoneNumber
+        };
+
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleSaveClick = this.handleSaveClick.bind(this);
-        this.state = { isEditable: false };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     static propTypes = {
@@ -19,6 +26,16 @@ export default class Profile extends Component {
         profile: PropTypes.object.isRequired,
     };
 
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
     handleEditClick() {
         this.setState({ isEditable: true });
     }
@@ -26,9 +43,9 @@ export default class Profile extends Component {
     handleSaveClick() {
         this.setState({ isEditable: false });
         this.props.handleUpdateProfile(
-            this.refs.textFieldPosition.getValue(),
-            this.refs.textFieldCompanyName.getValue(),
-            this.refs.textFieldPhoneNumber.getValue()
+            this.state.position,
+            this.state.companyName,
+            this.state.phoneNumber
         );
     }
 
@@ -36,60 +53,59 @@ export default class Profile extends Component {
         const { profile } = this.props;
         const isEditable = this.state.isEditable;
 
-        let editButton = null;
-        if (isEditable) {
-            // assign editable profile view
-            editButton = <FlatButton label={Messages.save} style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleSaveClick} />;
-        } else {
-            // assign static profile view
-            editButton = <FlatButton label={Messages.edit} style={{ position: 'absolute', right: 0, marginTop: 15 }} onClick={this.handleEditClick} />
-        }
-
         return (
             <div>
-                {editButton}
+                <FlatButton
+                    name='editButton'
+                    label={isEditable ? Messages.save : Messages.edit}
+                    style={{ position: 'absolute', right: 0, marginTop: 15 }}
+                    onClick={isEditable ? this.handleSaveClick : this.handleEditClick}
+                />
                 <div style={{ paddingTop: 51, textAlign: 'center' }}>
-                    <Avatar src={profile.photoURL} size={160} /><br />
+                    <Avatar src={profile.photoURL} size={160} />
                     <TextField
-                        ref='textFieldName'
-                        defaultValue={profile.displayName}
+                        name='name'
+                        value={profile.displayName}
                         underlineShow={false}
+                        style={{ display: 'block', margin: 'auto' }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 20 }}
-                    /><br />
+                    />
                     <TextField
-                        ref='textFieldEmail'
-                        defaultValue={profile.email}
+                        name='email'
+                        value={profile.email}
                         underlineShow={false}
-                        style={{ bottom: 15 }}
+                        style={{ display: 'block', margin: 'auto', bottom: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
-
-                    /><br />
+                    />
                     <TextField
-                        ref='textFieldPosition'
+                        name='position'
                         disabled={!isEditable}
-                        defaultValue={profile.position}
-                        hintText={Messages.profileHintPosition}
+                        value={this.state.position}
+                        hintText={Messages.position}
                         underlineShow={isEditable}
-                        style={{ paddingTop: 15 }}
+                        style={{ display: 'block', margin: 'auto', paddingTop: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
-                    /><br />
+                        onChange={this.handleInputChange}
+                    />
                     <TextField
-                        ref='textFieldCompanyName'
+                        name='companyName'
                         disabled={!isEditable}
-                        defaultValue={profile.companyName}
-                        hintText={Messages.profileHintCompanyName}
+                        value={this.state.companyName}
+                        hintText={Messages.companyName}
                         underlineShow={isEditable}
-                        style={{ bottom: 15 }}
+                        style={{ display: 'block', margin: 'auto', bottom: 15 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
-                    /><br />
+                        onChange={this.handleInputChange}
+                    />
                     <TextField
-                        ref='textFieldPhoneNumber'
+                        name='phoneNumber'
                         disabled={!isEditable}
-                        defaultValue={profile.phoneNumber}
-                        hintText={Messages.profileHintPhoneNumber}
+                        value={this.state.phoneNumber}
+                        hintText={Messages.phoneNumber}
                         underlineShow={isEditable}
-                        style={{ bottom: 30 }}
+                        style={{ display: 'block', margin: 'auto', bottom: 30 }}
                         inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        onChange={this.handleInputChange}
                     />
                 </div>
             </div>
