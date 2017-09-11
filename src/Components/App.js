@@ -31,12 +31,13 @@ export default class App extends Component {
             isLoggedIn: false
         }));
 
-        auth.on('userLoggedIn', (user, dbSnapshot) => this.setState({
-            isLoggedIn: true,
-            profile: new ProfileModel(user),
-            speakers: dbSnapshot.speakers,
-            votes: dbSnapshot.votes
-        }));
+        auth.on('userLoggedIn', (user, userInfo) => this.setState({
+                isLoggedIn: true,
+                profile: new ProfileModel(user, userInfo),
+                // speakers: dbSnapshot.speakers,
+                // votes: dbSnapshot.votes
+            }
+        ));
 
         auth.on('conferencesLoaded', (conferences) => this.setState({isLoading: false, conferences}));
 
@@ -147,7 +148,7 @@ export default class App extends Component {
             {
                 path: '/profile',
                 appTitle: () => <div>Witaj {profile.displayName}!</div>,
-                main: () => <Profile profile={profile} handleLogout={actions.logout}/>
+                main: () => <Profile profile={profile} handleLogout={actions.logout} handleUpdateProfile={actions.updateProfile}/>
             }
         ];
 

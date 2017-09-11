@@ -23,7 +23,9 @@ export default class Firebase extends EventEmitter {
             } else {
                 database.on('value', snapshot => {
                     const data = snapshot.val();
-                    this.emit('userLoggedIn', user, data);
+                    const userInfo = data.users[user.uid];
+                    // TODO: pass conference details
+                    this.emit('userLoggedIn', user, userInfo);
                 });
             }
         });
@@ -66,7 +68,15 @@ export default class Firebase extends EventEmitter {
                     score: score,
                     time: new Date()
                 });
-            }
+            },
+
+            updateProfile: (position, companyName, phoneNumber) => {
+                app.database().ref('users/' + auth.currentUser.uid).set({
+                    position: position,
+                    companyName: companyName,
+                    phoneNumber: phoneNumber
+                });
+            },
         }
     }
 }
