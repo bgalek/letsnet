@@ -9,7 +9,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Messages from "../Messages";
 import {Profile as ProfileModel} from '../Models';
 import {ScrollToTop, AnonymousBar, AuthenticatedBar, BottomMenu, AnimatedRoute} from '../Components';
-import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login, Networking} from '../Views';
+import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login, Networking, Contacts} from '../Views';
 import Home from "../Views/Home/Home";
 
 export default class App extends Component {
@@ -34,6 +34,7 @@ export default class App extends Component {
         auth.on('userLoggedIn', (user, userInfo) => this.setState({
                 isLoggedIn: true,
                 profile: new ProfileModel(user, userInfo),
+                contacts: userInfo.contacts
                 // speakers: dbSnapshot.speakers,
                 // votes: dbSnapshot.votes
             }
@@ -100,7 +101,7 @@ export default class App extends Component {
     }
 
     renderApp() {
-        const {profile, title, schedule, speakers, votes} = this.state;
+        const {profile, title, contacts, schedule, speakers, votes} = this.state;
         const {actions} = this.props.auth;
 
         const routesDefinitions = [
@@ -149,6 +150,11 @@ export default class App extends Component {
                 path: '/profile',
                 appTitle: () => <div>Witaj {profile.displayName}!</div>,
                 main: () => <Profile profile={profile} handleLogout={actions.logout} handleUpdateProfile={actions.updateProfile}/>
+            },
+            {
+                path: '/contacts',
+                appTitle: () => <div>{this.state.title} - {Messages.contacts}</div>,
+                main: () => <Contacts contacts={contacts} handleAddContact={actions.addContact}/>
             }
         ];
 

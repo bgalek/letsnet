@@ -14,7 +14,7 @@ class BottomMenuComponent extends Component {
         history: PropTypes.object.isRequired
     };
 
-    goTo = (route: string) => {
+    goTo = (route) => {
         this.props.history.push(route);
     };
 

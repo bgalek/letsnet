@@ -77,6 +77,13 @@ export default class Firebase extends EventEmitter {
                     phoneNumber: phoneNumber
                 });
             },
+
+            addContact: (name, position) => {
+                app.database().ref('users/' + auth.currentUser.uid + '/contacts').push({
+                    name: name,
+                    position: position
+                });
+            }
         }
     }
 }

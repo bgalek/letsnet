@@ -8,7 +8,8 @@ import Stream from './Stream/Stream';
 import Talk from './Talk/Talk';
 import Register from './Register/Register';
 import Home from './Home/Home';
-import Networking from "./Networking";
+import Networking from './Networking';
+import Contacts from './Contacts';
 
 export {
     Home,
@@ -21,5 +22,6 @@ export {
     Stream,
     Talk,
     Register,
-    Networking
+    Networking,
+    Contacts
 };

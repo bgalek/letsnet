@@ -7,6 +7,7 @@ export default {
     edit: 'Edytuj',
     save: 'Zapisz',
     passwordTooShort: 'hasło jest za krótkie!',
+    name: 'Imię Nazwisko',
     position: 'Stanowisko',
     companyName: 'Nazwa firmy',
     phoneNumber: 'Numer telefonu',
@@ -16,5 +17,8 @@ export default {
     profile: 'Profil',
     browse: 'Przeglądaj',
     scan: 'Skanuj',
-    invitations: 'Zaproszenia'
+    invitations: 'Zaproszenia',
+    myContacts: 'Moje kontakty',
+    addContact: 'Dodaj nowy',
+    add: 'Dodaj'
 }

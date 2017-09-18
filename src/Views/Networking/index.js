@@ -1,10 +1,10 @@
 // @flow
 import React, {Component} from 'react';
-import {Tab, Tabs} from "material-ui";
+import {Tab, Tabs} from 'material-ui';
 import Messages from '../../Messages';
 import BrowseTab from './BrowseTab';
-import ScanTab from "./ScanTab";
-import InvitationsTab from "./InvitationsTab";
+import ScanTab from './ScanTab';
+import InvitationsTab from './InvitationsTab';
 
 export default class Networking extends Component {
 
