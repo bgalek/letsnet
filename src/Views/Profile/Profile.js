@@ -1,7 +1,7 @@
 // @flow
-import React, { Component } from 'react';
-import { Avatar, FlatButton, TextField } from "material-ui";
-import { PropTypes } from 'prop-types';
+import React, {Component} from 'react';
+import {Avatar, FlatButton, TextField} from "material-ui";
+import {PropTypes} from 'prop-types';
 import Messages from "../../Messages";
 
 export default class Profile extends Component {
@@ -30,18 +30,17 @@ export default class Profile extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
         this.setState({
             [name]: value
         });
     }
 
     handleEditClick() {
-        this.setState({ isEditable: true });
+        this.setState({isEditable: true});
     }
 
     handleSaveClick() {
-        this.setState({ isEditable: false });
+        this.setState({isEditable: false});
         this.props.handleUpdateProfile(
             this.state.position,
             this.state.companyName,
@@ -50,32 +49,31 @@ export default class Profile extends Component {
     }
 
     render() {
-        const { profile } = this.props;
+        const {profile} = this.props;
         const isEditable = this.state.isEditable;
 
         return (
             <div>
-                <FlatButton
-                    name='editButton'
-                    label={isEditable ? Messages.save : Messages.edit}
-                    style={{ position: 'absolute', right: 0, marginTop: 15 }}
-                    onClick={isEditable ? this.handleSaveClick : this.handleEditClick}
+                <FlatButton name='editButton'
+                            label={isEditable ? Messages.save : Messages.edit}
+                            style={{position: 'absolute', right: 0, marginTop: 15}}
+                            onClick={isEditable ? this.handleSaveClick : this.handleEditClick}
                 />
-                <div style={{ paddingTop: 51, textAlign: 'center' }}>
-                    <Avatar src={profile.photoURL} size={160} />
+                <div style={{paddingTop: 51, textAlign: 'center'}}>
+                    <Avatar src={profile.photoURL} size={160}/>
                     <TextField
                         name='name'
                         value={profile.displayName}
                         underlineShow={false}
-                        style={{ display: 'block', margin: 'auto' }}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 20 }}
+                        style={{display: 'block', margin: 'auto'}}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 20}}
                     />
                     <TextField
                         name='email'
                         value={profile.email}
                         underlineShow={false}
-                        style={{ display: 'block', margin: 'auto', bottom: 15 }}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        style={{display: 'block', margin: 'auto', bottom: 15}}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                     />
                     <TextField
                         name='position'
@@ -83,8 +81,8 @@ export default class Profile extends Component {
                         value={this.state.position}
                         hintText={Messages.position}
                         underlineShow={isEditable}
-                        style={{ display: 'block', margin: 'auto', paddingTop: 15 }}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        style={{display: 'block', margin: 'auto', paddingTop: 15}}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
                     <TextField
@@ -93,8 +91,8 @@ export default class Profile extends Component {
                         value={this.state.companyName}
                         hintText={Messages.companyName}
                         underlineShow={isEditable}
-                        style={{ display: 'block', margin: 'auto', bottom: 15 }}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        style={{display: 'block', margin: 'auto', bottom: 15}}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
                     <TextField
@@ -103,8 +101,8 @@ export default class Profile extends Component {
                         value={this.state.phoneNumber}
                         hintText={Messages.phoneNumber}
                         underlineShow={isEditable}
-                        style={{ display: 'block', margin: 'auto', bottom: 30 }}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        style={{display: 'block', margin: 'auto', bottom: 30}}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
                 </div>

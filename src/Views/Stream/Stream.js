@@ -1,13 +1,13 @@
 import * as React from "react";
-import {Paper} from "material-ui";
+import Card from "../../Components/Card/Card";
 
 export default class Stream extends React.Component {
 
     render() {
         return (
-            <Paper style={{padding: 30, margin: 30, textAlign: 'center', display: 'flex', flexDirection: 'column'}} zDepth={1}>
+            <Card>
                 <p>Streams!</p>
-            </Paper>
+            </Card>
         )
     }
 }

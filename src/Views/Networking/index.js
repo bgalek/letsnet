@@ -22,17 +22,19 @@ export default class Networking extends Component {
 
     render() {
         return (
-            <Tabs value={this.state.selectedIndex} onChange={(val) => this.handleChange(val)}>
-                <Tab label={Messages.browse} value="browse">
-                    <BrowseTab/>
-                </Tab>
-                <Tab label={Messages.scan} value="scan">
-                    <ScanTab scanning={false}/>
-                </Tab>
-                <Tab label={Messages.invitations} value="invitations">
-                    <InvitationsTab/>
-                </Tab>
-            </Tabs>
+            <div>
+                <Tabs value={this.state.selectedIndex} onChange={(val) => this.handleChange(val)}>
+                    <Tab label={Messages.browse} value="browse">
+                        <BrowseTab/>
+                    </Tab>
+                    <Tab label={Messages.scan} value="scan">
+                        <ScanTab scanning={false}/>
+                    </Tab>
+                    <Tab label={Messages.invitations} value="invitations">
+                        <InvitationsTab/>
+                    </Tab>
+                </Tabs>
+            </div>
         );
     }
 }

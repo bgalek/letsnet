@@ -8,6 +8,7 @@ import Comments from './Comments';
 import VotingStars from './VotingStars';
 
 import './Talk.css';
+import Card from "../../Components/Card/Card";
 
 /**
  *
@@ -30,7 +31,7 @@ const Talk = ({ match, votes, schedule, profile, handleVote }) => {
     const { score: userVoteValue } = talkVotes[profile.displayName] || {};
 
     return <div>
-        <Paper className="talk" style={{padding: 30, margin: 30, textAlign: 'center'}} zDepth={1}>
+        <Card className="talk">
             {avatars}
             <h2 style={{color: config.palette.accent1Color}}>
                 {speakers.map(speaker => <div key={speaker.name}>{speaker.name}</div>)}
@@ -39,7 +40,7 @@ const Talk = ({ match, votes, schedule, profile, handleVote }) => {
 
             <h4>Twoja ocena:</h4>
             <VotingStars currentScore={userVoteValue} onScoreChange={newScore => handleVote(talkId, newScore)} />
-        </Paper>
+        </Card>
         <h2>Komentarze</h2>
         <Comments id={talk.id}/>
     </div>;

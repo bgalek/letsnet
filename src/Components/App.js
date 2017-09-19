@@ -107,47 +107,38 @@ export default class App extends Component {
             {
                 path: '/',
                 exact: true,
-                appTitle: () => <div>{this.state.title} - Ekran pierwszy</div>,
                 main: () => <Home/>
             },
             {
                 path: '/conference/:conferenceId',
-                appTitle: () => <div>{this.state.title}</div>,
                 main: () => <Stream/>
             },
             {
                 path: '/networking',
-                appTitle: () => <div>{this.state.title} - {Messages.networking}</div>,
                 main: () => <Networking />
             },
             {
                 path: '/schedule',
-                appTitle: () => <div>{this.state.title} - {Messages.schedule}</div>,
                 main: () => <Stream/>
             },
             {
                 path: '/talk/:id',
-                appTitle: (props) => <div>{this.state.title} - {schedule.findById(props.match.params.id).title}</div>,
                 main: () => <Talk profile={profile} schedule={schedule} votes={votes} handleVote={actions.vote}/>
             },
             {
                 path: '/info',
-                appTitle: () => <div>{this.state.title} - Mapa wydarzenia</div>,
                 main: () => <Info/>
             },
             {
                 path: '/stream',
-                appTitle: () => <div>{this.state.title} - Oglądaj na żywo</div>,
                 main: () => <Stream/>
             },
             {
                 path: '/speakers',
-                appTitle: () => <div>{this.state.title} - Prelegenci</div>,
                 main: () => <Speakers speakers={speakers}/>
             },
             {
                 path: '/profile',
-                appTitle: () => <div>Witaj {profile.displayName}!</div>,
                 main: () => <Profile profile={profile} handleLogout={actions.logout} handleUpdateProfile={actions.updateProfile}/>
             }
         ];
@@ -158,7 +149,7 @@ export default class App extends Component {
 
         const titleComponent = <Switch>
             {routesDefinitions.map((route, index) => (
-                <Route key={index} path={route.path} exact={route.exact} component={route.appTitle}/>
+                <Route key={index} path={route.path} exact={route.exact} component={() => <div>{title}</div>}/>
             ))}
             <Route component={() => <div>{title}</div>}/>
         </Switch>;

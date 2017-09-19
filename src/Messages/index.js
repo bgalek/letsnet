@@ -16,5 +16,6 @@ export default {
     profile: 'Profil',
     browse: 'Przeglądaj',
     scan: 'Skanuj',
-    invitations: 'Zaproszenia'
+    invitations: 'Zaproszenia',
+    back: 'Powrót'
 }
