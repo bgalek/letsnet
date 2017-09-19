@@ -21,4 +21,5 @@ export default {
     myContacts: 'Moje kontakty',
     addContact: 'Dodaj nowy',
     add: 'Dodaj'
+    back: 'Powrót'
 }
