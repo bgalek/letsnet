@@ -20,6 +20,6 @@ export default {
     invitations: 'Zaproszenia',
     myContacts: 'Moje kontakty',
     addContact: 'Dodaj nowy',
-    add: 'Dodaj'
+    add: 'Dodaj',
     back: 'Powrót'
 }
