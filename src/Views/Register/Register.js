@@ -40,7 +40,8 @@ export default class Register extends React.Component {
 
     render() {
         if(this.state.redirect){
-            return <Redirect to={`/?email=${this.getEmailFromQuery()}`} />
+            const url = this.props.location.pathname.substring(0, this.props.location.pathname.lastIndexOf("/"));
+            return <Redirect to={`${url}?email=${this.getEmailFromQuery()}`} />
         }
 
         if (this.state.loading) {

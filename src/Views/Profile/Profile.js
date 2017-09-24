@@ -105,6 +105,8 @@ export default class Profile extends Component {
                         inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
+                    <FlatButton label={Messages.logout} onClick={this.props.handleLogout}
+                    />
                 </div>
             </div>
         );

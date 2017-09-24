@@ -1,7 +1,7 @@
 // @flow
-import React, { Component } from 'react';
-import { List, ListItem, TextField, FlatButton } from 'material-ui';
-import { PropTypes } from 'prop-types';
+import React, {Component} from 'react';
+import {TextField, FlatButton} from 'material-ui';
+import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
 
 export default class AddContactTab extends Component {
@@ -48,24 +48,24 @@ export default class AddContactTab extends Component {
                 <FlatButton
                     name='addButton'
                     label={Messages.add}
-                    style={{ position: 'absolute', right: 0, marginTop: 15 }}
+                    style={{position: 'absolute', right: 0, marginTop: 15}}
                     onClick={this.handleAddClick}
                 />
-                <div style={{ paddingTop: 51, textAlign: 'center' }}>
+                <div style={{paddingTop: 51, textAlign: 'center'}}>
                     <TextField
                         name='name'
                         value={this.state.name}
-                        style={{ display: 'block', margin: 'auto' }}
+                        style={{display: 'block', margin: 'auto'}}
                         hintText={Messages.name}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 20 }}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 20}}
                         onChange={this.handleInputChange}
                     />
                     <TextField
                         name='position'
                         value={this.state.position}
-                        style={{ display: 'block', margin: 'auto', bottom: 15 }}
+                        style={{display: 'block', margin: 'auto', bottom: 15}}
                         hintText={Messages.position}
-                        inputStyle={{ textAlign: 'center', color: 'black', fontSize: 15 }}
+                        inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Avatar, Paper } from 'material-ui';
-import { PropTypes } from 'prop-types';
+import {Avatar} from 'material-ui';
+import {PropTypes} from 'prop-types';
 
 import config from '../../Config/theme';
 
@@ -18,17 +18,19 @@ import Card from "../../Components/Card/Card";
  * @param {Profile} profile
  * @param {Function} handleVote
  */
-const Talk = ({ match, votes, schedule, profile, handleVote }) => {
+const Talk = ({match, votes, schedule, profile, handleVote}) => {
     const talkId = match.params.id;
 
     const talk = schedule.findById(talkId);
-    const { speakers } = talk;
+    const {speakers} = talk;
     const avatars = <div>
-        {speakers.map(speaker => <Avatar key={speaker.name} className="speaker-avatar" size={140} src={speaker.photo}/>)}
+        {speakers.map(speaker => <Avatar key={speaker.name}
+                                         className="speaker-avatar" size={140}
+                                         src={speaker.photo}/>)}
     </div>;
 
     const talkVotes = votes[talkId] || {};
-    const { score: userVoteValue } = talkVotes[profile.displayName] || {};
+    const {score: userVoteValue} = talkVotes[profile.displayName] || {};
 
     return <div>
         <Card className="talk">
@@ -39,7 +41,7 @@ const Talk = ({ match, votes, schedule, profile, handleVote }) => {
             <h3>{talk.title}</h3>
 
             <h4>Twoja ocena:</h4>
-            <VotingStars currentScore={userVoteValue} onScoreChange={newScore => handleVote(talkId, newScore)} />
+            <VotingStars currentScore={userVoteValue} onScoreChange={newScore => handleVote(talkId, newScore)}/>
         </Card>
         <h2>Komentarze</h2>
         <Comments id={talk.id}/>

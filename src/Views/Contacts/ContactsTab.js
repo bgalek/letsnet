@@ -5,10 +5,6 @@ import { PropTypes } from 'prop-types';
 
 export default class BrowseTab extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     static propTypes = {
         contacts: PropTypes.object.isRequired,
     };

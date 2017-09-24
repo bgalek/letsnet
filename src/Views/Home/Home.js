@@ -7,6 +7,7 @@ export default class Home extends React.Component {
         return (
             <Card>
                 <p>Ekran główny!</p>
+                <p>{this.props.title}</p>
             </Card>
         )
     }

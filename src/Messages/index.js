@@ -2,6 +2,7 @@ export default {
     appName: 'Let\'s net',
     password: 'hasło',
     login: 'login',
+    logout: 'wyloguj',
     schedule: 'Plan',
     loading: 'Ładowanie',
     edit: 'Edytuj',

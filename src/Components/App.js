@@ -1,27 +1,32 @@
 // @flow
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory'
+import {Route, Switch, withRouter} from 'react-router-dom';
 import 'moment/locale/pl';
-import theme from '../Config/theme';
-import {MuiThemeProvider, Paper} from "material-ui";
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Messages from "../Messages";
 import {Profile as ProfileModel} from '../Models';
-import {ScrollToTop, AnonymousBar, AuthenticatedBar, BottomMenu, AnimatedRoute} from '../Components';
-import {Info, Loading, Profile, Schedule, Speakers, Stream, Talk, Register, Login, Networking, Contacts} from '../Views';
+import {AuthenticatedBar, BottomMenu} from '../Components';
+import {
+    Loading,
+    Profile,
+    Register,
+    Login,
+    Networking,
+    Contacts,
+    LandingPage
+} from '../Views';
 import Home from "../Views/Home/Home";
+import {Redirect} from "react-router";
 
-export default class App extends Component {
+class App extends Component {
 
     state = {
         title: Messages.appName,
         conferences: [],
+        contacts: [],
         isLoading: true,
         isLoggedIn: false,
         profile: {},
         logo: '',
-        theme: theme
     };
 
     componentWillMount() {
@@ -34,143 +39,73 @@ export default class App extends Component {
         auth.on('userLoggedIn', (user, userInfo) => this.setState({
                 isLoggedIn: true,
                 profile: new ProfileModel(user, userInfo),
-                contacts: userInfo.contacts
-                // speakers: dbSnapshot.speakers,
-                // votes: dbSnapshot.votes
+                contacts: userInfo.contacts || {}
             }
         ));
 
         auth.on('conferencesLoaded', (conferences) => this.setState({isLoading: false, conferences}));
-
-        // theme: conference.theme,
-        // title: conference.title,
-        // logo: conference.logo,
-        // schedule: new ScheduleModel(conference.schedule)
-        // }));
     }
 
     render() {
-        const {isLoggedIn, isLoading} = this.state;
-        if (isLoading) return this.renderLoader();
-        if (!isLoggedIn) return this.renderLoginForm();
-        return this.renderApp();
-    }
+        const {profile} = this.state;
+        const {actions} = this.props.auth;
 
-    renderLandingPage() {
-        return <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+        if (this.state.isLoading) return <Loading/>;
+        if (!this.state.isLoggedIn) return this.renderLoginForm();
+        return (
             <div>
-                <AnonymousBar title={this.state.title}/>
-                <Paper zDepth={1} style={{padding: 50, textAlign: 'center'}}>
-                    <h1>Witaj w Let's Net!</h1>
-                    <p>Wybierz interesującą Cię konferencję</p>
-                    <p>--</p>
-                    {this.state.conferences.map(conf => <li
-                        style={{textAlign: 'center', margin: 0, padding: 0, listStyle: 'none'}} key={conf.title}>
-                        <a href={`/conference/${conf.id}`}><img alt={conf.title} style={{maxWidth: 500}}
-                                                                src={conf.leadPhoto}/></a>
-                    </li>)}
-                </Paper>
+                <AuthenticatedBar title={this.state.title} profile={this.state.profile}/>
+                <Switch>
+                    <Route path="/conference/:conferenceId" render={(props) => {
+                        const conferenceId = props.match.params.conferenceId;
+                        return <div>
+                            <Switch>
+                                <Route path={`/conference/${conferenceId}`} exact={true} render={(props) =>
+                                    <Redirect to={"/conference/" + conferenceId + "/home"}/>
+                                }/>
+                                <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home
+                                    text={this.state.conferences.find(it => it._id === conferenceId)}/>}
+                                />
+                                <Route path={`/conference/${conferenceId}/register`} exact={true} render={(props) =>
+                                    <Register
+                                        title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
+                                        logo={this.state.logo}
+                                        handleRegister={actions.register}
+                                        handleAlreadyRegistered={actions.userAlreadyRegistered}
+                                        location={props.location}
+                                    />
+                                }/>
+                                <Route path={`/conference/${conferenceId}/networking`} exact={true} render={(props) =>
+                                    <Networking/>
+                                }/>
+                                <Route path={`/conference/${conferenceId}/contacts`} exact={true} render={(props) =>
+                                    <Contacts contacts={this.state.contacts} handleAddContact={actions.addContact}/>
+                                }/>
+                                <Redirect to={{pathname: '/'}}/>
+                            </Switch>
+                            <BottomMenu baseUrl={`/conference/${conferenceId}`}/>
+                        </div>;
+                    }
+                    }/>
+                    <Route path="/profile" render={(props) =>
+                        <Profile profile={profile} handleLogout={actions.logout}
+                                 handleUpdateProfile={actions.updateProfile}/>}
+                    />
+                    <Route
+                        render={props => <LandingPage history={props.history} conferences={this.state.conferences}/>}/>
+                </Switch>
             </div>
-        </MuiThemeProvider>;
-    }
-
-    renderLoader() {
-        return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-            <Loading/>
-        </MuiThemeProvider>;
+        );
     }
 
     renderLoginForm() {
         const {actions} = this.props.auth;
-
-        return <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/conference/:conferenceId/register" exact render={(props) =>
-                        <Register
-                            title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
-                            logo={this.state.logo}
-                            handleRegister={actions.register}
-                            handleAlreadyRegistered={actions.userAlreadyRegistered}
-                            location={props.location}/>}/>
-                    <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
-                                                     handleLogin={actions.login} location={props.location}/>}/>
-                </Switch>
-            </BrowserRouter>
-        </MuiThemeProvider>;
-    }
-
-    renderApp() {
-        const {profile, title, contacts, schedule, speakers, votes} = this.state;
-        const {actions} = this.props.auth;
-
-        const routesDefinitions = [
-            {
-                path: '/',
-                exact: true,
-                main: () => <Home/>
-            },
-            {
-                path: '/conference/:conferenceId',
-                main: () => <Stream/>
-            },
-            {
-                path: '/networking',
-                main: () => <Networking />
-            },
-            {
-                path: '/schedule',
-                main: () => <Stream/>
-            },
-            {
-                path: '/talk/:id',
-                main: () => <Talk profile={profile} schedule={schedule} votes={votes} handleVote={actions.vote}/>
-            },
-            {
-                path: '/info',
-                main: () => <Info/>
-            },
-            {
-                path: '/stream',
-                main: () => <Stream/>
-            },
-            {
-                path: '/speakers',
-                main: () => <Speakers speakers={speakers}/>
-            },
-            {
-                path: '/profile',
-                main: () => <Profile profile={profile} handleLogout={actions.logout} handleUpdateProfile={actions.updateProfile}/>
-            },
-            {
-                path: '/contacts',
-                appTitle: () => <div>{this.state.title} - {Messages.contacts}</div>,
-                main: () => <Contacts contacts={contacts} handleAddContact={actions.addContact}/>
-            }
-        ];
-
-        const mainRoutesComponents = routesDefinitions.map((route, index) => (
-            <AnimatedRoute key={index} path={route.path} exact={route.exact} view={route.main()}/>
-        ));
-
-        const titleComponent = <Switch>
-            {routesDefinitions.map((route, index) => (
-                <Route key={index} path={route.path} exact={route.exact} component={() => <div>{title}</div>}/>
-            ))}
-            <Route component={() => <div>{title}</div>}/>
-        </Switch>;
-
-        return (
-            <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
-                <BrowserRouter history={createHistory({forceRefresh: true})}>
-                    <div>
-                        <AuthenticatedBar title={titleComponent} profile={profile}/>
-                        {mainRoutesComponents}
-                        <BottomMenu/>
-                        <ScrollToTop/>
-                    </div>
-                </BrowserRouter>
-            </MuiThemeProvider>
-        )
+        return <Route render={(props) => <Login title={this.state.title}
+                                                logo={this.state.logo}
+                                                handleLogin={actions.login}
+                                                location={props.location}/>}
+        />;
     }
 }
+
+export default withRouter(App);

@@ -10,7 +10,7 @@ import Register from './Register/Register';
 import Home from './Home/Home';
 import Networking from './Networking';
 import Contacts from './Contacts';
-
+import LandingPage from './LandingPage/LandingPage'
 export {
     Home,
     Info,
@@ -23,5 +23,6 @@ export {
     Talk,
     Register,
     Networking,
-    Contacts
+    Contacts,
+    LandingPage
 };

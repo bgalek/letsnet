@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react';
 import {Tab, Tabs} from "material-ui";
-import { PropTypes } from 'prop-types';
+import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
 import ContactsTab from './ContactsTab';
 import AddContactTab from './AddContactTab';
@@ -10,7 +10,7 @@ export default class Contacts extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {selectedIndex: 0};
     }
 
     static propTypes = {
