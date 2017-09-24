@@ -66,15 +66,6 @@ class App extends Component {
                                 <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home
                                     text={this.state.conferences.find(it => it._id === conferenceId)}/>}
                                 />
-                                <Route path={`/conference/${conferenceId}/register`} exact={true} render={(props) =>
-                                    <Register
-                                        title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
-                                        logo={this.state.logo}
-                                        handleRegister={actions.register}
-                                        handleAlreadyRegistered={actions.userAlreadyRegistered}
-                                        location={props.location}
-                                    />
-                                }/>
                                 <Route path={`/conference/${conferenceId}/networking`} exact={true} render={(props) =>
                                     <Networking/>
                                 }/>
@@ -100,11 +91,19 @@ class App extends Component {
 
     renderLoginForm() {
         const {actions} = this.props.auth;
-        return <Route render={(props) => <Login title={this.state.title}
-                                                logo={this.state.logo}
-                                                handleLogin={actions.login}
-                                                location={props.location}/>}
-        />;
+        return (
+            <Switch>
+                <Route path="/conference/:conferenceId/register" exact render={(props) =>
+                    <Register
+                        title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
+                        logo={this.state.logo}
+                        handleRegister={actions.register}
+                        handleAlreadyRegistered={actions.userAlreadyRegistered}
+                        location={props.location}/>}/>
+                <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
+                                                 handleLogin={actions.login} location={props.location}/>}/>
+            </Switch>
+        );
     }
 }
 
