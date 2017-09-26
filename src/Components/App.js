@@ -64,7 +64,9 @@ class App extends Component {
                                     <Redirect to={"/conference/" + conferenceId + "/home"}/>
                                 }/>
                                 <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home
-                                    text={this.state.conferences.find(it => it._id === conferenceId)}/>}
+                                    welcomeScreen={this.state.conferences.find(it => it._id === conferenceId).welcomeScreen}
+                                    schedule={this.state.conferences.find(it => it._id === conferenceId).schedule}
+                                />}
                                 />
                                 <Route path={`/conference/${conferenceId}/networking`} exact={true} render={(props) =>
                                     <Networking/>

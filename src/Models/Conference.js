@@ -8,6 +8,7 @@ export default class Conference {
         this._leadPhoto = snapshot.leadPhoto;
         this._schedule = new ScheduleModel(snapshot.schedule);
         this._theme = snapshot.theme;
+        this._welcomeScreen = snapshot.welcomeScreen;
         this._snapshot = snapshot;
     }
 
@@ -37,5 +38,9 @@ export default class Conference {
 
     get theme() {
         return this._theme;
+    }
+
+    get welcomeScreen() {
+        return this._welcomeScreen;
     }
 }

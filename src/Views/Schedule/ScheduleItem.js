@@ -2,23 +2,18 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 import {PropTypes} from 'prop-types';
-import {Avatar, Card, CardHeader, CardText, CardTitle} from "material-ui";
-import { PlacesFreeBreakfast, MapsRestaurantMenu, SocialLocationCity,
-    ActionVerifiedUser, ActionSpeakerNotes, ActionFlightTakeoff, ActionFlightLand } from 'material-ui/svg-icons';
-
+import {Avatar, CardHeader} from "material-ui";
 import './ScheduleItem.css';
-
-const getIconForEventType = type => {
-    return {
-        registration: <ActionVerifiedUser />,
-        open: <ActionFlightLand />,
-        keynote: <ActionSpeakerNotes />,
-        coffeebreak: <PlacesFreeBreakfast />,
-        lunch: <MapsRestaurantMenu />,
-        party: <SocialLocationCity />,
-        close: <ActionFlightTakeoff />
-    }[type];
-};
+import Card from "../../Components/Card/Card";
+import {
+    PlacesFreeBreakfast,
+    MapsRestaurantMenu,
+    SocialLocationCity,
+    ActionVerifiedUser,
+    ActionSpeakerNotes,
+    ActionFlightTakeoff,
+    ActionFlightLand
+} from 'material-ui/svg-icons';
 
 class ScheduleItem extends Component {
 
@@ -29,41 +24,52 @@ class ScheduleItem extends Component {
     };
 
     renderTechnicalTime() {
-        const { title, type, start, end } = this.props.item;
-
-        return <Card className="schedule-card" style={{margin: '0 0 30px'}}>
-            <CardHeader
-                title={title}
-                subtitle={`${start} - ${end}`}
-                textStyle={{'padding': '0'}}
-                avatar={<Avatar icon={getIconForEventType(type)}/>}
-            />
-        </Card>;
+        const {title, type, start, end} = this.props.item;
+        const style = {padding: '0', cursor: 'pointer'};
+        return (
+            <Card className="schedule-card" style={style}>
+                <CardHeader
+                    title={title}
+                    subtitle={`${start} - ${end}`}
+                    textStyle={{'padding': '0'}}
+                    avatar={<Avatar icon={getIconForEventType(type)}/>}
+                />
+            </Card>)
+            ;
     }
 
     renderPresentationDesc() {
-        const {item, history, hideDescription} = this.props;
-
-        return <Card className="schedule-card" style={{margin: '0 0 30px 0', cursor: 'pointer'}}
-                     onTouchTap={() => history.push(`/talk/${item.id}`)}>
-            <CardTitle title={item.title}/>
-            {hideDescription || item.type === 'lightning' ? null : <CardText>{item.content}</CardText>}
-
-            <CardHeader title={item.speakers.map(speaker => speaker.name).join(', ')}
-                        textStyle={{'padding': '0'}}
-                        subtitle={`${item.start} - ${item.end}`}
-                        avatar={<span>{item.speakers.map(speaker => <Avatar key={speaker.name} className="speaker-avatar" src={speaker.photo}/>)}</span>}
-            />
-        </Card>;
+        const {item, history} = this.props;
+        const style = {padding: '0', cursor: 'pointer'};
+        return (
+            <Card className="schedule-card" style={style} onTouchTap={() => history.push(`/talk/${item.id}`)}>
+                <CardHeader title={item.title}
+                            textStyle={{'padding': '0'}}
+                            subtitle={`${item.start} - ${item.end} · ${item.speakers.map(speaker => speaker.name).join(', ')}`}
+                            avatar={<span>{item.speakers.map(speaker => <Avatar key={speaker.name}
+                                                                                className="speaker-avatar"
+                                                                                src={speaker.photo}/>)}</span>}
+                />
+            </Card>
+        );
     }
 
     render() {
         const {item} = this.props;
-
-        return item.isTechnical()
-            ? this.renderTechnicalTime()
-            : this.renderPresentationDesc();
+        return item.isTechnical() ? this.renderTechnicalTime() : this.renderPresentationDesc();
     }
 }
 
 export default withRouter(ScheduleItem);
+
+const getIconForEventType = type => {
+    return {
+        registration: <ActionVerifiedUser/>,
+        open: <ActionFlightLand/>,
+        keynote: <ActionSpeakerNotes/>,
+        coffeebreak: <PlacesFreeBreakfast/>,
+        lunch: <MapsRestaurantMenu/>,
+        party: <SocialLocationCity/>,
+        close: <ActionFlightTakeoff/>
+    }[type];
+};

@@ -22,5 +22,6 @@ export default {
     myContacts: 'Moje kontakty',
     addContact: 'Dodaj nowy',
     add: 'Dodaj',
-    back: 'Powrót'
+    back: 'Powrót',
+    yourTicket: 'Twój bilet '
 }
