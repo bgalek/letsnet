@@ -1,16 +1,12 @@
-import * as React from "react";
+import React, {Component} from 'react';
 import theme from '../Config/theme';
 import {MuiThemeProvider} from "material-ui";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-export default class Theme extends React.Component {
-    state = {
-        theme: theme
-    };
-
+export default class Theme extends Component {
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(this.state.theme)}>
+            <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
                 {this.props.children}
             </MuiThemeProvider>
         );

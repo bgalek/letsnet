@@ -16,14 +16,14 @@ export default class BrowseTab extends Component {
         for (let contact in contacts) {
             let initials = contacts[contact].name.split(' ').map((n)=>n[0]).join('');
             let item =
-                <div>
+                <div key={contacts[contact].name}>
                     <ListItem
                         leftAvatar={<Avatar>{initials}</Avatar>}
                         primaryText={contacts[contact].name}
                         secondaryText={contacts[contact].position}
                     />
                     <Divider inset={true} />
-                </div>
+                </div>;
             listItems.push(item);
         }
 

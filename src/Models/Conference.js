@@ -9,6 +9,7 @@ export default class Conference {
         this._schedule = new ScheduleModel(snapshot.schedule);
         this._theme = snapshot.theme;
         this._welcomeScreen = snapshot.welcomeScreen;
+        this._areas = snapshot.areas;
         this._snapshot = snapshot;
     }
 
@@ -42,5 +43,9 @@ export default class Conference {
 
     get welcomeScreen() {
         return this._welcomeScreen;
+    }
+
+    get areas(){
+        return this._areas;
     }
 }

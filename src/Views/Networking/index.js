@@ -25,7 +25,7 @@ export default class Networking extends Component {
             <div>
                 <Tabs value={this.state.selectedIndex} onChange={(val) => this.handleChange(val)}>
                     <Tab label={Messages.browse} value="browse">
-                        <BrowseTab/>
+                        <BrowseTab areas={this.props.areas}/>
                     </Tab>
                     <Tab label={Messages.scan} value="scan">
                         <ScanTab scanning={false}/>
