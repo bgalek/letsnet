@@ -21,10 +21,10 @@ export default class Contacts extends Component {
     render() {
         return (
             <Tabs value={this.state.selectedIndex}>
-                <Tab label={Messages.myContacts} value="contacts">
+                <Tab label={Messages.myContacts} value={0}>
                     <ContactsTab contacts={this.props.contacts}/>
                 </Tab>
-                <Tab label={Messages.addContact} value="addContact">
+                <Tab label={Messages.addContact} value={1}>
                     <AddContactTab handleAddContact={this.props.handleAddContact}/>
                 </Tab>
             </Tabs>

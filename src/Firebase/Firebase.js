@@ -71,7 +71,7 @@ export default class Firebase extends EventEmitter {
             },
 
             updateProfile: (position, companyName, phoneNumber) => {
-                app.database().ref('users/' + auth.currentUser.uid).set({
+                app.database().ref('users/' + auth.currentUser.uid).update({
                     position: position,
                     companyName: companyName,
                     phoneNumber: phoneNumber
