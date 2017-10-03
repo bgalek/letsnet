@@ -16,6 +16,7 @@ export default class Contacts extends Component {
     static propTypes = {
         handleAddContact: PropTypes.func.isRequired,
         contacts: PropTypes.object.isRequired,
+        areas: PropTypes.array.isRequired
     };
 
     render() {
@@ -25,7 +26,7 @@ export default class Contacts extends Component {
                     <ContactsTab contacts={this.props.contacts}/>
                 </Tab>
                 <Tab label={Messages.addContact} value={1}>
-                    <AddContactTab handleAddContact={this.props.handleAddContact}/>
+                    <AddContactTab handleAddContact={this.props.handleAddContact} areas={this.props.areas}/>
                 </Tab>
             </Tabs>
         );

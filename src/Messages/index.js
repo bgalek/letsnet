@@ -9,7 +9,7 @@ export default {
     save: 'Zapisz',
     passwordTooShort: 'hasło jest za krótkie!',
     name: 'Imię Nazwisko',
-    position: 'Stanowisko',
+    position: 'Zawód',
     companyName: 'Nazwa firmy',
     phoneNumber: 'Numer telefonu',
     event: 'Event',
@@ -23,5 +23,7 @@ export default {
     addContact: 'Dodaj nowy',
     add: 'Dodaj',
     back: 'Powrót',
-    yourTicket: 'Twój bilet '
+    yourTicket: 'Twój bilet',
+    email: 'E-mail',
+    twitter: '@twitter'
 }

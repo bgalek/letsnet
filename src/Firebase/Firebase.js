@@ -78,10 +78,13 @@ export default class Firebase extends EventEmitter {
                 });
             },
 
-            addContact: (name, position) => {
+            addContact: (contact) => {
                 app.database().ref('users/' + auth.currentUser.uid + '/contacts').push({
-                    name: name,
-                    position: position
+                    name: contact.name,
+                    email: contact.email,
+                    position: contact.position,
+                    companyName: contact.companyName,
+                    phoneNumber: contact.phoneNumber
                 });
             }
         }

@@ -40,7 +40,7 @@ export default class ConferenceController extends Component {
                                        }/>
                                 <Route path={`/conference/${conferenceId}/contacts`} exact={true}
                                        render={(props) =>
-                                           <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact}/>
+                                           <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact} areas={conference.areas}/>
                                        }/>
                                 <Redirect to={{pathname: '/'}}/>
                             </Switch>
