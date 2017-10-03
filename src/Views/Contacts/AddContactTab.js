@@ -21,7 +21,9 @@ export default class AddContactTab extends Component {
             position: '',
             companyName: '',
             phoneNumber: '',
-            initials: ''
+            initials: '',
+            nameError: '',
+            positionError: ''
         };
 
         this.handleAddClick = this.handleAddClick.bind(this);
@@ -37,24 +39,42 @@ export default class AddContactTab extends Component {
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
-        const name = target.name;
+        const textFieldName = target.name;
 
-        if (name === 'name') {
+        if (textFieldName === 'name') {
             this.setState({
-                initials: value.split(' ').map((n)=>n[0]).join('')
+                name: value,
+                initials: value.split(' ').map((n)=>n[0]).join(''),
+                nameError: ''
+            });
+        } else {
+            this.setState({
+                [textFieldName]: value
             });
         }
-
-        this.setState({
-            [name]: value
-        });
     }
 
     handleSelection(event, index, value) {
-        this.setState({position: value});
+        this.setState({
+            position: value,
+            positionError: ''
+        });
     };
 
     handleAddClick() {
+        // validate name
+        if (!this.state.name) {
+            return this.setState({
+                nameError: 'Dodaj proszę imię'
+            });
+        }
+        // validate position
+        if (!this.state.position) {
+            return this.setState({
+                positionError: 'Dodaj proszę zawód'
+            });
+        }
+
         let newContact = {
             name: this.state.name,
             email: this.state.email,
@@ -94,6 +114,7 @@ export default class AddContactTab extends Component {
                     <TextField
                         name='name'
                         value={this.state.name}
+                        errorText={this.state.nameError}
                         style={{display: 'block', margin: 'auto', fontSize: 15}}
                         hintText={Messages.name}
                         onChange={this.handleInputChange}
@@ -108,6 +129,7 @@ export default class AddContactTab extends Component {
                     <SelectField
                         value={this.state.position}
                         style={{display: 'block', margin: 'auto', fontSize: 15, textAlign: 'left'}}
+                        errorText={this.state.positionError}
                         hintText={Messages.position}
                         onChange={this.handleSelection}
                         maxHeight={180}
