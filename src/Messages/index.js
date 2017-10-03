@@ -25,5 +25,7 @@ export default {
     back: 'Powrót',
     yourTicket: 'Twój bilet',
     email: 'E-mail',
-    twitter: '@twitter'
+    noContacts: 'Nie masz jeszcze kontaktów',
+    nameMissing: 'Proszę dodaj Imię Nazwisko',
+    positionMissing: 'Proszę dodaj zawód'
 }

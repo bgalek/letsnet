@@ -65,13 +65,13 @@ export default class AddContactTab extends Component {
         // validate name
         if (!this.state.name) {
             return this.setState({
-                nameError: 'Dodaj proszę imię'
+                nameError: Messages.nameMissing
             });
         }
         // validate position
         if (!this.state.position) {
             return this.setState({
-                positionError: 'Dodaj proszę zawód'
+                positionError: Messages.positionMissing
             });
         }
 
@@ -90,7 +90,8 @@ export default class AddContactTab extends Component {
             email: '',
             position: '',
             companyName: '',
-            phoneNumber: ''
+            phoneNumber: '',
+            initials: ''
         });
     }
 
