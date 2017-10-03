@@ -56,7 +56,8 @@ class App extends Component {
         if (!this.state.isLoggedIn) return this.renderLoginForm();
         return (
             <Switch>
-                <ConferenceController path="/conference/:conferenceId" conferences={this.state.conferences} actions={actions} contacts={this.state.contacts}/>
+                <ConferenceController path="/conference/:conferenceId" conferences={this.state.conferences}
+                                      actions={actions} contacts={this.state.contacts}/>
                 <ProfileController path="/profile" actions={actions}/>
                 <LandingPageController conferences={this.state.conferences}/>
             </Switch>
@@ -67,17 +68,27 @@ class App extends Component {
         const {actions} = this.props.auth;
         return (
             <Switch>
-                <Route path="/conference/:conferenceId/register" exact render={(props) =>
-                    <Register
-                        title={this.state.conferences.find(it => it._id === props.match.params.conferenceId).title}
+                <Route path="/conference/:conferenceId/register" exact render={(props) => {
+                    const conference = this.state.conferences.find(it => it._id === props.match.params.conferenceId);
+                    return (<Register
+                        title={conference.title}
+                        areas={conference.areas}
                         logo={this.state.logo}
-                        handleRegister={actions.register}
+                        handleRegister={this.handleRegister(actions, conference.id)}
                         handleAlreadyRegistered={actions.userAlreadyRegistered}
-                        location={props.location}/>}/>
+                        location={props.location}/>);
+                }}/>
                 <Route render={(props) => <Login title={this.state.title} logo={this.state.logo}
                                                  handleLogin={actions.login} location={props.location}/>}/>
             </Switch>
         );
+    }
+
+    handleRegister(actions, conferenceId) {
+        return (username, password, metadata, area) => actions.register(username, password, metadata).then(user => {
+            actions.addAttendee(conferenceId, {id: user.uid, area, name: metadata.name, lastname: metadata.lastname});
+            return user;
+        });
     }
 }
 

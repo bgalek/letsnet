@@ -9,6 +9,7 @@ export default class Profile {
         this._position = (userDetails) ? userDetails.position : '';
         this._companyName = (userDetails) ? userDetails.companyName : '';
         this._phoneNumber = (userDetails) ? userDetails.phoneNumber : '';
+        this._area = currentUser.area;
     }
 
     get displayName() {
@@ -33,5 +34,9 @@ export default class Profile {
 
     get phoneNumber() {
         return this._phoneNumber;
+    }
+
+    get area() {
+        return this._area;
     }
 }

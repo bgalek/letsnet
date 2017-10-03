@@ -47,10 +47,16 @@ export default class Firebase extends EventEmitter {
 
             /**
              *
-             * @param email
-             * @param password
+             * @param {String} email
+             * @param {String} password
+             * @param {Object} metadata
              */
-            register: (email, password) => auth.createUserWithEmailAndPassword(email, password),
+            register: (email, password, metadata) => {
+                return auth.createUserWithEmailAndPassword(email, password).then((user) => {
+                    app.database().ref('users/' + user.uid).set(Object.assign({contacts: []}, metadata));
+                    return user;
+                });
+            },
 
             /**
              *
@@ -86,7 +92,11 @@ export default class Firebase extends EventEmitter {
                     companyName: contact.companyName,
                     phoneNumber: contact.phoneNumber
                 });
-            }
+            },
+
+            addAttendee: (conferenceId, user) => {
+                app.database().ref('conferences/' + conferenceId + '/attendees').push(user);
+            },
         }
     }
 }

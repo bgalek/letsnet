@@ -10,6 +10,7 @@ export default class Conference {
         this._theme = snapshot.theme;
         this._welcomeScreen = snapshot.welcomeScreen;
         this._areas = snapshot.areas;
+        this._attendees = snapshot.attendees;
         this._snapshot = snapshot;
     }
 
@@ -45,7 +46,11 @@ export default class Conference {
         return this._welcomeScreen;
     }
 
-    get areas(){
+    get areas() {
         return this._areas;
+    }
+
+    get attendees() {
+        return this._attendees;
     }
 }

@@ -17,7 +17,7 @@ export default class ConferenceController extends Component {
     static contextTypes = {
         profile: PropTypes.object
     };
-    
+
     render() {
         return (
             <Route path="/conference/:conferenceId" render={(props) => {
@@ -36,7 +36,7 @@ export default class ConferenceController extends Component {
                                 />
                                 <Route path={`/conference/${conferenceId}/networking`} exact={true}
                                        render={(props) =>
-                                           <Networking areas={conference.areas}/>
+                                           <Networking attendees={conference.attendees}/>
                                        }/>
                                 <Route path={`/conference/${conferenceId}/contacts`} exact={true}
                                        render={(props) =>

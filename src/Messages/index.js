@@ -27,5 +27,10 @@ export default {
     email: 'E-mail',
     noContacts: 'Nie masz jeszcze kontaktów',
     nameMissing: 'Proszę dodaj Imię Nazwisko',
-    positionMissing: 'Proszę dodaj zawód'
+    positionMissing: 'Proszę dodaj zawód',
+    area: 'obszar zainteresowania',
+    onlyOneMoreStepToStart: 'jeszcze tylko jeden krok dzieli Cię od rozpoczęcia networkingu z LetsNet',
+    yourAccountWillBeAssignedTo: 'Twoje konto zostanie przypisane do adresu',
+    invite: 'Umów się na spotkanie',
+    noInvitations: 'Brak zaproszeń'
 }

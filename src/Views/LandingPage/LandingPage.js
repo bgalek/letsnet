@@ -16,7 +16,7 @@ export default class LandingPage extends React.Component {
                 <p>Wybierz interesującą Cię konferencję</p>
                 <p>--</p>
                 {this.props.conferences.map(conf => <li
-                    style={{textAlign: 'center', margin: 0, padding: 0, listStyle: 'none'}} key={conf.title}>
+                    style={{textAlign: 'center', margin: 0, padding: 0, listStyle: 'none'}} key={conf.id}>
                     <a onClick={() => this.props.history.push(`/conference/${conf.id}/home`)}>
                         <img alt={conf.title} style={{maxWidth: '90%'}} src={conf.leadPhoto}/>
                     </a>

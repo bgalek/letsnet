@@ -1,11 +1,11 @@
 // @flow
-import React, { Component } from 'react';
-import { List, ListItem, Divider, Avatar } from 'material-ui';
-import { PropTypes } from 'prop-types';
+import React, {Component} from 'react';
+import {PropTypes} from 'prop-types';
+import {List} from 'material-ui';
 import PersonListItem from "../../Components/PersonListItem/PersonListItem";
 import Messages from '../../Messages';
 
-export default class BrowseTab extends Component {
+export default class ContactsTab extends Component {
 
     static propTypes = {
         contacts: PropTypes.object.isRequired

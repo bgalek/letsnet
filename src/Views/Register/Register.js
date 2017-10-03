@@ -3,10 +3,13 @@ import {RaisedButton, TextField} from "material-ui";
 import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
 import {Redirect} from 'react-router-dom';
+import AreaSelect from "./AreaSelect";
 
 export default class Register extends React.Component {
 
     static propTypes = {
+        title: PropTypes.string.isRequired,
+        areas: PropTypes.object.isRequired,
         handleRegister: PropTypes.func.isRequired,
         handleAlreadyRegistered: PropTypes.func.isRequired
     };
@@ -14,6 +17,7 @@ export default class Register extends React.Component {
     constructor() {
         super();
         this.state = {
+            selectedArea: null,
             loading: true,
             redirect: false,
             error: null
@@ -21,7 +25,7 @@ export default class Register extends React.Component {
     }
 
     componentWillMount() {
-        this.props.handleAlreadyRegistered(this.getEmailFromQuery()).then(providers => {
+        this.props.handleAlreadyRegistered(this.getDataFromQuery().email).then(providers => {
             if (providers.length === 0) {
                 this.setState({loading: false});
             } else {
@@ -32,16 +36,20 @@ export default class Register extends React.Component {
 
     handleSubmit(event) {
         if (!this.state.error) {
-            this.props.handleRegister(this.getEmailFromQuery(), this.state.password)
-                .catch((error) => this.setState({error: error.message}));
+            const payload = this.getDataFromQuery();
+            this.props.handleRegister(payload.email, this.state.password, {
+                name: payload.name,
+                lastname: payload.lastname
+            }, this.state.selectedArea).catch((error) => this.setState({error: error.message}));
         }
         event.preventDefault();
     }
 
     render() {
-        if(this.state.redirect){
+        const payload = this.getDataFromQuery();
+        if (this.state.redirect) {
             const url = this.props.location.pathname.substring(0, this.props.location.pathname.lastIndexOf("/"));
-            return <Redirect to={`${url}?email=${this.getEmailFromQuery()}`} />
+            return <Redirect to={`${url}?email=${payload.email}`}/>
         }
 
         if (this.state.loading) {
@@ -50,25 +58,38 @@ export default class Register extends React.Component {
 
         return (<div style={{padding: 30}}>
             <h1>Zapraszamy na <br/>{this.props.title}!</h1>
-            <p style={{fontSize: '1.6rem', wordSpacing: '0.2rem'}}>Jeszcze tylko jeden krok dzieli Cię od rozpoczęcia
-                networkingu z LetsNet:</p>
+            <p style={{
+                fontSize: '1.6rem',
+                wordSpacing: '0.2rem'
+            }}>{payload.name} {payload.lastname}, {Messages.onlyOneMoreStepToStart}</p>
             <form onSubmit={(event) => this.handleSubmit(event)}>
-                <TextField type="password"
-                           errorText={this.state.error}
-                           onChange={(event) => this.handleInputType(event)}
-                           floatingLabelText="Ustaw hasło"
-                           fullWidth={true}/>
+                <AreaSelect
+                    value={this.state.selectedArea}
+                    areas={this.props.areas}
+                    onChange={(event, index, value) => this.setState({selectedArea: value})}
+                />
+                <TextField
+                    type="password"
+                    errorText={this.state.error}
+                    onChange={(event) => this.handleInputType(event)}
+                    floatingLabelText="ustaw hasło"
+                    fullWidth={true}/>
             </form>
             {this.state.showOkButton ?
-                <RaisedButton onTouchTap={(event) => this.handleSubmit(event)} label={Messages.save}
-                              primary={true}/> : null}
-            <p style={{position: 'fixed', bottom: 16, wordSpacing: '0.2rem'}}>Twoje konto zostanie przypisane<br/>
-                do adresu <strong>{this.getEmailFromQuery()}</strong></p>
+                <RaisedButton
+                    onTouchTap={(event) => this.handleSubmit(event)}
+                    label={Messages.save}
+                    primary={true}/> : null}
+            <p style={{position: 'fixed', bottom: 16, wordSpacing: '0.2rem'}}>
+                {Messages.yourAccountWillBeAssignedTo}
+                <strong> {payload.email}</strong>
+            </p>
         </div>)
     }
 
-    getEmailFromQuery() {
-        return this.props.location.search.split("=")[1];
+    getDataFromQuery() {
+        const data = this.props.location.search.split("=")[1];
+        return JSON.parse(decodeURIComponent(atob(data)));
     }
 
     handleInputType(event) {

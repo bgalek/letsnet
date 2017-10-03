@@ -51,7 +51,6 @@ export default class Profile extends Component {
     render() {
         const {profile} = this.props;
         const isEditable = this.state.isEditable;
-
         return (
             <div>
                 <FlatButton name='editButton'
