@@ -27,10 +27,11 @@ h3 {
     }
 
     body {
-        padding: 0;
+        padding: 0 0 60px 0;
     }
 
     .bottomBar {
-        position: sticky !important;
+        position: fixed !important;
+        width: 450px !important;
     }
 }
