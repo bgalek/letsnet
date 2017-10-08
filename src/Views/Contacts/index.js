@@ -16,7 +16,7 @@ export default class Contacts extends Component {
     static propTypes = {
         handleAddContact: PropTypes.func.isRequired,
         contacts: PropTypes.object.isRequired,
-        areas: PropTypes.array.isRequired
+        areas: PropTypes.object.isRequired
     };
 
     render() {

@@ -27,7 +27,7 @@ export default class ConferenceController extends Component {
                 return (
                     <MuiThemeProvider muiTheme={getMuiTheme(conference.theme)}>
                         <div>
-                            <AuthenticatedBar title={conference.title} profile={this.context.profile} logo={conference.logo}/>
+                            <AuthenticatedBar title={conference.title} logo={conference.logo}/>
                             <Switch>
                                 <Route path={`/conference/${conferenceId}`} exact={true} render={(props) => <Redirect to={"/conference/" + conferenceId + "/home"}/>}/>
                                 <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home

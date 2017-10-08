@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {Avatar, FlatButton, TextField} from "material-ui";
 import {PropTypes} from 'prop-types';
 import Messages from "../../Messages";
-import { browserHistory } from 'react-router-dom';
 
 export default class Profile extends Component {
 
@@ -25,10 +24,6 @@ export default class Profile extends Component {
         handleLogout: PropTypes.func.isRequired,
         handleUpdateProfile: PropTypes.func.isRequired,
         profile: PropTypes.object.isRequired,
-    };
-
-    static contextTypes = {
-        router: PropTypes.object
     };
 
     handleInputChange(event) {

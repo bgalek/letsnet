@@ -1,11 +1,6 @@
-import md5 from 'blueimp-md5';
-
 export default class Profile {
 
     constructor(currentUser, userDetails) {
-        console.log('Current user: ' + JSON.stringify(currentUser, 0, 2));
-        console.log('User details: ' + JSON.stringify(userDetails, 0, 2));
-
         this._displayName = currentUser.displayName;
         this._email = currentUser.email;
         this._photoURL = currentUser.photoURL;

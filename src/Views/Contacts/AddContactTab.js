@@ -33,7 +33,7 @@ export default class AddContactTab extends Component {
 
     static propTypes = {
         handleAddContact: PropTypes.func.isRequired,
-        areas: PropTypes.array.isRequired
+        areas: PropTypes.object.isRequired
     };
 
     handleInputChange(event) {
@@ -96,10 +96,9 @@ export default class AddContactTab extends Component {
     }
 
     render() {
-        const menuItems = [];
-        for (let i = 0; i < this.props.areas.length; i++ ) {
-            menuItems.push(<MenuItem value={this.props.areas[i]} key={i} primaryText={this.props.areas[i]} />);
-        }
+        const menuItems = Object.keys(this.props.areas).map(key =>
+            <MenuItem key={key} value={this.props.areas[key]} primaryText={this.props.areas[key]}/>
+        );
 
         return (
             <div>
