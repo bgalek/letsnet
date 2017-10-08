@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Avatar, FlatButton, TextField} from "material-ui";
 import {PropTypes} from 'prop-types';
 import Messages from "../../Messages";
+import { browserHistory } from 'react-router-dom';
 
 export default class Profile extends Component {
 
@@ -59,10 +60,10 @@ export default class Profile extends Component {
                             onClick={isEditable ? this.handleSaveClick : this.handleEditClick}
                 />
                 <div style={{paddingTop: 51, textAlign: 'center'}}>
-                    <Avatar src={profile.photoURL} size={160}/>
+                    <Avatar size={160}>{profile.firstName[0]+profile.lastName[0]}</Avatar>
                     <TextField
                         name='name'
-                        value={profile.displayName}
+                        value={profile.firstName + ' ' + profile.lastName}
                         underlineShow={false}
                         style={{display: 'block', margin: 'auto'}}
                         inputStyle={{textAlign: 'center', color: 'black', fontSize: 20}}
@@ -104,8 +105,7 @@ export default class Profile extends Component {
                         inputStyle={{textAlign: 'center', color: 'black', fontSize: 15}}
                         onChange={this.handleInputChange}
                     />
-                    <FlatButton label={Messages.logout} onClick={this.props.handleLogout}
-                    />
+                    <FlatButton label={Messages.logout} onClick={this.props.handleLogout}/>
                 </div>
             </div>
         );

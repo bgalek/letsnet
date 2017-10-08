@@ -8,7 +8,7 @@ const AuthenticatedBar = ({ title, profile, children, history }) => {
                 showMenuIconButton={false}
                 style={{position: 'sticky', top: 0, boxShadow: 'none'}}
                 onRightIconButtonTouchTap={() => history.push('/profile')}
-                iconElementRight={<Avatar style={{cursor: 'pointer'}} size={48} src={profile.photoURL}/>}>
+                iconElementRight={<Avatar style={{cursor: 'pointer'}} size={48}>{profile.firstName[0]+profile.lastName[0]}</Avatar>}>
             {children}
         </AppBar>
     );
