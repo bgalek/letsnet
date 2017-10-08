@@ -2,13 +2,12 @@ import React from 'react';
 import { AppBar, Avatar } from 'material-ui';
 import { withRouter } from 'react-router-dom';
 
-const AuthenticatedBar = ({ title, profile, children, history }) => {
+const AuthenticatedBar = ({ title, logo, children, history }) => {
     return (
         <AppBar title={title}
                 showMenuIconButton={false}
                 style={{position: 'sticky', top: 0, boxShadow: 'none'}}
-                onRightIconButtonTouchTap={() => history.push('/profile')}
-                iconElementRight={<Avatar style={{cursor: 'pointer'}} size={48}>{profile.firstName[0]+profile.lastName[0]}</Avatar>}>
+                iconElementRight={<Avatar src={logo} size={48}/>}>
             {children}
         </AppBar>
     );

@@ -11,6 +11,7 @@ import {
     Home,
     Networking,
     Contacts,
+    Profile
 } from '../../Views';
 
 export default class ConferenceController extends Component {
@@ -26,7 +27,7 @@ export default class ConferenceController extends Component {
                 return (
                     <MuiThemeProvider muiTheme={getMuiTheme(conference.theme)}>
                         <div>
-                            <AuthenticatedBar title={conference.title} profile={this.context.profile}/>
+                            <AuthenticatedBar title={conference.title} profile={this.context.profile} logo={conference.logo}/>
                             <Switch>
                                 <Route path={`/conference/${conferenceId}`} exact={true} render={(props) => <Redirect to={"/conference/" + conferenceId + "/home"}/>}/>
                                 <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home
@@ -41,6 +42,11 @@ export default class ConferenceController extends Component {
                                 <Route path={`/conference/${conferenceId}/contacts`} exact={true}
                                        render={(props) =>
                                            <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact} areas={conference.areas}/>
+                                       }/>
+                                <Route path={`/conference/${conferenceId}/profile`} exact={true}
+                                       render={(props) =>
+                                           <Profile profile={this.context.profile} handleLogout={this.props.actions.logout}
+                                                    handleUpdateProfile={this.props.actions.updateProfile}/>
                                        }/>
                                 <Redirect to={{pathname: '/'}}/>
                             </Switch>

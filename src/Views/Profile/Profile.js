@@ -27,6 +27,10 @@ export default class Profile extends Component {
         profile: PropTypes.object.isRequired,
     };
 
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;

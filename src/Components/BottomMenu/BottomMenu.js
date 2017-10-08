@@ -40,8 +40,7 @@ class BottomMenuComponent extends Component {
                             key={option.link}
                             label={option.label}
                             icon={option.icon}
-                            onTouchTap={() => this.goTo((option.link !== '/profile') ?
-                                this.props.baseUrl + option.link : option.link)}
+                            onTouchTap={() => this.goTo(this.props.baseUrl + option.link)}
                         />
                     )}
                 </BottomNavigation>
