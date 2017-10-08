@@ -1,16 +1,17 @@
 // @flow
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import {Snackbar} from "material-ui";
 import 'moment/locale/pl';
 import Messages from "../Messages";
 import {Profile as ProfileModel} from '../Models';
-import {Loading, Register, Login,} from '../Views';
+import {Loading, Register, Login} from '../Views';
 import ConferenceController from "./Controllers/ConferenceController";
 import ProfileController from "./Controllers/ProfileController";
 import LandingPageController from "./Controllers/LandingPageController";
 
-class App extends Component {
+export default class App extends Component {
 
     state = {
         title: Messages.appName,
@@ -21,14 +22,20 @@ class App extends Component {
         profile: {},
         theme: {},
         logo: '',
+        message: ''
     };
 
     getChildContext() {
-        return {profile: this.state.profile};
+        return {
+            profile: this.state.profile, messaging: {
+                showMessage: (text) => this.setState({message: text})
+            }
+        };
     }
 
     static childContextTypes = {
-        profile: PropTypes.object
+        profile: PropTypes.object,
+        messaging: PropTypes.object
     };
 
     componentWillMount() {
@@ -55,12 +62,20 @@ class App extends Component {
         if (this.state.isLoading) return <Loading/>;
         if (!this.state.isLoggedIn) return this.renderLoginForm();
         return (
-            <Switch>
-                <ConferenceController path="/conference/:conferenceId" conferences={this.state.conferences}
-                                      actions={actions} contacts={this.state.contacts}/>
-                <ProfileController path="/profile" actions={actions}/>
-                <LandingPageController conferences={this.state.conferences}/>
-            </Switch>
+            <div>
+                <Switch>
+                    <ConferenceController path="/conference/:conferenceId" conferences={this.state.conferences}
+                                          actions={actions} contacts={this.state.contacts}/>
+                    <ProfileController path="/profile" actions={actions}/>
+                    <LandingPageController conferences={this.state.conferences}/>
+                </Switch>
+                <Snackbar style={{bottom: 58, zIndex: 0}} contentStyle={{bottom: 58}} bodyStyle={{bottom: 58}}
+                          open={this.state.message.length > 0}
+                          message={this.state.message}
+                          autoHideDuration={4000}
+                          onRequestClose={() => this.setState({message: ''})}
+                />
+            </div>
         );
     }
 
@@ -91,5 +106,3 @@ class App extends Component {
         });
     }
 }
-
-export default withRouter(App);

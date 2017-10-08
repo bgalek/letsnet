@@ -31,6 +31,7 @@ export default {
     area: 'obszar zainteresowania',
     onlyOneMoreStepToStart: 'jeszcze tylko jeden krok dzieli Cię od rozpoczęcia networkingu z LetsNet',
     yourAccountWillBeAssignedTo: 'Twoje konto zostanie przypisane do adresu',
-    invite: 'Umów się na spotkanie',
-    noInvitations: 'Brak zaproszeń'
+    invite: 'Zaproś do kontaków',
+    noInvitations: 'Brak zaproszeń',
+    invitationSent: 'Zaproszenie wysłane'
 }
