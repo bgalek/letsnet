@@ -50,6 +50,8 @@ export default class Profile extends Component {
 
     render() {
         const {profile} = this.props;
+        const firstName = profile.firstName;
+        const lastName = profile.lastName;
         const isEditable = this.state.isEditable;
         return (
             <div>
@@ -59,7 +61,7 @@ export default class Profile extends Component {
                             onClick={isEditable ? this.handleSaveClick : this.handleEditClick}
                 />
                 <div style={{paddingTop: 51, textAlign: 'center'}}>
-                    <Avatar size={160}>{profile.firstName[0]+profile.lastName[0]}</Avatar>
+                    <Avatar size={160}>{firstName.charAt(0)+lastName.charAt(0)}</Avatar>
                     <TextField
                         name='name'
                         value={profile.firstName + ' ' + profile.lastName}
