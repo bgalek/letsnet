@@ -27,13 +27,16 @@ export default class App extends Component {
 
     getChildContext() {
         return {
-            profile: this.state.profile, messaging: {
+            profile: this.state.profile,
+            messaging: {
                 showMessage: (text) => this.setState({message: text})
-            }
+            },
+            database: this.state.database
         };
     }
 
     static childContextTypes = {
+        database: PropTypes.object,
         profile: PropTypes.object,
         messaging: PropTypes.object
     };
@@ -48,13 +51,15 @@ export default class App extends Component {
         auth.on('userLoggedIn', (user, userInfo) => this.setState({
                 isLoggedIn: true,
                 profile: new ProfileModel(user, userInfo),
-                contacts: userInfo.contacts || {}
+                contacts: userInfo.contacts || {},
+                database: auth.database
             }
         ));
 
         auth.on('conferencesLoaded', (conferences) => {
             this.setState({isLoading: false, conferences});
         });
+
     }
 
     render() {

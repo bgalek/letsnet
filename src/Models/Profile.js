@@ -1,6 +1,7 @@
 export default class Profile {
 
     constructor(currentUser, userDetails) {
+        this._id = currentUser.uid;
         this._displayName = currentUser.displayName;
         this._email = currentUser.email;
         this._photoURL = currentUser.photoURL;
@@ -10,6 +11,10 @@ export default class Profile {
         this._companyName = (userDetails) ? userDetails.companyName : '';
         this._phoneNumber = (userDetails) ? userDetails.phoneNumber : '';
         this._area = currentUser.area;
+    }
+
+    get id() {
+        return this._id;
     }
 
     get displayName() {

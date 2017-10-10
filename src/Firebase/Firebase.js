@@ -10,6 +10,7 @@ export default class Firebase extends EventEmitter {
         const app = this.app = firebase.initializeApp(firebaseConfig);
         const auth = app.auth();
         const database = app.database().ref();
+        this.database = app.database();
 
         app.database().ref('/conferences/').on('value', snapshot => {
             const conferencesSnapshot = snapshot.val();
@@ -26,6 +27,9 @@ export default class Firebase extends EventEmitter {
                     const userInfo = data.users[user.uid] || {};
                     // TODO: pass conference details
                     this.emit('userLoggedIn', user, userInfo);
+                    app.database().ref(`/users/${user.uid}/invitations`).on('value', snapshot => {
+                        this.emit('newInvitation', snapshot.val());
+                    });
                 });
             }
         });

@@ -12,6 +12,10 @@ export default class Networking extends Component {
         attendees: PropTypes.object.isRequired
     };
 
+    static contextTypes = {
+        profile: PropTypes.object,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +38,7 @@ export default class Networking extends Component {
                     name: `${attendee.name} ${attendee.lastname}`,
                     area: attendee.area
                 }
-            });
+            }).filter(it => it.id !== this.context.profile.id);
     }
 
     render() {
