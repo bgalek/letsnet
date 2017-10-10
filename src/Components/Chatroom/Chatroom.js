@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Message from "./Message";
-import {List, RaisedButton, Subheader, TextField} from "material-ui";
+import {List, Subheader, TextField} from "material-ui";
 import PropTypes from "prop-types";
 import Card from "../Card/Card";
+import firebase from 'firebase';
 
 class Chatroom extends React.Component {
 
@@ -23,18 +24,24 @@ class Chatroom extends React.Component {
     }
 
     componentWillMount() {
-        let initialFetch = false;
         const chatroomId = this.getChatroomId(this.props.with.id, this.context.profile.id);
         this.setState({chatroomId: chatroomId});
-        this.context.database.ref(`/chats/${chatroomId}/`).on('child_added', snapshot => {
+        this.context.database.ref(`/chats/${chatroomId}/`).limitToLast(10).once('value', snapshot => {
+            this.setState({chats: Object.values(snapshot.val())});
+        });
+    }
+
+    componentDidMount() {
+        this.scrollToBot();
+        const chatroomId = this.getChatroomId(this.props.with.id, this.context.profile.id);
+        this.context.database.ref(`/chats/${chatroomId}/`).orderByChild('timestamp').startAt(Date.now()).on('child_added', snapshot => {
             const chatMessage = snapshot.val();
             let updated = this.state.chats.slice();
             updated.push(chatMessage);
             this.setState({chats: updated});
-            if (initialFetch && chatMessage.sender !== this.context.profile.id) {
-                this.context.messaging.showMessage('nowa wiadomosc');
+            if (chatMessage.sender !== this.context.profile.id) {
+                this.context.messaging.showMessage('Nowa wiadomość od ' + chatMessage.from);
             }
-            initialFetch = true;
         });
     }
 
@@ -52,7 +59,8 @@ class Chatroom extends React.Component {
             sender: this.context.profile.id,
             from: `${this.context.profile.firstName} ${this.context.profile.lastName}`,
             to: this.props.with.name,
-            content: this.state.msg
+            content: this.state.msg,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
         });
         this.setState({
             msg: ''
@@ -62,17 +70,20 @@ class Chatroom extends React.Component {
     render() {
         const {chats} = this.state;
         return (
-            <Card>
-                <List ref="chats">
-                    <Subheader>Wiadomości</Subheader>
-                    {chats.map((chat, i) => <Message key={i} chat={chat} me={this.context.profile.id}/>)}
-                </List>
-                <form onSubmit={this.submitMessage}>
-                    <TextField hintText="Wpisz wiadomość" value={this.state.msg}
-                               onChange={(e) => this.setState({msg: e.target.value})}/>
-                    <RaisedButton label="Wyślij" primary={true} onTouchTap={this.submitMessage}/>
-                </form>
-            </Card>
+            <div>
+                <Card style={{overflowY: 'scroll', maxHeight: 250}} ref="chats">
+                    <List>
+                        <Subheader>Ostatnie wiadomości</Subheader>
+                        {chats.map((chat, i) => <Message key={i} chat={chat} me={this.context.profile.id}/>)}
+                    </List>
+                </Card>
+                <Card>
+                    <form onSubmit={this.submitMessage}>
+                        <TextField hintText="Wpisz wiadomość" value={this.state.msg}
+                                   fullWidth={true} onChange={(e) => this.setState({msg: e.target.value})}/>
+                    </form>
+                </Card>
+            </div>
         );
     }
 

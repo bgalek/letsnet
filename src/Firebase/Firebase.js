@@ -6,7 +6,6 @@ import Conference from "../Models/Conference";
 export default class Firebase extends EventEmitter {
     constructor(firebaseConfig) {
         super();
-
         const app = this.app = firebase.initializeApp(firebaseConfig);
         const auth = app.auth();
         const database = app.database().ref();
