@@ -19,11 +19,36 @@ export default class Contacts extends Component {
         areas: PropTypes.object.isRequired
     };
 
+    prepareContacts() {
+        const {contacts} = this.props;
+        return Object.keys(contacts)
+            .map(it => {
+                const contact = contacts[it];
+                return {
+                    id: it,
+                    name: contact.name,
+                    email: contact.email,
+                    companyName: contact.companyName,
+                    phoneNumber: contact.phoneNumber,
+                    position: contact.position
+                };
+            });
+    }
+
+    handleChange(value) {
+        this.setState({
+            selectedIndex: value,
+        });
+    }
+
     render() {
         return (
-            <Tabs value={this.state.selectedIndex}>
+            <Tabs
+                value={this.state.selectedIndex}
+                onChange={(val) => this.handleChange(val)}
+            >
                 <Tab label={Messages.myContacts} value={0}>
-                    <ContactsTab contacts={this.props.contacts}/>
+                    <ContactsTab contacts={this.prepareContacts()} onSele/>
                 </Tab>
                 <Tab label={Messages.addContact} value={1}>
                     <AddContactTab handleAddContact={this.props.handleAddContact} areas={this.props.areas}/>
