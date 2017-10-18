@@ -9,7 +9,7 @@ export default {
     save: 'Zapisz',
     passwordTooShort: 'hasło jest za krótkie!',
     name: 'Imię Nazwisko',
-    position: 'Zawód',
+    position: 'Stanowisko',
     companyName: 'Nazwa firmy',
     phoneNumber: 'Numer telefonu',
     event: 'Event',

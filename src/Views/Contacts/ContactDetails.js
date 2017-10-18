@@ -27,7 +27,7 @@ export default class ContactDetails extends Component {
             <Paper style={{margin: 20, textAlign: 'center'}}>
                 <FlatButton style={{position: 'absolute', right: 0}}
                             icon={<NavigationClose/>}
-                            onTouchTap={this.props.handleClose}/>
+                            onClick={this.props.handleClose}/>
                 <Avatar size={160} style={{marginTop: 45}}>{this.getInitials(contact.name)}</Avatar>
                 <List>{listItems}</List>
                 <RaisedButton label={Messages.removeContact} onClick={() => {

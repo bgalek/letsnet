@@ -1,15 +1,8 @@
 // @flow
 import React, {Component} from 'react';
-import {TextField, SelectField, MenuItem, FlatButton, Avatar} from 'material-ui';
+import {TextField, FlatButton, Avatar} from 'material-ui';
 import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
-
-const items = ['Software Developer', 'Designer', 'Consulting', 'Analytics', 'Elo', 'Super', 'HR', 'PR'];
-const menuItems = [];
-
-for (let i = 0; i < items.length; i++ ) {
-    menuItems.push(<MenuItem value={items[i]} key={i} primaryText={items[i]} />);
-}
 
 export default class AddContactTab extends Component {
 
@@ -28,7 +21,6 @@ export default class AddContactTab extends Component {
 
         this.handleAddClick = this.handleAddClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSelection = this.handleSelection.bind(this);
     }
 
     static propTypes = {
@@ -53,13 +45,6 @@ export default class AddContactTab extends Component {
             });
         }
     }
-
-    handleSelection(event, index, value) {
-        this.setState({
-            position: value,
-            positionError: ''
-        });
-    };
 
     handleAddClick() {
         // validate name
@@ -96,10 +81,6 @@ export default class AddContactTab extends Component {
     }
 
     render() {
-        const menuItems = Object.keys(this.props.areas).map(key =>
-            <MenuItem key={key} value={this.props.areas[key]} primaryText={this.props.areas[key]}/>
-        );
-
         return (
             <div>
                 <FlatButton
@@ -126,16 +107,13 @@ export default class AddContactTab extends Component {
                         hintText={Messages.email}
                         onChange={this.handleInputChange}
                     />
-                    <SelectField
+                    <TextField
+                        name='position'
                         value={this.state.position}
-                        style={{display: 'block', margin: 'auto', fontSize: 15, textAlign: 'left'}}
-                        errorText={this.state.positionError}
+                        style={{display: 'block', margin: 'auto', fontSize: 15}}
                         hintText={Messages.position}
-                        onChange={this.handleSelection}
-                        maxHeight={180}
-                    >
-                        {menuItems}
-                    </SelectField>
+                        onChange={this.handleInputChange}
+                    />
                     <TextField
                         name='companyName'
                         value={this.state.companyName}
