@@ -21,14 +21,12 @@ export default class Firebase extends EventEmitter {
             if (!user) {
                 this.emit('userNotLogged');
             } else {
-                database.on('value', snapshot => {
-                    const data = snapshot.val();
-                    const userInfo = data.users[user.uid] || {};
-                    // TODO: pass conference details
+                app.database().ref(`/users/${user.uid}`).on('value', snapshot => {
+                    const userInfo = snapshot.val() || {};
                     this.emit('userLoggedIn', user, userInfo);
-                    app.database().ref(`/users/${user.uid}/invitations`).on('value', snapshot => {
-                        this.emit('newInvitation', snapshot.val());
-                    });
+                });
+                app.database().ref(`/users/${user.uid}/invitations/received`).on('child_added', snapshot => {
+                    this.emit('newInvitation', snapshot.val());
                 });
             }
         });

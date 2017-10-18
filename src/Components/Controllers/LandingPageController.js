@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {Route} from 'react-router-dom';
 import 'moment/locale/pl';
-import {AuthenticatedBar} from '../../Components';
 import LandingPage from "../../Views/LandingPage/LandingPage";
+import AnonymousAppBar from "../ApplicationBar/AnonymousBar";
 
 export default class LandingPageController extends Component {
 
@@ -16,7 +16,7 @@ export default class LandingPageController extends Component {
             <Route render={props => {
                 return (
                     <div>
-                        <AuthenticatedBar title="Let's net landing page" profile={this.context.profile}/>
+                        <AnonymousAppBar title="Let's net" profile={this.context.profile}/>
                         <LandingPage history={props.history} conferences={this.props.conferences}/>
                     </div>);
             }}/>

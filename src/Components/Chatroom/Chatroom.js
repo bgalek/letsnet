@@ -27,7 +27,9 @@ class Chatroom extends React.Component {
         const chatroomId = this.getChatroomId(this.props.with.id, this.context.profile.id);
         this.setState({chatroomId: chatroomId});
         this.context.database.ref(`/chats/${chatroomId}/`).limitToLast(10).once('value', snapshot => {
-            this.setState({chats: Object.values(snapshot.val())});
+            if (snapshot.val()) {
+                this.setState({chats: Object.values(snapshot.val())});
+            }
         });
     }
 
@@ -69,17 +71,19 @@ class Chatroom extends React.Component {
 
     render() {
         const {chats} = this.state;
+        const chatHistory = <List><Subheader>Ostatnie wiadomości</Subheader>
+            {chats.map((chat, i) => <Message key={i} chat={chat} me={this.context.profile.id}/>)}
+        </List>;
         return (
             <div>
+                <h2>Umów się na spotkanie</h2>
                 <Card style={{overflowY: 'scroll', maxHeight: 250}} ref="chats">
-                    <List>
-                        <Subheader>Ostatnie wiadomości</Subheader>
-                        {chats.map((chat, i) => <Message key={i} chat={chat} me={this.context.profile.id}/>)}
-                    </List>
+                    {chats.length ? chatHistory : <p>śmiało, napisz wiadomość</p>}
                 </Card>
+                <h2>Napisz wiadomość</h2>
                 <Card>
                     <form onSubmit={this.submitMessage}>
-                        <TextField hintText="Wpisz wiadomość" value={this.state.msg}
+                        <TextField hintText="Porozmawiamy przy bufecie za 15 minut?" value={this.state.msg}
                                    fullWidth={true} onChange={(e) => this.setState({msg: e.target.value})}/>
                     </form>
                 </Card>

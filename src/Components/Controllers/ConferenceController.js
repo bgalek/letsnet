@@ -13,6 +13,7 @@ import {
     Contacts,
     Profile
 } from '../../Views';
+import Talk from "../../Views/Talk/Talk";
 
 export default class ConferenceController extends Component {
     static contextTypes = {
@@ -30,24 +31,25 @@ export default class ConferenceController extends Component {
                             <AuthenticatedBar title={conference.title} logo={conference.logo}/>
                             <Switch>
                                 <Route path={`/conference/${conferenceId}`} exact={true} render={(props) => <Redirect to={"/conference/" + conferenceId + "/home"}/>}/>
-                                <Route path={`/conference/${conferenceId}/home`} exact={true} render={(props) => <Home
+                                <Route path={`/conference/:conferenceId/home`} exact={true} render={(props) => <Home
                                            welcomeScreen={conference.welcomeScreen}
                                            schedule={conference.schedule}
                                        />}
                                 />
-                                <Route path={`/conference/${conferenceId}/networking`} exact={true}
+                                <Route path={`/conference/:conferenceId/networking`} exact={true}
                                        render={(props) =>
                                            <Networking attendees={conference.attendees}/>
                                        }/>
-                                <Route path={`/conference/${conferenceId}/contacts`} exact={true}
+                                <Route path={`/conference/:conferenceId/contacts`} exact={true}
                                        render={(props) =>
                                            <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact} areas={conference.areas}/>
                                        }/>
-                                <Route path={`/conference/${conferenceId}/profile`} exact={true}
+                                <Route path={`/conference/:conferenceId/profile`} exact={true}
                                        render={(props) =>
                                            <Profile profile={this.context.profile} handleLogout={this.props.actions.logout}
                                                     handleUpdateProfile={this.props.actions.updateProfile}/>
                                        }/>
+                                <Route path={`/conference/:conferenceId/talk/:talkId`} render={(props) => <Talk schedule={conference.schedule} />} />
                                 <Redirect to={{pathname: '/'}}/>
                             </Switch>
                             <BottomMenu baseUrl={`/conference/${conferenceId}`}/>

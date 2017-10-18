@@ -1,6 +1,5 @@
 // @flow
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom'
 import {PropTypes} from 'prop-types';
 import {Avatar, CardHeader} from "material-ui";
 import './ScheduleItem.css';
@@ -15,7 +14,11 @@ import {
     ActionFlightLand
 } from 'material-ui/svg-icons';
 
-class ScheduleItem extends Component {
+export default class ScheduleItem extends Component {
+
+    static contextTypes = {
+        router: PropTypes.object
+    };
 
     static propTypes = {
         item: PropTypes.object.isRequired,
@@ -39,11 +42,13 @@ class ScheduleItem extends Component {
     }
 
     renderPresentationDesc() {
-        const {item, history} = this.props;
+        const {item} = this.props;
         const style = {padding: '0', cursor: 'pointer'};
+        const conferenceId = this.context.router.route.match.params.conferenceId;
         return (
-            <Card className="schedule-card" style={style} onTouchTap={() => history.push(`/talk/${item.id}`)}>
+            <Card className="schedule-card" style={style}>
                 <CardHeader title={item.title}
+                            onTouchTap={() => this.context.router.history.push(`/conference/${conferenceId}/talk/${item.id}`)}
                             textStyle={{'padding': '0'}}
                             subtitle={`${item.start} - ${item.end} · ${item.speakers.map(speaker => speaker.name).join(', ')}`}
                             avatar={<span>{item.speakers.map(speaker => <Avatar key={speaker.name}
@@ -59,8 +64,6 @@ class ScheduleItem extends Component {
         return item.isTechnical() ? this.renderTechnicalTime() : this.renderPresentationDesc();
     }
 }
-
-export default withRouter(ScheduleItem);
 
 const getIconForEventType = type => {
     return {

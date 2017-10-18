@@ -1,56 +1,29 @@
-import React from 'react';
-import {Avatar} from 'material-ui';
-import {PropTypes} from 'prop-types';
-
-import config from '../../Config/theme';
-
-import Comments from './Comments';
-import VotingStars from './VotingStars';
-
-import './Talk.css';
+// @flow
+import React, {Component} from 'react';
+import PropTypes from "prop-types";
+import {Avatar} from "material-ui";
 import Card from "../../Components/Card/Card";
 
-/**
- *
- * @param {Object} match
- * @param {Object} votes
- * @param {ScheduleRepository} schedule
- * @param {Profile} profile
- * @param {Function} handleVote
- */
-const Talk = ({match, votes, schedule, profile, handleVote}) => {
-    const talkId = match.params.id;
+export default class Talk extends Component {
 
-    const talk = schedule.findById(talkId);
-    const {speakers} = talk;
-    const avatars = <div>
-        {speakers.map(speaker => <Avatar key={speaker.name}
-                                         className="speaker-avatar" size={140}
-                                         src={speaker.photo}/>)}
-    </div>;
+    static contextTypes = {
+        router: PropTypes.object
+    };
 
-    const talkVotes = votes[talkId] || {};
-    const {score: userVoteValue} = talkVotes[profile.displayName] || {};
 
-    return <div>
-        <Card className="talk">
-            {avatars}
-            <h2 style={{color: config.palette.accent1Color}}>
-                {speakers.map(speaker => <div key={speaker.name}>{speaker.name}</div>)}
-            </h2>
-            <h3>{talk.title}</h3>
-
-            <h4>Twoja ocena:</h4>
-            <VotingStars currentScore={userVoteValue} onScoreChange={newScore => handleVote(talkId, newScore)}/>
-        </Card>
-        <h2>Komentarze</h2>
-        <Comments id={talk.id}/>
-    </div>;
-};
-
-Talk.propTypes = {
-    profile: PropTypes.object.isRequired,
-    match: PropTypes.object
-};
-
-export default Talk;
+    render() {
+        const talkId = this.context.router.route.match.params.talkId;
+        const talk = this.props.schedule.findById(talkId);
+        const {speakers} = talk;
+        const avatars = <div>{speakers.map(speaker => <Avatar key={speaker.name} className="speaker-avatar" size={140}
+                                                              src={speaker.photo}/>)}</div>;
+        return (
+            <Card className="talk" style={{textAlign: 'center'}}>
+                {avatars}
+                <h2>{speakers.map(speaker => <div key={speaker.name}>{speaker.name}</div>)}</h2>
+                <h3>{talk.title}</h3>
+                <p>{talk.content}</p>
+            </Card>
+        );
+    }
+}

@@ -60,6 +60,10 @@ export default class App extends Component {
             this.setState({isLoading: false, conferences});
         });
 
+        auth.on('newInvitation', (invitation) => {
+            this.setState({message: `Nowe zaproszenie do kontaktów od ${invitation.sender}`});
+        });
+
     }
 
     render() {
