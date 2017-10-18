@@ -95,6 +95,15 @@ export default class Firebase extends EventEmitter {
                 });
             },
 
+            removeContact: (contactId) => {
+                let contactRef = app.database().ref('users/' + auth.currentUser.uid + '/contacts/' + contactId);
+                contactRef.remove()
+                    .then(() => { console.log("Contact remove succeeded.") })
+                    .catch((error) => {
+                        console.log("Contact remove failed: " + error.message)
+                    });
+            },
+
             addAttendee: (conferenceId, user) => {
                 app.database().ref('conferences/' + conferenceId + '/attendees').push(user);
             },

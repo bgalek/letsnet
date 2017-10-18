@@ -25,7 +25,8 @@ export default {
     back: 'Powrót',
     yourTicket: 'Twój bilet',
     email: 'E-mail',
-    noContacts: 'Nie masz jeszcze kontaktów',
+    noContacts: 'Ta zakładka jest pusta bo nie wymieniłeś się jeszcze kontaktem z żadną z osób na konferencji.' +
+    '\nWróć do zakładki networking by nawiązać nowe znajomości lub wpisz ręcznie kontakt do poznanej osoby',
     nameMissing: 'Proszę dodaj Imię Nazwisko',
     positionMissing: 'Proszę dodaj zawód',
     area: 'obszar zainteresowania',
@@ -33,5 +34,6 @@ export default {
     yourAccountWillBeAssignedTo: 'Twoje konto zostanie przypisane do adresu',
     invite: 'Zaproś do kontaków',
     noInvitations: 'Brak zaproszeń',
-    invitationSent: 'Zaproszenie wysłane'
+    invitationSent: 'Zaproszenie wysłane',
+    removeContact: 'Usuń kontakt'
 }

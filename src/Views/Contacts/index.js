@@ -15,6 +15,7 @@ export default class Contacts extends Component {
 
     static propTypes = {
         handleAddContact: PropTypes.func.isRequired,
+        handleRemoveContact: PropTypes.func.isRequired,
         contacts: PropTypes.object.isRequired,
         areas: PropTypes.object.isRequired
     };
@@ -48,7 +49,7 @@ export default class Contacts extends Component {
                 onChange={(val) => this.handleChange(val)}
             >
                 <Tab label={Messages.myContacts} value={0}>
-                    <ContactsTab contacts={this.prepareContacts()} onSele/>
+                    <ContactsTab contacts={this.prepareContacts()} handleRemoveContact={this.props.handleRemoveContact} onSele/>
                 </Tab>
                 <Tab label={Messages.addContact} value={1}>
                     <AddContactTab handleAddContact={this.props.handleAddContact} areas={this.props.areas}/>

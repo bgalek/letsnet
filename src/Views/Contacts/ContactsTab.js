@@ -16,7 +16,8 @@ export default class ContactsTab extends Component {
     }
 
     static propTypes = {
-        contacts: PropTypes.array.isRequired
+        contacts: PropTypes.array.isRequired,
+        handleRemoveContact: PropTypes.func.isRequired
     };
 
     handleContactClick(contact) {
@@ -33,12 +34,16 @@ export default class ContactsTab extends Component {
             return (
                 <ContactDetails
                     contact={this.state.selectedContact}
+                    handleRemoveContact={this.props.handleRemoveContact}
                     handleClose={() => this.setState({selectedContact: null})}/>
             );
         } else if (contacts.length > 0) {
             return <List>{contacts}</List>;
         } else {
-            return <div style={{textAlign: 'center'}}><h3>{Messages.noContacts}</h3></div>;
+            return (
+            <div style={{textAlign: 'center', padding: 20}}>
+                {Messages.noContacts.split('\n').map((text, index) => {return <h3 key={index}>{text}</h3>;})}
+            </div>);
         }
     }
 }

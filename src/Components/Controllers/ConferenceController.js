@@ -42,7 +42,7 @@ export default class ConferenceController extends Component {
                                        }/>
                                 <Route path={`/conference/:conferenceId/contacts`} exact={true}
                                        render={(props) =>
-                                           <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact} areas={conference.areas}/>
+                                           <Contacts contacts={this.props.contacts} handleAddContact={this.props.actions.addContact} handleRemoveContact={this.props.actions.removeContact} areas={conference.areas}/>
                                        }/>
                                 <Route path={`/conference/:conferenceId/profile`} exact={true}
                                        render={(props) =>
