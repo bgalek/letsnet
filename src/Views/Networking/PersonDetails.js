@@ -9,8 +9,16 @@ import Chatroom from "../../Components/Chatroom/Chatroom";
 
 export default class PersonDetails extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isInvited: this.props.checkIfInvited(this.props.person.id)
+        };
+    }
+
     static propTypes = {
         person: PropTypes.object.isRequired,
+        checkIfInvited: PropTypes.func.isRequired
     };
 
     static contextTypes = {
@@ -28,7 +36,7 @@ export default class PersonDetails extends Component {
                         <small>{this.props.person.area}</small>
                     </p>
                     <Divider/>
-                    <InviteActionButton person={this.props.person}/>
+                    {(this.state.isInvited) ? '' : <InviteActionButton person={this.props.person}/> }
                 </Card>
                 <Chatroom with={this.props.person}/>
             </div>

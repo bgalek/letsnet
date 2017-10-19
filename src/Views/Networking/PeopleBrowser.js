@@ -11,6 +11,7 @@ export default class PeopleBrowser extends Component {
 
     static propTypes = {
         people: PropTypes.array.isRequired,
+        checkIfInvited: PropTypes.func.isRequired
     };
 
     constructor() {
@@ -38,7 +39,7 @@ export default class PeopleBrowser extends Component {
                             label={Messages.back}
                             icon={<NavigationArrowBack/>}
                             onTouchTap={() => this.setState({selectedPerson: null})}/>
-                <PersonDetails person={person}/>
+                <PersonDetails person={person} checkIfInvited={this.props.checkIfInvited}/>
             </div>
         );
     }

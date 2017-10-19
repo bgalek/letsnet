@@ -10,7 +10,8 @@ export default class Networking extends Component {
 
     static propTypes = {
         attendees: PropTypes.object.isRequired,
-        handleAddContact: PropTypes.func.isRequired
+        handleAddContact: PropTypes.func.isRequired,
+        checkIfInvited: PropTypes.func.isRequired
     };
 
     static contextTypes = {
@@ -46,7 +47,7 @@ export default class Networking extends Component {
         return (
             <Tabs value={this.state.selectedIndex} onChange={(val) => this.handleChange(val)}>
                 <Tab label={Messages.browse} value="browse">
-                    <PeopleTab people={this.makePeople()}/>
+                    <PeopleTab people={this.makePeople()} checkIfInvited={this.props.checkIfInvited}/>
                 </Tab>
                 <Tab label={Messages.invitations} value="invitations">
                     <InvitationsTab handleAddContact={this.props.handleAddContact}/>

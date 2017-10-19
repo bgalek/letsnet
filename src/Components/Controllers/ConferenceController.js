@@ -38,7 +38,7 @@ export default class ConferenceController extends Component {
                                 />
                                 <Route path={`/conference/:conferenceId/networking`} exact={true}
                                        render={(props) =>
-                                           <Networking attendees={conference.attendees} handleAddContact={this.props.actions.addContact} />
+                                           <Networking attendees={conference.attendees} handleAddContact={this.props.actions.addContact} checkIfInvited={this.props.actions.checkIfInvited} />
                                        }/>
                                 <Route path={`/conference/:conferenceId/contacts`} exact={true}
                                        render={(props) =>

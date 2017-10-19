@@ -16,7 +16,7 @@ export default class InvitationsTab extends Component {
         super();
         this.state = {
             invitations: []
-        }
+        };
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ export default class InvitationsTab extends Component {
         });
     }
 
-    getInitials(name) {
+    static getInitials(name) {
         let names = name.split(' '),
             initials = names[0].substring(0, 1).toUpperCase();
 
@@ -48,9 +48,9 @@ export default class InvitationsTab extends Component {
     };
 
     addToContacts(userId, invitationId) {
+        this.removeInvitation(invitationId);
         let userRef = this.context.database.ref(`/users/${userId}`);
         userRef.on('value', (dataSnapshot) => {
-            console.log(dataSnapshot.val());
             let contact = {
                 name: dataSnapshot.val().name + ' ' + dataSnapshot.val().lastname,
                 companyName: dataSnapshot.val().companyName,
@@ -58,7 +58,6 @@ export default class InvitationsTab extends Component {
                 position: dataSnapshot.val().position,
                 email: ''
             };
-            console.log(contact);
             this.props.handleAddContact(contact);
         });
     }
@@ -73,15 +72,13 @@ export default class InvitationsTab extends Component {
     }
 
     render() {
-        console.log(JSON.stringify(this.state.invitations,0,2));
-
         const invitationCards = this.state.invitations.map((invitation, index) => {
             return (
             <Card key={index} style={{margin: 20}}>
                 <CardHeader
                     title={invitation.sender}
                     subtitle='wysyła zaproszenie do networkingu'
-                    avatar={<Avatar size={50}>{this.getInitials(invitation.sender)}</Avatar>}
+                    avatar={<Avatar size={50}>{InvitationsTab.getInitials(invitation.sender)}</Avatar>}
                 />
                 <CardActions style={{textAlign: 'right'}}>
                     <FlatButton label={Messages.accept} onTouchTap={() => this.addToContacts(invitation.from, invitation.id)} />
@@ -90,7 +87,6 @@ export default class InvitationsTab extends Component {
             </Card>
             );
         });
-        // const list = this.state.invitations.map((invitation, index) => <div key={index}>do {invitation.receiver} o {moment(invitation.timestamp).fromNow()}</div>);
         return (
             <div>
                 {(invitationCards.length) ? invitationCards : <h3 style={{ textAlign: 'center'}}>{Messages.noInvitations}</h3>}
