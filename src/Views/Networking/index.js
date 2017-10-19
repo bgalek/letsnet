@@ -9,7 +9,8 @@ import PeopleTab from "./PeopleBrowser";
 export default class Networking extends Component {
 
     static propTypes = {
-        attendees: PropTypes.object.isRequired
+        attendees: PropTypes.object.isRequired,
+        handleAddContact: PropTypes.func.isRequired
     };
 
     static contextTypes = {
@@ -48,7 +49,7 @@ export default class Networking extends Component {
                     <PeopleTab people={this.makePeople()}/>
                 </Tab>
                 <Tab label={Messages.invitations} value="invitations">
-                    <InvitationsTab/>
+                    <InvitationsTab handleAddContact={this.props.handleAddContact}/>
                 </Tab>
             </Tabs>
         );

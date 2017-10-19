@@ -50,8 +50,8 @@ export default class Profile extends Component {
 
     render() {
         const {profile} = this.props;
-        const firstName = profile.firstName;
-        const lastName = profile.lastName;
+        const firstName = (profile.firstName) ? profile.firstName : '';
+        const lastName = (profile.firstName) ? profile.lastName : '';
         const isEditable = this.state.isEditable;
         return (
             <div>

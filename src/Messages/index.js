@@ -35,5 +35,7 @@ export default {
     invite: 'Zaproś do kontaków',
     noInvitations: 'Brak zaproszeń',
     invitationSent: 'Zaproszenie wysłane',
-    removeContact: 'Usuń kontakt'
+    removeContact: 'Usuń kontakt',
+    accept: "Akceptuję",
+    decline: "Odrzuć"
 }
