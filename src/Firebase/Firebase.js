@@ -113,14 +113,14 @@ export default class Firebase extends EventEmitter {
                 let isInvited = false;
                 app.database().ref('users/' + auth.currentUser.uid + '/invitations/sent')
                     .on('value', snapshot => {
-                        let sentInvitations = Object.values(snapshot.val());
-                        console.log(sentInvitations);
-                        sentInvitations.forEach(it => {
-                            if (it.to === userId) {
-                                console.log(it);
-                                isInvited = true;
-                            }
-                        });
+                        if (snapshot.val()) {
+                            let sentInvitations = Object.values(snapshot.val());
+                            sentInvitations.forEach(it => {
+                                if (it.to === userId) {
+                                    isInvited = true;
+                                }
+                            });
+                        }
                     });
                 return isInvited;
             }
