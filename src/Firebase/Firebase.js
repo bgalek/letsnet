@@ -109,7 +109,6 @@ export default class Firebase extends EventEmitter {
             },
 
             checkIfInvited: (userId) => {
-                console.log(userId);
                 let isInvited = false;
                 app.database().ref('users/' + auth.currentUser.uid + '/invitations/sent')
                     .on('value', snapshot => {
