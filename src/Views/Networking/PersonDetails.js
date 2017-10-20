@@ -12,7 +12,7 @@ export default class PersonDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isInvited: this.props.checkIfInvited(this.props.person.id)
+            isInvited: false
         };
     }
 
@@ -25,6 +25,10 @@ export default class PersonDetails extends Component {
         profile: PropTypes.object,
     };
 
+    componentDidMount() {
+        this.props.checkIfInvited(this.props.person.id).then(isInvited => this.setState({isInvited}));
+    }
+
     render() {
         return (
             <div>
@@ -36,7 +40,7 @@ export default class PersonDetails extends Component {
                         <small>{this.props.person.area}</small>
                     </p>
                     <Divider/>
-                    <InviteActionButton person={this.props.person}/>
+                    <InviteActionButton disabled={this.state.isInvited} person={this.props.person} onClick={() => this.setState({isInvited: true})}/>
                 </Card>
                 <Chatroom with={this.props.person}/>
             </div>

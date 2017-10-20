@@ -25,13 +25,13 @@ export default class InviteActionButton extends Component {
             to: this.props.person.id,
             receiver: this.props.person.name,
             timestamp: firebase.database.ServerValue.TIMESTAMP
-
         });
+        this.props.onClick();
     };
 
     render() {
         return (
-            <RaisedButton onTouchTap={this.handleClick} primary={true} label={Messages.invite}/>
+            <RaisedButton disabled={this.props.disabled} onTouchTap={this.handleClick} primary={true} label={Messages.invite}/>
         );
     }
 }

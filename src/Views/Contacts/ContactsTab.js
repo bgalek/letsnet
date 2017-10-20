@@ -24,7 +24,11 @@ export default class ContactsTab extends Component {
     componentDidMount() {
         this.context.database.ref(`/users/${this.context.profile.id}/contacts`)
             .on('value', (snapshot) => {
-                Object.values(snapshot.val() || [])
+                if (!snapshot.val()) {
+                    this.setState({contacts: []});
+                    return;
+                }
+                Object.values(snapshot.val())
                     .forEach(contact => {
                         const userRef = this.context.database.ref(`/users/${contact.userId}`);
                         userRef.once('value', (snapshot) => {

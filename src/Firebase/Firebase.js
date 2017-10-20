@@ -96,8 +96,8 @@ export default class Firebase extends EventEmitter {
             },
 
             removeContact: (contactId) => {
-                let contactRef = app.database().ref('users/' + auth.currentUser.uid + '/contacts/' + contactId);
-                contactRef.remove()
+                app.database().ref('users/' + auth.currentUser.uid + '/contacts/' + contactId)
+                    .remove()
                     .then(() => { console.log("Contact remove succeeded.") })
                     .catch((error) => {
                         console.log("Contact remove failed: " + error.message)
@@ -109,19 +109,8 @@ export default class Firebase extends EventEmitter {
             },
 
             checkIfInvited: (userId) => {
-                let isInvited = false;
-                app.database().ref('users/' + auth.currentUser.uid + '/invitations/sent')
-                    .on('value', snapshot => {
-                        if (snapshot.val()) {
-                            let sentInvitations = Object.values(snapshot.val());
-                            sentInvitations.forEach(it => {
-                                if (it.to === userId) {
-                                    isInvited = true;
-                                }
-                            });
-                        }
-                    });
-                return isInvited;
+                return app.database().ref('users/' + auth.currentUser.uid + '/invitations/sent')
+                    .once('value').then(snapshot => !!Object.values(snapshot.val() || {}).filter(it => it.to === userId).length);
             }
         }
     }
