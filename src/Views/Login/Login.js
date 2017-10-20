@@ -2,6 +2,8 @@ import * as React from "react";
 import {LinearProgress, Paper, RaisedButton, TextField} from "material-ui";
 import {PropTypes} from 'prop-types';
 import Messages from '../../Messages';
+import logo from '../../Components/ApplicationBar/letsnet-logo.svg';
+
 export default class Login extends React.Component {
 
     static propTypes = {
@@ -40,7 +42,9 @@ export default class Login extends React.Component {
         const email = this.props.location.search.split('=')[1];
         return (
             <div>
-                <p style={{textAlign: 'center', padding: 30}}>LOGO LET'S NET</p>
+                <p style={{textAlign: 'center', padding: 30}}>
+                    <img alt="logo lets net" style={{width: 128, height: 128, paddingRight: 16, boxShadow: 0}} src={logo}/>
+                </p>
                 <Paper style={{padding: 30, margin: 30, textAlign: 'center', display: 'flex', flexDirection: 'column'}}
                        zDepth={1}>
                     {this.state.loading ? <LinearProgress mode="indeterminate"/> : null}

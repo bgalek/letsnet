@@ -30,7 +30,7 @@ export default {
     nameMissing: 'Proszę dodaj Imię Nazwisko',
     positionMissing: 'Proszę dodaj zawód',
     area: 'obszar zainteresowania',
-    onlyOneMoreStepToStart: 'jeszcze tylko jeden krok dzieli Cię od rozpoczęcia networkingu z LetsNet',
+    onlyOneMoreStepToStart: 'jeszcze tylko jeden krok dzieli Cię od rozpoczęcia networkingu z Let\'s Net',
     yourAccountWillBeAssignedTo: 'Twoje konto zostanie przypisane do adresu',
     invite: 'Zaproś do kontaków',
     noInvitations: 'Brak zaproszeń',
