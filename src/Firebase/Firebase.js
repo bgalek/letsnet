@@ -96,7 +96,18 @@ export default class Firebase extends EventEmitter {
             },
 
             removeContact: (contactId) => {
-                app.database().ref('users/' + auth.currentUser.uid + '/contacts/' + contactId)
+
+                let contactToDelete = '';
+                app.database().ref('users/' + auth.currentUser.uid + '/contacts/')
+                    .once('value', snapshot => {
+                        const contacts = Object.keys(snapshot.val())
+                            .filter(it => {
+                                return snapshot.val()[it].userId === contactId;
+                            });
+                        contactToDelete = contacts;
+                    });
+
+                app.database().ref('users/' + auth.currentUser.uid + '/contacts/' + contactToDelete)
                     .remove()
                     .then(() => { console.log("Contact remove succeeded.") })
                     .catch((error) => {

@@ -64,9 +64,9 @@ export default class Contacts extends Component {
                 <Tab label={Messages.myContacts} value={0}>
                     <ContactsTab contacts={this.prepareContacts()} handleRemoveContact={this.props.handleRemoveContact} onSele/>
                 </Tab>
-                <Tab label={Messages.addContact} value={1}>
-                    <AddContactTab handleAddContact={this.props.handleAddContact} areas={this.props.areas}/>
-                </Tab>
+                {/*<Tab label={Messages.addContact} value={1}>*/}
+                    {/*<AddContactTab handleAddContact={this.props.handleAddContact} areas={this.props.areas}/>*/}
+                {/*</Tab>*/}
             </Tabs>
         );
     }

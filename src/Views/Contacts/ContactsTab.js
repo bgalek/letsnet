@@ -35,7 +35,7 @@ export default class ContactsTab extends Component {
                             if (snapshot.val()) {
                                 const item = {
                                     id: contact.userId,
-                                    name: snapshot.val().name,
+                                    name: `${snapshot.val().name} ${snapshot.val().lastname}`,
                                     email: contact.invitation.fromEmail,
                                     companyName: snapshot.val().companyName,
                                     phoneNumber: snapshot.val().phoneNumber,
@@ -70,7 +70,8 @@ export default class ContactsTab extends Component {
                 <ContactDetails
                     contact={this.state.selectedContact}
                     handleRemoveContact={this.props.handleRemoveContact}
-                    handleClose={() => this.setState({selectedContact: null})}/>
+                    handleClose={() => this.setState({selectedContact: null})}
+                />
             );
         } else if (contacts.length > 0) {
             return <List>{contacts}</List>;

@@ -26,7 +26,7 @@ export default {
     yourTicket: 'Twój bilet',
     email: 'E-mail',
     noContacts: 'Ta zakładka jest pusta bo nie wymieniłeś się jeszcze kontaktem z żadną z osób na konferencji.' +
-    '\nWróć do zakładki networking by nawiązać nowe znajomości lub wpisz ręcznie kontakt do poznanej osoby',
+    '\nWróć do zakładki networking by nawiązać nowe znajomości.',
     nameMissing: 'Proszę dodaj Imię Nazwisko',
     positionMissing: 'Proszę dodaj zawód',
     area: 'obszar zainteresowania',
