@@ -8,6 +8,12 @@ import AddContactTab from './AddContactTab';
 
 export default class Contacts extends Component {
 
+    static contextTypes = {
+        profile: PropTypes.object,
+        database: PropTypes.object,
+        handleAddContact: PropTypes.func
+    };
+
     constructor(props) {
         super(props);
         this.state = {selectedIndex: 0};
@@ -21,19 +27,26 @@ export default class Contacts extends Component {
     };
 
     prepareContacts() {
-        const {contacts} = this.props;
-        return Object.keys(contacts)
-            .map(it => {
-                const contact = contacts[it];
-                return {
-                    id: it,
-                    name: contact.name,
-                    email: contact.email,
-                    companyName: contact.companyName,
-                    phoneNumber: contact.phoneNumber,
-                    position: contact.position
-                };
-            });
+        // const {contacts} = this.props;
+        // return Object.keys(contacts)
+        //     .map(it => {
+        //         console.log('key: ', it);
+        //         const userRef = this.context.database.ref(`/users/${contacts[it].userId}`);
+        //         userRef.once('value', (snapshot) => {
+        //             console.log('Snapshot: ' + snapshot, snapshot.val());
+        //             if (snapshot.val()) {
+        //                 let item = {
+        //                     id: it,
+        //                     name: snapshot.val().name,
+        //                     email: snapshot.val().email,
+        //                     companyName: snapshot.val().companyName,
+        //                     phoneNumber: snapshot.val().phoneNumber,
+        //                     position: snapshot.val().position
+        //                 };
+        //                 console.log(item);
+        //             }
+        //         });
+        //     });
     }
 
     handleChange(value) {

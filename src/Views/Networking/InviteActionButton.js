@@ -18,12 +18,14 @@ export default class InviteActionButton extends Component {
         this.context.database.ref(`/users/${this.props.person.id}/invitations/received`).push({
             from: this.context.profile.id,
             sender: `${this.context.profile.firstName} ${this.context.profile.lastName}`,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            fromEmail: this.context.profile.email
         });
         this.context.database.ref(`/users/${this.context.profile.id}/invitations/sent`).push({
             to: this.props.person.id,
             receiver: this.props.person.name,
             timestamp: firebase.database.ServerValue.TIMESTAMP
+
         });
     };
 
