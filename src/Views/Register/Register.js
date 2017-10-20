@@ -89,8 +89,14 @@ export default class Register extends React.Component {
     }
 
     getDataFromQuery() {
+        function fromHtmlEntities(string) {
+            return (string + "").replace(/&#\d+;/gm, function (s) {
+                return String.fromCharCode(s.match(/\d+/gm)[0]);
+            })
+        }
+
         const data = this.props.location.search.split("=")[1];
-        return JSON.parse(decodeURIComponent(atob(data)));
+        return JSON.parse(fromHtmlEntities(decodeURIComponent(atob(data))));
     }
 
     handleInputType(event) {
