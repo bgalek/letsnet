@@ -16,7 +16,7 @@ export default class ContactDetails extends Component {
 
     render() {
         const contact = this.props.contact;
-        const items = [contact.name, contact.email, contact.position, contact.companyName, contact.phoneNumber];
+        const items = [contact.name, contact.email, contact.position, contact.companyName, `tel://${contact.phoneNumber}`];
         const listItems = items.map((it, index) => {
             return <ListItem key={index} disabled={true} style={{padding: 10}}>{it}</ListItem>
         });
