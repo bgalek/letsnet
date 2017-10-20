@@ -28,7 +28,6 @@ export default class ContactsTab extends Component {
                     .forEach(contact => {
                         const userRef = this.context.database.ref(`/users/${contact.userId}`);
                         userRef.once('value', (snapshot) => {
-                            console.log(contact);
                             if (snapshot.val()) {
                                 const item = {
                                     id: contact.userId,
@@ -59,7 +58,6 @@ export default class ContactsTab extends Component {
     }
 
     render() {
-        console.log(this.state.contacts);
         const contacts = this.state.contacts.map(contact =>
             <PersonListItem key={contact.id} person={contact} onTouchTap={() => this.handleContactClick(contact)}/>);
 

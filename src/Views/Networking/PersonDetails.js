@@ -36,7 +36,7 @@ export default class PersonDetails extends Component {
                         <small>{this.props.person.area}</small>
                     </p>
                     <Divider/>
-                    {(this.state.isInvited) ? '' : <InviteActionButton person={this.props.person}/> }
+                    <InviteActionButton person={this.props.person}/>
                 </Card>
                 <Chatroom with={this.props.person}/>
             </div>

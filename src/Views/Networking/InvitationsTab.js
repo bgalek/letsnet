@@ -22,17 +22,8 @@ export default class InvitationsTab extends Component {
 
     componentDidMount() {
         this.context.database.ref(`/users/${this.context.profile.id}/invitations/received`).on('value', (snapshot) => {
-                let invitations = Object.keys(snapshot.val() || [])
-                    .map(it => {
-                        let invitation = snapshot.val()[it];
-                        return {
-                            id: it,
-                            from: invitation.from,
-                            sender: invitation.sender,
-                            timestamp: invitation.timestamp
-                        }
-                    });
-                this.setState({invitations: invitations});
+            const invitations = Object.keys(snapshot.val() || []).map(id => Object.assign({id}, snapshot.val()[id]));
+            this.setState({invitations: invitations});
         });
     }
 
@@ -43,35 +34,49 @@ export default class InvitationsTab extends Component {
                 userId: invitation.from,
                 invitation: invitation
             });
-        // this.declineInvitation(invitation.id);
+        this.context.database.ref(`/users/${invitation.from}/contacts`).push()
+            .set({
+                userId: this.context.profile.id,
+                invitation: {
+                    id: this.context.profile.id,
+                    fromEmail: this.context.profile.email,
+                    sender: `${this.context.profile.name} ${this.context.profile.lastName}`
+                }
+            });
+        this.declineInvitation(invitation);
     }
 
     declineInvitation(invitation) {
-        const invitationRef = this.context.database.ref(`/users/${this.context.profile.id}/invitations/received/${invitation.id}`);
-        invitationRef.remove().catch((error) => {
-            console.log("Invitation remove failed: " + error.message);
-        });
+        this.context.database.ref(`/users/${this.context.profile.id}/invitations/received/${invitation.id}`)
+            .remove()
+            .catch((error) => {
+                console.log("Invitation remove failed: " + error.message);
+            });
     }
 
     render() {
         const invitationCards = this.state.invitations.map((invitation, index) => {
             return (
-            <Card key={index} style={{margin: 20}}>
-                <CardHeader
-                    title={invitation.sender}
-                    subtitle={'zaproszenie do networkingu ∙' + moment(invitation.timestamp).fromNow()}
-                    avatar={<Avatar size={50}>{PersonListItem.getInitials(invitation.sender)}</Avatar>}
-                />
-                <CardActions style={{textAlign: 'right'}}>
-                    <FlatButton label={Messages.decline} onClick={() => {this.declineInvitation(invitation)}}/>
-                    <FlatButton primary={true} label={Messages.accept} onTouchTap={() => this.acceptInvitation(invitation)} />
-                </CardActions>
-            </Card>
+                <Card key={index} style={{margin: 20}}>
+                    <CardHeader
+                        title={invitation.sender}
+                        subtitle={'zaproszenie do networkingu ∙' + moment(invitation.timestamp).fromNow()}
+                        avatar={<Avatar size={50}>{PersonListItem.getInitials(invitation.sender)}</Avatar>}
+                    />
+                    <CardActions style={{textAlign: 'right'}}>
+                        <FlatButton label={Messages.decline} onClick={() => {
+                            this.declineInvitation(invitation)
+                        }}/>
+                        <FlatButton primary={true} label={Messages.accept}
+                                    onTouchTap={() => this.acceptInvitation(invitation)}/>
+                    </CardActions>
+                </Card>
             );
         });
         return (
             <div>
-                {(invitationCards.length) ? invitationCards : <h3 style={{ textAlign: 'center'}}>{Messages.noInvitations}</h3>}
+                {(invitationCards.length) ? invitationCards :
+                    <h3 style={{textAlign: 'center'}}>{Messages.noInvitations}</h3>}
             </div>
         );
     }
