@@ -39,7 +39,8 @@ export default class Register extends React.Component {
             const payload = this.getDataFromQuery();
             this.props.handleRegister(payload.email, this.state.password, {
                 name: payload.name,
-                lastname: payload.lastname
+                lastname: payload.lastname,
+                ticket: payload.ticket
             }, this.state.selectedArea).catch((error) => this.setState({error: error.message}));
         }
         event.preventDefault();

@@ -16,7 +16,7 @@ export default class LandingPageController extends Component {
             <Route render={props => {
                 return (
                     <div>
-                        <AnonymousAppBar title="Let's net" profile={this.context.profile}/>
+                        <AnonymousAppBar title="[BETA] Let's net" profile={this.context.profile}/>
                         <LandingPage history={props.history} conferences={this.props.conferences}/>
                     </div>);
             }}/>

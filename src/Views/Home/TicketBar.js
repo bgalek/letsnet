@@ -7,18 +7,21 @@ import {PropTypes} from 'prop-types';
 export default class TicketBar extends React.Component {
 
     static propTypes = {
-        ticketNumber: PropTypes.string.isRequired,
+        id: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired,
         enrolled: PropTypes.bool
     };
 
     render() {
-        const {ticketNumber, enrolled} = this.props;
-        if(enrolled) return null
+        const {id, enrolled} = this.props;
+        if (enrolled) return null;
         return (
             <Card style={{margin: 0, padding: '0px 20px'}}>
                 <p>
                     <ActionReceipt style={{margin: '0px 6px -6px 0px'}}/>{Messages.yourTicket}
-                    <strong style={{color: '#535353', float: 'right'}}>{ticketNumber}</strong>
+                    <strong style={{color: '#535353', float: 'right'}}>{id}</strong>
                 </p>
             </Card>
         )

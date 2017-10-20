@@ -110,7 +110,7 @@ export default class App extends Component {
 
     handleRegister(actions, conferenceId) {
         return (username, password, metadata, area) => actions.register(username, password, metadata).then(user => {
-            actions.addAttendee(conferenceId, {id: user.uid, area, name: metadata.name, lastname: metadata.lastname});
+            actions.addAttendee(conferenceId, {id: user.uid, area, name: metadata.name, lastname: metadata.lastname, ticket: metadata.ticket});
             return user;
         });
     }

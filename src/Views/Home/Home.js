@@ -10,12 +10,12 @@ export default class Home extends React.Component {
     };
 
     render() {
-        const {welcomeScreen, schedule} = this.props;
+        const {welcomeScreen, schedule, ticket} = this.props;
         // const nextRecords = schedule.findNext(new Date(), 5);
         const nextRecords = schedule.findAll(new Date());
         return (
             <div>
-                <TicketBar ticketNumber="77777777777777"/>
+                <TicketBar id={ticket.id} enrolled={ticket.enrolled}/>
                 <h2>{welcomeScreen.title}</h2>
                 <p style={{margin: '1.5em'}}>{welcomeScreen.description}</p>
                 <h2>Agenda</h2>

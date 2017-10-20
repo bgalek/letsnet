@@ -20,6 +20,6 @@ export default class PersonListItem extends ListItem {
 
     static getInitials(name) {
         const split = name.split(" ");
-        return (split > 1) ? split[0][0] + split[1][0] : split[0][0];
+        return (split.length > 1) ? split[0][0] + split[1][0] : split[0][0];
     }
 }

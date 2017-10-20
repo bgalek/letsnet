@@ -77,12 +77,12 @@ export default class InvitationsTab extends Component {
             <Card key={index} style={{margin: 20}}>
                 <CardHeader
                     title={invitation.sender}
-                    subtitle='wysyła zaproszenie do networkingu'
+                    subtitle={'zaproszenie do networkingu ∙' + moment(invitation.timestamp).fromNow()}
                     avatar={<Avatar size={50}>{InvitationsTab.getInitials(invitation.sender)}</Avatar>}
                 />
                 <CardActions style={{textAlign: 'right'}}>
-                    <FlatButton label={Messages.accept} onTouchTap={() => this.addToContacts(invitation.from, invitation.id)} />
                     <FlatButton label={Messages.decline} onClick={() => {this.removeInvitation(invitation.id)}}/>
+                    <FlatButton primary={true} label={Messages.accept} onTouchTap={() => this.addToContacts(invitation.from, invitation.id)} />
                 </CardActions>
             </Card>
             );

@@ -1,19 +1,22 @@
 // @flow
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Card from "../../Components/Card/Card";
+import Messages from "../../Messages";
+import {FlatButton} from "material-ui";
+import {NavigationArrowBack} from "material-ui/svg-icons";
 
 export default class BackButton extends Component {
 
     static propTypes = {
-        people: PropTypes.array.isRequired,
+        handleClick: PropTypes.func.isRequired,
     };
 
     render() {
         return (
-            <Card>
-                <p>{this.props.person.name}</p>
-            </Card>
+            <FlatButton style={{margin: 10}}
+                        label={Messages.back}
+                        icon={<NavigationArrowBack/>}
+                        onTouchTap={this.props.handleClick}/>
         );
     }
 }

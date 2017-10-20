@@ -7,11 +7,13 @@ import Card from "../../Components/Card/Card";
 import {
     PlacesFreeBreakfast,
     MapsRestaurantMenu,
-    SocialLocationCity,
     ActionVerifiedUser,
     ActionSpeakerNotes,
     ActionFlightTakeoff,
-    ActionFlightLand
+    ActionFlightLand,
+    SocialCake,
+    SocialGroup,
+    SocialMood
 } from 'material-ui/svg-icons';
 
 export default class ScheduleItem extends Component {
@@ -27,11 +29,13 @@ export default class ScheduleItem extends Component {
     };
 
     renderTechnicalTime() {
-        const {title, type, start, end} = this.props.item;
+        const {id, title, type, start, end} = this.props.item;
+        const conferenceId = this.context.router.route.match.params.conferenceId;
         const style = {padding: '0', cursor: 'pointer'};
         return (
             <Card className="schedule-card" style={style}>
                 <CardHeader
+                    onTouchTap={() => this.context.router.history.push(`/conference/${conferenceId}/talk/${id}`)}
                     title={title}
                     subtitle={`${start} - ${end}`}
                     textStyle={{'padding': '0'}}
@@ -72,7 +76,9 @@ const getIconForEventType = type => {
         keynote: <ActionSpeakerNotes/>,
         coffeebreak: <PlacesFreeBreakfast/>,
         lunch: <MapsRestaurantMenu/>,
-        party: <SocialLocationCity/>,
-        close: <ActionFlightTakeoff/>
+        party: <SocialMood/>,
+        close: <ActionFlightTakeoff/>,
+        cake: <SocialCake/>,
+        network: <SocialGroup/>
     }[type];
 };

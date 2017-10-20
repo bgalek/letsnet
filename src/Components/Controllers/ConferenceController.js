@@ -25,6 +25,7 @@ export default class ConferenceController extends Component {
             <Route path="/conference/:conferenceId" render={(props) => {
                 const conferenceId = props.match.params.conferenceId;
                 const conference = this.props.conferences.find(it => it._id === conferenceId);
+                const ticket = Object.values(conference.attendees).find(it => it.id === this.context.profile.id).ticket;
                 return (
                     <MuiThemeProvider muiTheme={getMuiTheme(conference.theme)}>
                         <div>
@@ -34,6 +35,7 @@ export default class ConferenceController extends Component {
                                 <Route path={`/conference/:conferenceId/home`} exact={true} render={(props) => <Home
                                            welcomeScreen={conference.welcomeScreen}
                                            schedule={conference.schedule}
+                                           ticket={ticket}
                                        />}
                                 />
                                 <Route path={`/conference/:conferenceId/networking`} exact={true}
