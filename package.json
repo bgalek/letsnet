@@ -6,7 +6,7 @@
   "devDependencies": {
     "flow-bin": "^0.47.0",
     "gh-pages": "^1.0.0",
-    "react-scripts": "1.0.7"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "blueimp-md5": "^2.7.0",
